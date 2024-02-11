@@ -10,6 +10,7 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import frc.robot.utility.shuffleBoardDrive;
 
 public class Constants {
     public static class OperatorConstants {
@@ -62,6 +63,12 @@ public class Constants {
         public static final int BackRightDrive = 12;
         public static final int BackRightEncoderOffset = 0;
 
+        public static final shuffleBoardDrive frontLeft = new shuffleBoardDrive("LF Set Angle", 0, 0);
+        public static final shuffleBoardDrive backLeft = new shuffleBoardDrive("LB Set Angle", 0, 1);
+
+        public static final shuffleBoardDrive frontRight = new shuffleBoardDrive("RF Set Angle", 4, 0);
+        public static final shuffleBoardDrive backRight = new shuffleBoardDrive("RBack Set Angle", 4, 1);
+
         public static final class ModuleConstants {
             public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
             public static final double kDriveMotorGearRatio = 1 / 6.429;
@@ -74,6 +81,45 @@ public class Constants {
             public static final double maxSpeed = 4.5; // M/S
 
             public static final double kPTurning = 0.5;
+
+            // Invert the turning encoder if necessary. If pivots snap back and forth when setting up
+            // inversion may be needed as the encoder can be reading in the opposite direction 
+            // as the pivots are going. 
+            public static final boolean kTurningEncoderInverted = true;
+
+
+            // Calculations required for driving motor conversion factors and feed forward
+            public static final double kDrivingMotorFreeSpeedRps = VortexMotorConstants.kFreeSpeedRpm / 60;
+            public static final double kWheelCircumferenceMeters = kWheelDiameterMeters * Math.PI;
+            public static final double kDriveWheelFreeSpeedRps = (kDrivingMotorFreeSpeedRps * kDriveMotorGearRatio)
+             * kWheelCircumferenceMeters;
+
+            public static final double kDrivingEncoderPositionFactor = (kWheelDiameterMeters * Math.PI)
+            * kDriveMotorGearRatio; // meters
+
+            public static final double kDrivingEncoderVelocityFactor = ((kWheelDiameterMeters * Math.PI)
+            * kDriveMotorGearRatio) / 60.0; // meters per second
+
+            public static final double kTurningEncoderPositionFactor = (2 * Math.PI); // radians
+            public static final double kTurningEncoderVelocityFactor = (2 * Math.PI) / 60.0; // radians per second
+        
+            public static final double kTurningEncoderPositionPIDMinInput = 0; // radians
+            public static final double kTurningEncoderPositionPIDMaxInput = kTurningEncoderPositionFactor; // radians
+        
+            public static final double kDrivingP = 0.04;
+            public static final double kDrivingI = 0;
+            public static final double kDrivingD = 0;
+            public static final double kDrivingFF = 1 / kDriveWheelFreeSpeedRps;
+            public static final double kDrivingMinOutput = -1;
+            public static final double kDrivingMaxOutput = 1;
+        
+            public static final double kTurningP = 0.8;
+            public static final double kTurningI = 0;
+            public static final double kTurningD = 0.005;
+            public static final double kTurningFF = 0;
+            public static final double kTurningMinOutput = -1;
+            public static final double kTurningMaxOutput = 1;
+
         }
 
         public static final class FrameConstants {
@@ -91,11 +137,12 @@ public class Constants {
             public static final Translation2d brModuleOffset = new Translation2d(-kWheelBase / 2, -kTrackWidth / 2);
 
             public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
-                    flModuleOffset,
-                    frModuleOffset,
-                    blModuleOffset,
-                    brModuleOffset);
-
+                flModuleOffset,
+                frModuleOffset,
+                blModuleOffset,
+                brModuleOffset
+            );
+                    
             public static final double kPhysicalMaxSpeedMetersPerSecond = 6;
             public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 2 * Math.PI;
         }
@@ -121,4 +168,20 @@ public class Constants {
     public static final class ShuffleBoardConstants {
         private static ShuffleboardTab driveTab = Shuffleboard.getTab("Drive Tab");
     }
+
+    public static class shuffleBoardDrive {
+        public String drivePosition;
+        public int colPos;
+        public int rowPos;
+    
+        public shuffleBoardDrive(String drivePosition, int colPos, int rowPos){
+          this.drivePosition = drivePosition;
+          this.colPos = colPos;
+          this.rowPos = rowPos;
+        }
+    }
+
+    public static final class VortexMotorConstants {
+        public static final double kFreeSpeedRpm = 6784;
+      }
 }

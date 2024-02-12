@@ -85,7 +85,7 @@ public class Constants {
             // Invert the turning encoder if necessary. If pivots snap back and forth when setting up
             // inversion may be needed as the encoder can be reading in the opposite direction 
             // as the pivots are going. 
-            public static final boolean kTurningEncoderInverted = true;
+            public static final boolean kTurningEncoderInverted = false;
 
 
             // Calculations required for driving motor conversion factors and feed forward

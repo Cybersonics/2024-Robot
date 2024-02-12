@@ -166,12 +166,12 @@ public class SwerveModule extends SubsystemBase {
         double currentAngle = ((currentSteerPosition * 360) / (2 * Math.PI)) % 360.0;
 
         //double targetAngle = -angle + getAngleOffset(); // -angle;
-        double targetAngle = -angle; // -angle;
+        double targetAngle = angle; // -angle;
         double deltaDegrees = targetAngle - currentAngle;
     
-        SmartDashboard.putNumber(this.driveData.drivePosition + " Raw Angle", currentAngle);
+        //SmartDashboard.putNumber(this.driveData.drivePosition + " Raw Angle", currentAngle);
         //SmartDashboard.putNumber(this.driveData.drivePosition + " Offset Angle", getAngleOffset());
-        SmartDashboard.putNumber(this.driveData.drivePosition + " cur Angle", targetAngle);
+        //SmartDashboard.putNumber(this.driveData.drivePosition + " cur Angle", targetAngle);
         /*
          * The encoder reads in degrees from 0 to 360 where the 0/360 degree position is straight ahead.
          * The swerve equations generate position angles from -180 to 180 degrees where the
@@ -283,7 +283,7 @@ public class SwerveModule extends SubsystemBase {
        */
       public double getTurningPosition() {
         double steerEncoderRaw = rawEncoderPosition();
-        double angleOffset = (getAngleOffset() / 360) *2 * Math.PI;
+        //double angleOffset = (getAngleOffset() / 360) *2 * Math.PI;
         //double turningEncoder = steerEncoderRaw + angleOffset;
         double turningEncoder = steerEncoderRaw;
         return -turningEncoder; // Invert Encoder for odometry as wpilib treats encoders backwards.

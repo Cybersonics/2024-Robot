@@ -97,6 +97,9 @@ public class DriveCommand extends Command {
       stickForward = -this.leftStick.getY();
       stickStrafe = -this.leftStick.getX();
       stickOmega = -this.rightStick.getX();
+      // stickForward = this.leftStick.getY();
+      // stickStrafe = this.leftStick.getX();
+      // stickOmega = this.rightStick.getX();
     }
 
     // SmartDashboard.putNumber("Controller Forward", stickForward);
@@ -154,21 +157,7 @@ public class DriveCommand extends Command {
        * the angle of the robot to the field.
        */
       final double originCorrection = Math.toRadians(originHeading - _navXGyro.getNavAngle());
-
-      /*
-       * The following commented out code is the original calculations for the field
-       * centric. The
-       * uncommented code has been rewritten to accomodate the inverted axises and
-       * rotations of
-       * wpilib.
-       */
-
-      // final double temp = forward * Math.cos(originCorrection) - strafe *
-      // Math.sin(originCorrection);
-      // strafe = strafe * Math.cos(originCorrection) + forward *
-      // Math.sin(originCorrection);
-      // forward = temp;
-
+  
       /*
        * Field centric code only affects the forward and strafe action, not rotation.
        * To perform field
@@ -193,9 +182,9 @@ public class DriveCommand extends Command {
       deadStick = true;
     }
 
-    SmartDashboard.putNumber("Forward Done", forward);
-    SmartDashboard.putNumber("Strafe Done", strafe);
-    SmartDashboard.putNumber("Rotation Done", omega);
+    // SmartDashboard.putNumber("Forward Done", forward);
+    // SmartDashboard.putNumber("Strafe Done", strafe);
+    // SmartDashboard.putNumber("Rotation Done", omega);
     SmartDashboard.putBoolean("Dead Stick", deadStick);
 
     /*

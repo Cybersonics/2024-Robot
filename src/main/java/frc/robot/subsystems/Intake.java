@@ -10,11 +10,16 @@ import frc.robot.Constants;
 public class Intake extends SubsystemBase {
     private static Intake instance;
     private CANSparkMax intakeMotor;
+    private CANSparkMax feederMotor;
 
     public Intake() {
         intakeMotor = new CANSparkMax(Constants.IntakeConstants.intakeMotor, MotorType.kBrushless);
         intakeMotor.restoreFactoryDefaults();
         intakeMotor.setIdleMode(IdleMode.kCoast);
+
+        feederMotor = new CANSparkMax(Constants.IntakeConstants.feederMotor, MotorType.kBrushless);
+        feederMotor.restoreFactoryDefaults();
+        feederMotor.setIdleMode(IdleMode.kCoast);
         // feederMotor.setInverted(invertDrive);
         // feederMotor.setSmartCurrentLimit(40);
     }
@@ -28,5 +33,9 @@ public class Intake extends SubsystemBase {
 
     public void setIntakeSpeed(double speed) {
         intakeMotor.set(speed);
+    }    
+
+    public void setFeederSpeed(double speed) {
+        feederMotor.set(speed);
     }    
 }

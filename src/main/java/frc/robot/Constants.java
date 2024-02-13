@@ -157,11 +157,12 @@ public class Constants {
 
     public static final class IntakeConstants {
         public static final int intakeMotor = 30;
+        public static final int feederMotor = 34;
     }
 
     public static final class LauncherConstants {
-        public static final int launcherTopMotor = 31;
-        public static final int launcherBottomMotor = 32;
+        public static final int launcherTopMotor = 32;
+        public static final int launcherBottomMotor = 31;
         public static final int feederMotor = 33;
     }
 

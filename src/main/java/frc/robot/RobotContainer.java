@@ -29,13 +29,13 @@ import com.pathplanner.lib.path.PathPlannerPath;
 public class RobotContainer {
   public static NavXGyro _gyro = NavXGyro.getInstance(); // This must be called before Drive as it is used by the Drive
   public static Drive _drive = Drive.getInstance(_gyro);
-  //public static Launcher _launcher = Launcher.getInstance();
+  public static Launcher _launcher = Launcher.getInstance();
   private static Intake _intake = Intake.getInstance();
 
   public final CommandJoystick leftStick = new CommandJoystick(OperatorConstants.LeftStick);
   public final CommandJoystick rightStick = new CommandJoystick(OperatorConstants.RightStick);
 
-  //public final CommandXboxController xboxController = new CommandXboxController(2);
+  public final CommandXboxController xboxController = new CommandXboxController(2);
 
   // Setup Sendable chooser for picking autonomous program in SmartDashboard
   private SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -58,17 +58,20 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    // xboxController.a().onTrue(new InstantCommand(() -> _launcher.setLauncherSpeed(.85)));
-    // xboxController.a().onFalse(new InstantCommand(() -> _launcher.setLauncherSpeed(0)));
+    xboxController.a().onTrue(new InstantCommand(() -> _launcher.setLauncherSpeed(.85)));
+    xboxController.a().onFalse(new InstantCommand(() -> _launcher.setLauncherSpeed(0)));
 
-    // xboxController.b().onTrue(new InstantCommand(() -> _launcher.setFeederSpeed(1)));
-    // xboxController.b().onFalse(new InstantCommand(() -> _launcher.setFeederSpeed(0.0)));
+    xboxController.b().onTrue(new InstantCommand(() -> _launcher.setFeederSpeed(1)));
+    xboxController.b().onFalse(new InstantCommand(() -> _launcher.setFeederSpeed(0.0)));
 
-    //xboxController.x().onTrue(new InstantCommand(() -> _intake.setIntakeSpeed(1)));
-    //xboxController.x().onFalse(new InstantCommand(() -> _intake.setIntakeSpeed(0.0)));
+    xboxController.x().onTrue(new InstantCommand(() -> _intake.setIntakeSpeed(-1)));
+    xboxController.x().onFalse(new InstantCommand(() -> _intake.setIntakeSpeed(0.0)));
+
+    xboxController.y().onTrue(new InstantCommand(() -> _intake.setFeederSpeed(.7)));
+    xboxController.y().onFalse(new InstantCommand(() -> _intake.setFeederSpeed(0.0)));
 
   }
-
+// 
   public Command getAutonomousCommand() {
     // Get the selected Auto in smartDashboard
     return m_chooser.getSelected();

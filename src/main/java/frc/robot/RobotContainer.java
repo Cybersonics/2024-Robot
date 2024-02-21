@@ -16,6 +16,7 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Launcher;
 import frc.robot.subsystems.NavXGyro;
+import frc.robot.subsystems.Pneumatics;
 import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.Drive;
 
@@ -31,6 +32,7 @@ public class RobotContainer {
   public static Drive _drive = Drive.getInstance(_gyro);
   public static Launcher _launcher = Launcher.getInstance();
   private static Intake _intake = Intake.getInstance();
+  public static Pneumatics _pneumatics = Pneumatics.getInstance();
 
   public final CommandJoystick leftStick = new CommandJoystick(OperatorConstants.LeftStick);
   public final CommandJoystick rightStick = new CommandJoystick(OperatorConstants.RightStick);
@@ -58,7 +60,9 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    xboxController.a().onTrue(new InstantCommand(() -> _launcher.setLauncherSpeed(.85)));
+    leftStick.trigger().onTrue(new InstantCommand(()-> _pneumatics.launcherToggle()));
+    
+    xboxController.a().onTrue(new InstantCommand(() -> _launcher.setLauncherSpeed(.70)));
     xboxController.a().onFalse(new InstantCommand(() -> _launcher.setLauncherSpeed(0)));
 
     xboxController.b().onTrue(new InstantCommand(() -> _launcher.setFeederSpeed(1)));
@@ -67,7 +71,7 @@ public class RobotContainer {
     xboxController.x().onTrue(new InstantCommand(() -> _intake.setIntakeSpeed(-1)));
     xboxController.x().onFalse(new InstantCommand(() -> _intake.setIntakeSpeed(0.0)));
 
-    xboxController.y().onTrue(new InstantCommand(() -> _intake.setFeederSpeed(.7)));
+    xboxController.y().onTrue(new InstantCommand(() -> _intake.setFeederSpeed(-.7)));
     xboxController.y().onFalse(new InstantCommand(() -> _intake.setFeederSpeed(0.0)));
 
   }

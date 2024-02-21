@@ -164,6 +164,7 @@ public class Constants {
         public static final int launcherTopMotor = 32;
         public static final int launcherBottomMotor = 31;
         public static final int feederMotor = 33;
+
     }
 
     public static final class ShuffleBoardConstants {
@@ -185,4 +186,11 @@ public class Constants {
     public static final class VortexMotorConstants {
         public static final double kFreeSpeedRpm = 6784;
       }
+
+    public static final class PneumaticConstants {
+        public static final int compressorInput = 1;
+        
+        public static final int launcherUp = 0;
+        public static final int launcherDown = 1;
+    }
 }

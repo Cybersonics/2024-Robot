@@ -15,10 +15,17 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Launcher;
+import frc.robot.subsystems.LauncherFeeder;
 import frc.robot.subsystems.NavXGyro;
 import frc.robot.subsystems.Pneumatics;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.IntakeNote;
+import frc.robot.commands.LauncherFeed;
+import frc.robot.commands.LauncherSpinUp;
+import frc.robot.commands.RaiseLauncher;
 import frc.robot.subsystems.Drive;
+
+import javax.management.InstanceAlreadyExistsException;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
@@ -31,7 +38,8 @@ public class RobotContainer {
   public static NavXGyro _gyro = NavXGyro.getInstance(); // This must be called before Drive as it is used by the Drive
   public static Drive _drive = Drive.getInstance(_gyro);
   public static Launcher _launcher = Launcher.getInstance();
-  private static Intake _intake = Intake.getInstance();
+  public static LauncherFeeder _launcherFeeder = LauncherFeeder.getInstance();
+  public static Intake _intake = Intake.getInstance();
   public static Pneumatics _pneumatics = Pneumatics.getInstance();
 
   public final CommandJoystick leftStick = new CommandJoystick(OperatorConstants.LeftStick);
@@ -45,9 +53,10 @@ public class RobotContainer {
   public RobotContainer() {
 
      // Register named commands
-     NamedCommands.registerCommand("marker1", Commands.print("Passed marker 1"));
-     NamedCommands.registerCommand("marker2", Commands.print("Passed marker 2"));
-     NamedCommands.registerCommand("print hello", Commands.print("hello"));
+     NamedCommands.registerCommand("LauncherSpinUp", new LauncherSpinUp(_launcher));     
+     NamedCommands.registerCommand("RaiseLauncher", new RaiseLauncher(_pneumatics));
+     NamedCommands.registerCommand("LauncherFeed", new LauncherFeed(_launcherFeeder));
+     NamedCommands.registerCommand("IntakeNote", new IntakeNote(_intake));
 
     CommandScheduler.getInstance()
       .setDefaultCommand(_drive, new DriveCommand(_drive, leftStick, rightStick, _gyro));
@@ -59,20 +68,22 @@ public class RobotContainer {
     configureBindings();
   }
 
-  private void configureBindings() {
-    leftStick.trigger().onTrue(new InstantCommand(()-> _pneumatics.launcherToggle()));
-    
-    xboxController.a().onTrue(new InstantCommand(() -> _launcher.setLauncherSpeed(.70)));
-    xboxController.a().onFalse(new InstantCommand(() -> _launcher.setLauncherSpeed(0)));
+  private void configureBindings() {    
+    xboxController.leftTrigger().onTrue(new InstantCommand(() -> _intake.intakeNote(-1, -.7)));    
+    xboxController.leftTrigger().onFalse(new InstantCommand(() -> _intake.intakeNote(0, 0)));
 
-    xboxController.b().onTrue(new InstantCommand(() -> _launcher.setFeederSpeed(1)));
-    xboxController.b().onFalse(new InstantCommand(() -> _launcher.setFeederSpeed(0.0)));
+    xboxController.rightTrigger().onTrue(new InstantCommand(() -> _launcher.setLauncherSpeed(.83)));   
+    xboxController.rightTrigger().onFalse(new InstantCommand(() -> _launcher.setLauncherSpeed(0)));
 
-    xboxController.x().onTrue(new InstantCommand(() -> _intake.setIntakeSpeed(-1)));
-    xboxController.x().onFalse(new InstantCommand(() -> _intake.setIntakeSpeed(0.0)));
+    xboxController.a().onTrue(new InstantCommand(() -> _pneumatics.launcherToggle()));
 
-    xboxController.y().onTrue(new InstantCommand(() -> _intake.setFeederSpeed(-.7)));
-    xboxController.y().onFalse(new InstantCommand(() -> _intake.setFeederSpeed(0.0)));
+    rightStick.trigger().onTrue(new InstantCommand(() -> _launcherFeeder.setFeederSpeed(1)));   
+    rightStick.trigger().onFalse(new InstantCommand(() -> _launcherFeeder.setFeederSpeed(0)));
+
+    leftStick.button(2).onTrue(new InstantCommand(() -> _launcherFeeder.setFeederSpeed(-.5)));
+    leftStick.button(2).onFalse(new InstantCommand(() -> _launcherFeeder.setFeederSpeed(0)));
+
+    leftStick.button(7).onTrue(new InstantCommand(() -> _gyro.zeroNavHeading(), _gyro));
 
   }
 // 

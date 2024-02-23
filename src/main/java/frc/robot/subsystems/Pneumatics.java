@@ -22,7 +22,7 @@ public class Pneumatics extends SubsystemBase {
     //pcmCompressor.enableDigital();
     //pcmCompressor.disable();
 
-    _launcher.set(Value.kForward);
+    _launcher.set(Value.kReverse);
   }
 
   public static Pneumatics getInstance() {
@@ -37,10 +37,10 @@ public class Pneumatics extends SubsystemBase {
   }
 
   public void launcherUp() {
-    _launcher.set(Value.kReverse);
+    _launcher.set(Value.kForward);
   }
 
   public void launcherDown() {
-    _launcher.set(Value.kForward);
+    _launcher.set(Value.kReverse);
   }
 }

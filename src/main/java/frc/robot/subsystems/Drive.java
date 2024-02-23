@@ -250,8 +250,8 @@ public class Drive extends SubsystemBase {
 	public void getSteerEncoderVal() {
 		SmartDashboard.putNumber("angleLF", frontLeft.rawEncoderPosition());
 		SmartDashboard.putNumber("angleRF", frontRight.rawEncoderPosition());
-		//SmartDashboard.putNumber("angleLB", backLeft.rawEncoderPosition());
-		// SmartDashboard.putNumber("angleRB", backRight.rawEncoderPosition());
+		SmartDashboard.putNumber("angleLB", backLeft.rawEncoderPosition());
+		SmartDashboard.putNumber("angleRB", backRight.rawEncoderPosition());
 	}
 
 	public SwerveModulePosition[] getPositions() {

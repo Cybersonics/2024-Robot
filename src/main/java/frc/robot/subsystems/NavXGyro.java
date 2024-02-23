@@ -48,12 +48,12 @@ public class NavXGyro extends SubsystemBase {
   }
 
   public void zeroNavHeading() {
-    // navX.zeroYaw();
+    //navX.zeroYaw();
     navX.reset();
     zeroHeading = getNavHeading();
     zeroAngle = getNavAngle();
-    //System.out.println("ZeroHeading: " + zeroHeading);
-    //System.out.println("ZeroAngle: " + zeroAngle);
+    System.out.println("ZeroHeading: " + zeroHeading);
+    System.out.println("ZeroAngle: " + zeroAngle);
   }
 
   public double getZeroHeading() {

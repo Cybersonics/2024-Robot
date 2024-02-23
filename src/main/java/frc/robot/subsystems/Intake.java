@@ -33,6 +33,11 @@ public class Intake extends SubsystemBase {
         return instance;
     }
 
+    public void intakeNote(double intakeSpeed, double feederSpeed) {
+        intakeMotor.set(intakeSpeed);
+        feederMotor.set(feederSpeed);
+    }
+
     public void setIntakeSpeed(double speed) {
         intakeMotor.set(speed);
     }    

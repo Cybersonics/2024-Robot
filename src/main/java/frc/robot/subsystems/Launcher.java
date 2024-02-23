@@ -10,7 +10,6 @@ public class Launcher extends SubsystemBase {
     private static Launcher instance;
     private CANSparkFlex topMotor;
     private CANSparkFlex bottomMotor;
-    private CANSparkFlex feederMotor;
 
     public Launcher() {
         topMotor = new CANSparkFlex(Constants.LauncherConstants.launcherTopMotor, MotorType.kBrushless);
@@ -24,12 +23,6 @@ public class Launcher extends SubsystemBase {
         bottomMotor.setIdleMode(IdleMode.kCoast);
         // motorTwo.setInverted(invertDrive);
         // motorTwo.setSmartCurrentLimit(40);
-
-        feederMotor = new CANSparkFlex(Constants.LauncherConstants.feederMotor, MotorType.kBrushless);
-        feederMotor.restoreFactoryDefaults();
-        feederMotor.setIdleMode(IdleMode.kCoast);
-        // feederMotor.setInverted(invertDrive);
-        // feederMotor.setSmartCurrentLimit(40);
     }
 
     public static Launcher getInstance() {
@@ -43,8 +36,4 @@ public class Launcher extends SubsystemBase {
         topMotor.set(speed);
         bottomMotor.set(-speed);
     }
-
-    public void setFeederSpeed(double speed) {
-        feederMotor.set(speed);
-    }    
 }

@@ -31,9 +31,21 @@ public class Launcher extends SubsystemBase {
         }
         return instance;
     }
-
+    //*public void setLauncherSpeed(double speed) {
+        
     public void setLauncherSpeed(double speed) {
         topMotor.set(speed);
         bottomMotor.set(-speed);
+    }
+
+    public void setShoot(double speed) {
+        if(speed == 0) {
+            topMotor.set(speed);
+            bottomMotor.set(-speed);
+        } else {
+            topMotor.set(0);
+            bottomMotor.set(0);
+        }
+
     }
 }

@@ -20,6 +20,7 @@ import frc.robot.subsystems.NavXGyro;
 import frc.robot.subsystems.Pneumatics;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakeNote;
+//import frc.robot.commands.IntakeNoteAuto;
 import frc.robot.commands.LauncherFeed;
 import frc.robot.commands.LauncherSpinUp;
 import frc.robot.commands.RaiseLauncher;
@@ -69,19 +70,19 @@ public class RobotContainer {
   }
 
   private void configureBindings() {    
-    xboxController.leftTrigger().onTrue(new InstantCommand(() -> _intake.intakeNote(-1, -.7)));    
-    xboxController.leftTrigger().onFalse(new InstantCommand(() -> _intake.intakeNote(0, 0)));
+    xboxController.leftTrigger().onTrue(new InstantCommand(() -> _intake.intakeNote(-1, -.7), _intake));    
+    xboxController.leftTrigger().onFalse(new InstantCommand(() -> _intake.intakeNote(0, 0), _intake));
 
-    xboxController.rightTrigger().onTrue(new InstantCommand(() -> _launcher.setLauncherSpeed(.83)));   
-    xboxController.rightTrigger().onFalse(new InstantCommand(() -> _launcher.setLauncherSpeed(0)));
+    xboxController.rightTrigger().onTrue(new InstantCommand(() -> _launcher.setShoot(.83), _launcher));   
+    
 
-    xboxController.a().onTrue(new InstantCommand(() -> _pneumatics.launcherToggle()));
+    xboxController.a().onTrue(new InstantCommand(() -> _pneumatics.launcherToggle(), _pneumatics));
 
-    rightStick.trigger().onTrue(new InstantCommand(() -> _launcherFeeder.setFeederSpeed(1)));   
-    rightStick.trigger().onFalse(new InstantCommand(() -> _launcherFeeder.setFeederSpeed(0)));
+    rightStick.trigger().onTrue(new InstantCommand(() -> _launcherFeeder.setFeederSpeed(1), _launcherFeeder));   
+    rightStick.trigger().onFalse(new InstantCommand(() -> _launcherFeeder.setFeederSpeed(0), _launcherFeeder));
 
-    leftStick.button(2).onTrue(new InstantCommand(() -> _launcherFeeder.setFeederSpeed(-.5)));
-    leftStick.button(2).onFalse(new InstantCommand(() -> _launcherFeeder.setFeederSpeed(0)));
+    leftStick.button(2).onTrue(new InstantCommand(() -> _launcherFeeder.setFeederSpeed(-.5), _launcherFeeder));
+    leftStick.button(2).onFalse(new InstantCommand(() -> _launcherFeeder.setFeederSpeed(0), _launcherFeeder));
 
     leftStick.button(7).onTrue(new InstantCommand(() -> _gyro.zeroNavHeading(), _gyro));
 

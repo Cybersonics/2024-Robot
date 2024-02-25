@@ -65,7 +65,8 @@ public class NavXGyro extends SubsystemBase {
   }
 
   public Rotation2d getNavXRotation2D() {
-    return Rotation2d.fromDegrees(navX.getAngle());
+    //return Rotation2d.fromDegrees(navX.getAngle());
+    return Rotation2d.fromDegrees(-navX.getAngle());
   }
 
   /*

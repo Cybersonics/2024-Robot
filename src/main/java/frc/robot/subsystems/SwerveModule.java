@@ -70,9 +70,9 @@ public class SwerveModule extends SubsystemBase {
     // Get Drive information from Constants and create a Drive Alignment Tuner on ShuffleBoard
     this.driveData = driveData;
 
-    setAngleOffset = driveTab.addPersistent(this.driveData.drivePosition, 0)
-        .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", -180, "max", 180, "center", 0))
-        .withPosition(this.driveData.colPos, this.driveData.rowPos).withSize(3, 1).getEntry();
+    // setAngleOffset = driveTab.addPersistent(this.driveData.drivePosition, 0)
+    //     .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", -180, "max", 180, "center", 0))
+    //     .withPosition(this.driveData.colPos, this.driveData.rowPos).withSize(3, 1).getEntry();
 
     // Create and configure a new Drive motor
     driveMotor = new CANSparkMax(driveNum, MotorType.kBrushless);
@@ -286,7 +286,7 @@ public class SwerveModule extends SubsystemBase {
         //double angleOffset = (getAngleOffset() / 360) *2 * Math.PI;
         //double turningEncoder = steerEncoderRaw + angleOffset;
         double turningEncoder = steerEncoderRaw;
-        return -turningEncoder; // Invert Encoder for odometry as wpilib treats encoders backwards.
+        return turningEncoder; // -turningEncoder Invert Encoder for odometry as wpilib treats encoders backwards.
       }
     
       public void resetEncoders() {

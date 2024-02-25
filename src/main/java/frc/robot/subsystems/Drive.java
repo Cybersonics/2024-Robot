@@ -274,8 +274,9 @@ public class Drive extends SubsystemBase {
 		odometer.update(this._gyro.getRotation2d(), getPositions());
 
 		SmartDashboard.putNumber("Robot Heading", this._gyro.getHeading());
-		// SmartDashboard.putString("Robot Location",
-		// getPose().getTranslation().toString());
+		SmartDashboard.putString("Robot Location", getPose().getTranslation().toString());
+		SmartDashboard.putNumber("Robot DistanceX", odometer.getPoseMeters().getX());
+		SmartDashboard.putNumber("Robot DistanceY", odometer.getPoseMeters().getY());
 	}
 
 	public void stopModules() {

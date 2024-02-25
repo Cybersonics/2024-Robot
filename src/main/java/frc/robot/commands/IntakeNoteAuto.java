@@ -4,11 +4,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.Intake;
 
-public class IntakeNote extends Command {
+public class IntakeNoteAuto extends Command {
     
     private Intake _intake;
 
-    public IntakeNote(Intake intake) {
+    public IntakeNoteAuto(Intake intake) {
         _intake = intake;
         
         // Use addRequirements() here to declare subsystem dependencies.

@@ -75,13 +75,19 @@
       "name": "IntakeNote",
       "waypointRelativePos": 0.55,
       "command": {
-        "type": "parallel",
+        "type": "race",
         "data": {
           "commands": [
             {
               "type": "named",
               "data": {
                 "name": "IntakeNote"
+              }
+            },
+            {
+              "type": "wait",
+              "data": {
+                "waitTime": 2.0
               }
             }
           ]

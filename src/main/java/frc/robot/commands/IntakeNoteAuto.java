@@ -23,7 +23,7 @@ public class IntakeNoteAuto extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        _intake.intakeNote(1, .7);
+        _intake.intakeNote(-1, -0.7);
     }
 
     // Called once the command ends or is interrupted.

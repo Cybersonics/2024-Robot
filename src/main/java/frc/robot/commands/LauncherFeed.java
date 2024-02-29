@@ -26,7 +26,9 @@ public class LauncherFeed extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if(_rightJoystick.trigger().getAsBoolean()) {
+        if(_rightJoystick.button(2).and(_rightJoystick.trigger()).getAsBoolean()) {
+            _launcherFeeder.setFeederSpeed(.35);
+        } else if(_rightJoystick.trigger().getAsBoolean()) {
             _launcherFeeder.setFeederSpeed(1);
         } else if(_leftJoystick.button(2).getAsBoolean()) {
             _launcherFeeder.setFeederSpeed(-.5);

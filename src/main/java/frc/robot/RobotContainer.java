@@ -18,12 +18,18 @@ import frc.robot.subsystems.Launcher;
 import frc.robot.subsystems.LauncherFeeder;
 import frc.robot.subsystems.NavXGyro;
 import frc.robot.subsystems.Pneumatics;
+import frc.robot.commands.AmpShot;
+import frc.robot.commands.ClimberCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakeNote;
 //import frc.robot.commands.IntakeNoteAuto;
 import frc.robot.commands.LauncherFeed;
 import frc.robot.commands.LauncherSpinUp;
-import frc.robot.commands.RaiseLauncher;
+import frc.robot.commands.Autos.FeedNoteAuto;
+import frc.robot.commands.Autos.IntakeNoteAuto;
+import frc.robot.commands.Autos.LauncherSpinUpAuto;
+import frc.robot.commands.Autos.RaiseLauncher;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drive;
 
 import javax.management.InstanceAlreadyExistsException;
@@ -42,7 +48,7 @@ public class RobotContainer {
   public static LauncherFeeder _launcherFeeder = LauncherFeeder.getInstance();
   public static Intake _intake = Intake.getInstance();
   public static Pneumatics _pneumatics = Pneumatics.getInstance();
-
+  public static Climber _climber = Climber.getInstance();
   public final CommandJoystick leftStick = new CommandJoystick(OperatorConstants.LeftStick);
   public final CommandJoystick rightStick = new CommandJoystick(OperatorConstants.RightStick);
 
@@ -54,10 +60,7 @@ public class RobotContainer {
   public RobotContainer() {
 
     // Register named commands
-    // NamedCommands.registerCommand("LauncherSpinUp", new LauncherSpinUp(_launcher));
-    // NamedCommands.registerCommand("RaiseLauncher", new RaiseLauncher(_pneumatics));
-    // NamedCommands.registerCommand("LauncherFeed", new LauncherFeed(_launcherFeeder));
-    // NamedCommands.registerCommand("IntakeNote", new IntakeNote(_intake));
+    configureNamedCommands();
 
     CommandScheduler.getInstance()
         .setDefaultCommand(_drive, new DriveCommand(_drive, leftStick, rightStick, _gyro));
@@ -72,34 +75,31 @@ public class RobotContainer {
     CommandScheduler.getInstance()
         .setDefaultCommand(_launcherFeeder, new LauncherFeed(_launcherFeeder, rightStick, leftStick));
 
+    CommandScheduler.getInstance()
+        .setDefaultCommand(_climber, new ClimberCommand(_climber, xboxController));
+
+    // CommandScheduler.getInstance()
+    //     .setDefaultCommand(_launcher, new AmpShot(_launcher, _launcherFeeder, xboxController));
+
     // Configure Autonomous Options
     autonomousOptions();
 
     configureBindings();
   }
 
-  private void configureBindings() {
-    // xboxController.leftTrigger().onTrue(new InstantCommand(() -> _intake.intakeNote(-1, -.7), _intake));
-    // xboxController.leftTrigger().onFalse(new InstantCommand(() -> _intake.intakeNote(0, 0), _intake));
-
-    // xboxController.rightTrigger().onTrue(new InstantCommand(() -> _launcher.setShoot(.83), _launcher));
-    // xboxController.rightTrigger().onTrue(new InstantCommand(() -> _launcher.setLauncherSpeed(.83), _launcher));
-    // xboxController.rightTrigger().onFalse(new InstantCommand(() -> _launcher.setLauncherSpeed(0), _launcher));
-    // xboxController.a().onTrue(new InstantCommand(() -> _launcher.setLauncherSpeed(0), _launcher));
-
-    xboxController.a().onTrue(new InstantCommand(() -> _pneumatics.launcherToggle(), _pneumatics));
-
-    // rightStick.trigger().onTrue(new InstantCommand(() -> _launcherFeeder.setFeederSpeed(1), _launcherFeeder));
-    // rightStick.trigger().onFalse(new InstantCommand(() -> _launcherFeeder.setFeederSpeed(0), _launcherFeeder));
-
-    // leftStick.button(2).onTrue(new InstantCommand(() -> _launcherFeeder.setFeederSpeed(-.5), _launcherFeeder));
-    // leftStick.button(2).onFalse(new InstantCommand(() -> _launcherFeeder.setFeederSpeed(0), _launcherFeeder));
-
-    leftStick.button(7).onTrue(new InstantCommand(() -> _gyro.zeroNavHeading(), _gyro));
-
+  private void configureNamedCommands() {
+    NamedCommands.registerCommand("LauncherSpinUpAuto", new LauncherSpinUpAuto(_launcher));
+    NamedCommands.registerCommand("RaiseLauncher", new RaiseLauncher(_pneumatics));
+    NamedCommands.registerCommand("FeedNoteAuto", new FeedNoteAuto(_launcherFeeder));
+    NamedCommands.registerCommand("IntakeNote", new IntakeNoteAuto(_intake));
   }
 
-  //
+  private void configureBindings() {
+    xboxController.a().onTrue(new InstantCommand(() -> _pneumatics.launcherToggle(), _pneumatics));
+
+    leftStick.button(7).onTrue(new InstantCommand(() -> _gyro.zeroNavHeading(), _gyro));
+  }
+
   public Command getAutonomousCommand() {
     // Get the selected Auto in smartDashboard
     return m_chooser.getSelected();

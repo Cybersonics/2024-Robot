@@ -18,11 +18,11 @@ public class Pneumatics extends SubsystemBase {
 
   /** Creates a new Pnuematics. */
   private Pneumatics() {
-    pcmCompressor.enableAnalog(70,120);
+    pcmCompressor.enableAnalog(50,60);
     //pcmCompressor.enableDigital();
     //pcmCompressor.disable();
 
-    _launcher.set(Value.kReverse);
+    _launcher.set(Value.kForward);
   }
 
   public static Pneumatics getInstance() {

@@ -20,8 +20,8 @@ public class Launcher extends SubsystemBase {
     private SparkPIDController topPIDController;
     private SparkPIDController bottomPIDController;
     
-  public double topKP, topKI, topKD, topKIz, farTopKFF, closeTopKFF, topKMaxOutput, topMinOutput, topMaxRPM;  
-  public double bottomKP, bottomKI, bottomKD, bottomKIz, farBottomKFF, closeBottomKFF, bottomMaxOutput, bottomMinOutput, bottomMaxRPM;
+  public double topKP, topKI, topKD, topKIz, downTopKFF, upTopKFF, topKMaxOutput, topMinOutput, topMaxRPM;  
+  public double bottomKP, bottomKI, bottomKD, bottomKIz, downBottomKFF, upBottomKFF, bottomMaxOutput, bottomMinOutput, bottomMaxRPM;
 
 
     public Launcher() {
@@ -42,22 +42,22 @@ public class Launcher extends SubsystemBase {
         // motorTwo.setInverted(invertDrive);
         // motorTwo.setSmartCurrentLimit(40);
 
-        topKP = 0.001; 
+        topKP = 0.0002; 
         topKI = 0;//0.00000001;
         topKD = 0; //0.000001; 
         topKIz = 0; 
-        farTopKFF = 0.00015;
-        closeTopKFF = 0.00005;
+        downTopKFF = 0.00015;
+        upTopKFF = 0.00005;
         topKMaxOutput = 1; 
         topMinOutput = -1;
         topMaxRPM = 6000;
 
-        bottomKP = 0.0000001; 
+        bottomKP = 0.0000002; 
         bottomKI = 0;//0.00000001;
         bottomKD = 0; //0.000001; 
         bottomKIz = 0; 
-        farBottomKFF = 0.00015;
-        closeBottomKFF = 0.00005;
+        downBottomKFF = 0.00015;
+        upBottomKFF = 0.0001;
 
         bottomMaxOutput = 1; 
         bottomMinOutput = -1;
@@ -67,30 +67,30 @@ public class Launcher extends SubsystemBase {
         topPIDController.setI(topKI);
         topPIDController.setD(topKD);
         topPIDController.setIZone(topKIz);
-        topPIDController.setFF(farTopKFF);
+        topPIDController.setFF(downTopKFF);
         topPIDController.setOutputRange(topMinOutput, topKMaxOutput);
 
         bottomPIDController.setP(bottomKP);
         bottomPIDController.setI(bottomKI);
         bottomPIDController.setD(bottomKD);
         bottomPIDController.setIZone(bottomKIz);
-        bottomPIDController.setFF(farBottomKFF);
+        bottomPIDController.setFF(downBottomKFF);
         bottomPIDController.setOutputRange(bottomMinOutput, bottomMaxOutput);
 
         SmartDashboard.putNumber("Input TopShooterRPM", Constants.LauncherConstants.longTopMotor);        
         SmartDashboard.putNumber("Input BottomShooterRPM", Constants.LauncherConstants.longBottomMotor);
     }
     
-    public void setReferenceSpeed() {
-        boolean isLauncherUp = SmartDashboard.getBoolean("LauncherUp", true);
+    public void setReferenceSpeed(boolean isLauncherUp) {
+        //boolean isLauncherUp = SmartDashboard.getBoolean("LauncherUp", true);
         double setTopReferenceSpeed = SmartDashboard.getNumber("Input TopShooterRPM", Constants.LauncherConstants.longTopMotor);        
         double setBottomReferenceSpeed = SmartDashboard.getNumber("Input BottomShooterRPM", Constants.LauncherConstants.longBottomMotor);
-        if(!isLauncherUp) {
-            topPIDController.setFF(closeTopKFF);
-            bottomPIDController.setFF(closeBottomKFF);
+        if(isLauncherUp) {
+            topPIDController.setFF(upTopKFF);
+            bottomPIDController.setFF(upBottomKFF);
         } else {
-            topPIDController.setFF(farTopKFF);
-            bottomPIDController.setFF(farBottomKFF);
+            topPIDController.setFF(downTopKFF);
+            bottomPIDController.setFF(downBottomKFF);
         }
 
         topPIDController.setReference(setTopReferenceSpeed, CANSparkMax.ControlType.kVelocity);        
@@ -112,15 +112,4 @@ public class Launcher extends SubsystemBase {
         topMotor.set(speed);
         bottomMotor.set(speed);
     }
-
-    //public void setShoot(double speed) {
-        //if(speed == 0) {
-            //topMotor.set(speed);
-            //bottomMotor.set(-speed);
-        //} else {
-            //topMotor.set(0);
-            //bottomMotor.set(0);
-        //}
-
-    //}
 }

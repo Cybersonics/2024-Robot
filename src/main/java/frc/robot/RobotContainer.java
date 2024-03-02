@@ -67,7 +67,7 @@ public class RobotContainer {
     // .setDefaultCommand(_drive, new DriveCommand(_drive, xboxController, _gyro));
 
     CommandScheduler.getInstance()
-        .setDefaultCommand(_launcher, new LauncherSpinUp(_launcher, xboxController));
+        .setDefaultCommand(_launcher, new LauncherSpinUp(_launcher, _pneumatics, xboxController));
 
     CommandScheduler.getInstance()
         .setDefaultCommand(_intake, new IntakeNote(_intake, xboxController));

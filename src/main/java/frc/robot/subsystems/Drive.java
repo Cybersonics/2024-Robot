@@ -148,7 +148,7 @@ public class Drive extends SubsystemBase {
 		// SmartDashboard.putNumber("OmegaW2", omegaW2);
 		// SmartDashboard.putNumber("Forward", forward);
 		// SmartDashboard.putNumber("Strafe", strafe);
-		SmartDashboard.putNumber("NavX", _gyro.getNavAngle());
+		// SmartDashboard.putNumber("NavX", _gyro.getNavAngle());
 		// Compute the constants used later for calculating speeds and angles
 		double A = strafe - omegaL2;
 		double B = strafe + omegaL2;
@@ -210,7 +210,7 @@ public class Drive extends SubsystemBase {
 			backRight.setSwerve(angleBR, speedBR / maxSpeed, this._driveCorrect);
 		}
 
-		getSteerEncoderVal();
+		// getSteerEncoderVal();
 	}
 
 	private double speed(double val1, double val2) {
@@ -273,10 +273,10 @@ public class Drive extends SubsystemBase {
 
 		odometer.update(this._gyro.getRotation2d(), getPositions());
 
-		SmartDashboard.putNumber("Robot Heading", this._gyro.getHeading());
-		SmartDashboard.putString("Robot Location", getPose().getTranslation().toString());
-		SmartDashboard.putNumber("Robot DistanceX", odometer.getPoseMeters().getX());
-		SmartDashboard.putNumber("Robot DistanceY", odometer.getPoseMeters().getY());
+		// SmartDashboard.putNumber("Robot Heading", this._gyro.getHeading());
+		// SmartDashboard.putString("Robot Location", getPose().getTranslation().toString());
+		// SmartDashboard.putNumber("Robot DistanceX", odometer.getPoseMeters().getX());
+		// SmartDashboard.putNumber("Robot DistanceY", odometer.getPoseMeters().getY());
 	}
 
 	public void stopModules() {

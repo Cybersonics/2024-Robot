@@ -24,7 +24,8 @@ public class LauncherSpinUp extends Command {
     @Override
     public void execute() {
         if (_xboxController.rightTrigger().getAsBoolean()) {
-            _launcher.setLauncherSpeed(.75);
+            _launcher.setReferenceSpeed();
+            //_launcher.setLauncherSpeed(0.83);//Orig 0.75
         } else {
             _launcher.setLauncherSpeed(0);
         }        

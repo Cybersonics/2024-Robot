@@ -165,6 +165,11 @@ public class Constants {
         public static final int launcherBottomMotor = 31;
         public static final int feederMotor = 33;
 
+        public static final double longTopMotor = 5300; // 5255; // avg drop down
+        public static final double longBottomMotor = 5440; // 5051; // avg drop down
+
+        public static final double shortTopMotor = 3800; // ; // avg drop up
+        public static final double shortBottomMotor = 3840; // ; // avg drop up
     }
 
     public static final class ShuffleBoardConstants {
@@ -192,5 +197,10 @@ public class Constants {
         
         public static final int launcherUp = 0;
         public static final int launcherDown = 1;
+    }
+
+    public static final class ClimberConstants {
+        public static final int leftClimber = 35;
+        public static final int rightClimber = 36;
     }
 }

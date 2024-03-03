@@ -1,0 +1,62 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.5,
+      "y": 3.0
+    },
+    "rotation": 0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "StartMoveFireLoaded"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "FireNoteAuto"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "MiddleFourNotePickup"
+          }
+        },
+        {
+          "type": "deadline",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "MiddleFourReturnToShoot"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "PickupNoteAuto"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "FireNoteAuto"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}

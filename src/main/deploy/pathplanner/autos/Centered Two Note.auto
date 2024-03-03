@@ -16,6 +16,12 @@
           "data": {
             "pathName": "2 Note Auto"
           }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "FireNoteAuto"
+          }
         }
       ]
     }

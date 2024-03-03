@@ -1,5 +1,7 @@
 package frc.robot.commands.Autos;
 
+import java.util.function.Supplier;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Launcher;
@@ -8,9 +10,11 @@ public class LauncherSpinUpAuto extends Command {
     
     private Launcher _launcher;
     private Timer _timer;
+    private boolean _isLauncherUp;
 
-    public LauncherSpinUpAuto(Launcher launcher) {
+    public LauncherSpinUpAuto(Launcher launcher, Supplier<Boolean> isLauncherUp) {
         _launcher = launcher;
+        _isLauncherUp = isLauncherUp.get();
         addRequirements(_launcher);
     }
 
@@ -24,7 +28,7 @@ public class LauncherSpinUpAuto extends Command {
     @Override
     public void execute() {
         _timer.start();
-        _launcher.setLauncherSpeed(.75);
+        _launcher.setReferenceSpeed(_isLauncherUp);
     }
 
     // Called once the command ends or is interrupted.
@@ -38,6 +42,6 @@ public class LauncherSpinUpAuto extends Command {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return _timer.hasElapsed(.25);
+        return _timer.hasElapsed(.75);
     }
 }

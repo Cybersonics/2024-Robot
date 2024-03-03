@@ -23,7 +23,7 @@ public class Pneumatics extends SubsystemBase {
     //pcmCompressor.enableDigital();
     //pcmCompressor.disable();
 
-    _launcher.set(Value.kForward);
+    _launcher.set(Value.kReverse);
     
     SmartDashboard.putBoolean("LauncherUp", IsLauncherUp());
   }

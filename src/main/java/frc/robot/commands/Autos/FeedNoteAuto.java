@@ -1,16 +1,19 @@
 package frc.robot.commands.Autos;
 
+import java.util.function.Supplier;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import frc.robot.subsystems.LauncherFeeder;
 
 public class FeedNoteAuto extends Command {
     private LauncherFeeder _launcherFeeder;
     private Timer _timer;
+    private Supplier<Boolean> _hasNoteSupplier;
 
-     public FeedNoteAuto(LauncherFeeder launcherFeeder) {
+     public FeedNoteAuto(LauncherFeeder launcherFeeder, Supplier<Boolean> hasNoteSupplier) {
         _launcherFeeder = launcherFeeder;
+        _hasNoteSupplier = hasNoteSupplier;
         addRequirements(_launcherFeeder);
     }
 
@@ -38,7 +41,7 @@ public class FeedNoteAuto extends Command {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return _timer.hasElapsed(.4);
+        return (!_hasNoteSupplier.get()) || (_timer.hasElapsed(.5));
     }
 
 }

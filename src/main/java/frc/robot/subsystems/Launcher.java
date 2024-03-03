@@ -112,4 +112,14 @@ public class Launcher extends SubsystemBase {
         topMotor.set(speed);
         bottomMotor.set(speed);
     }
+
+    public boolean AtReferenceSpeed() {
+        double topVelocity = topEncoder.getVelocity();
+        double bottomVelocity = bottomEncoder.getVelocity();
+        
+        SmartDashboard.putNumber("Reading TopShooterRPM", topVelocity);        
+        SmartDashboard.putNumber("Reading BottomShooterRPM", bottomVelocity);
+        return topVelocity > (topVelocity - 50) || topVelocity < (topVelocity + 50)
+            && bottomVelocity > (bottomVelocity - 50) || bottomVelocity < (bottomVelocity + 50);
+    }
 }

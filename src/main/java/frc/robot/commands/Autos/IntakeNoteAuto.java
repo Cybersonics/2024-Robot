@@ -2,7 +2,6 @@ package frc.robot.commands.Autos;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.Intake;
 
 public class IntakeNoteAuto extends Command {
@@ -41,6 +40,6 @@ public class IntakeNoteAuto extends Command {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return _timer.hasElapsed(1);
+        return _intake.hasNote();
     }
 }

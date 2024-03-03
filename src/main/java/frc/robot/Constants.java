@@ -78,7 +78,7 @@ public class Constants {
             public static final double kDriveEncoderRPM2MeterPerSec = kDriveEncoderRot2Meter / 60;
             public static final double kTurningEncoderRPM2RadPerSec = kTurningEncoderRot2Rad / 60;
 
-            public static final double maxSpeed = 4.5; // M/S
+            public static final double maxSpeed = 6; // M/S
 
             public static final double kPTurning = 0.5;
 
@@ -158,6 +158,8 @@ public class Constants {
     public static final class IntakeConstants {
         public static final int intakeMotor = 30;
         public static final int feederMotor = 34;
+
+        public static final int noteTripInput = 0;
     }
 
     public static final class LauncherConstants {

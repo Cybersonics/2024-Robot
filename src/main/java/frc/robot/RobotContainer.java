@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -22,24 +21,17 @@ import frc.robot.commands.AmpShot;
 import frc.robot.commands.ClimberCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakeNote;
-//import frc.robot.commands.IntakeNoteAuto;
 import frc.robot.commands.LauncherFeed;
 import frc.robot.commands.LauncherSpinUp;
-import frc.robot.commands.Autos.FeedNoteAuto;
-import frc.robot.commands.Autos.IntakeNoteAuto;
-import frc.robot.commands.Autos.LauncherSpinUpAuto;
+import frc.robot.commands.Autos.FireNoteAuto;
+import frc.robot.commands.Autos.PickupNoteAuto;
 import frc.robot.commands.Autos.RaiseLauncher;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drive;
 
-import javax.management.InstanceAlreadyExistsException;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-import com.pathplanner.lib.commands.PathPlannerAuto;
-import com.pathplanner.lib.path.GoalEndState;
-import com.pathplanner.lib.path.PathConstraints;
-import com.pathplanner.lib.path.PathPlannerPath;
 
 public class RobotContainer {
   public static NavXGyro _gyro = NavXGyro.getInstance(); // This must be called before Drive as it is used by the Drive
@@ -88,10 +80,10 @@ public class RobotContainer {
   }
 
   private void configureNamedCommands() {
-    NamedCommands.registerCommand("LauncherSpinUpAuto", new LauncherSpinUpAuto(_launcher));
+    NamedCommands.registerCommand("FireNoteAuto", new FireNoteAuto(_launcher, _launcherFeeder, _pneumatics::IsLauncherUp, _intake::hasNote));
     NamedCommands.registerCommand("RaiseLauncher", new RaiseLauncher(_pneumatics));
-    NamedCommands.registerCommand("FeedNoteAuto", new FeedNoteAuto(_launcherFeeder));
-    NamedCommands.registerCommand("IntakeNote", new IntakeNoteAuto(_intake));
+    NamedCommands.registerCommand("PickupNoteAuto", new PickupNoteAuto(_intake));
+    NamedCommands.registerCommand("RaiseLauncher", new RaiseLauncher(_pneumatics));
   }
 
   private void configureBindings() {

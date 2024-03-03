@@ -4,24 +4,24 @@
     {
       "anchor": {
         "x": 1.1017398672973981,
-        "y": 5.578111669043852
+        "y": 5.6
       },
       "prevControl": null,
       "nextControl": {
         "x": 1.33591512751414,
-        "y": 5.578111669043852
+        "y": 5.6
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.68,
-        "y": 5.58
+        "x": 2.0,
+        "y": 5.6
       },
       "prevControl": {
-        "x": 2.2068370297130557,
-        "y": 5.58
+        "x": 1.5268370297130556,
+        "y": 5.6
       },
       "nextControl": null,
       "isLocked": false,
@@ -31,40 +31,6 @@
   "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [
-    {
-      "name": "Pickup Note",
-      "waypointRelativePos": 0.9,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "PickupNoteAuto"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "name": "Fire Loaded Note",
-      "waypointRelativePos": 0.5,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "FireNoteAuto"
-              }
-            }
-          ]
-        }
-      }
-    },
     {
       "name": "Raise Launcher",
       "waypointRelativePos": 0,
@@ -84,8 +50,8 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 5.0,
-    "maxAcceleration": 5.0,
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
@@ -95,7 +61,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "BlueTwo",
+  "folder": "AmpTwo",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }

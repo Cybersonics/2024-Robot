@@ -23,8 +23,11 @@ import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakeNote;
 import frc.robot.commands.LauncherFeed;
 import frc.robot.commands.LauncherSpinUp;
+import frc.robot.commands.Autos.FeedNoteAuto;
 import frc.robot.commands.Autos.FireNoteAuto;
+import frc.robot.commands.Autos.LowerLauncher;
 import frc.robot.commands.Autos.PickupNoteAuto;
+import frc.robot.commands.Autos.PrespinupLauncher;
 import frc.robot.commands.Autos.RaiseLauncher;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drive;
@@ -59,7 +62,7 @@ public class RobotContainer {
     // .setDefaultCommand(_drive, new DriveCommand(_drive, xboxController, _gyro));
 
     CommandScheduler.getInstance()
-        .setDefaultCommand(_launcher, new LauncherSpinUp(_launcher, _pneumatics, xboxController));
+        .setDefaultCommand(_launcher, new LauncherSpinUp(_launcher, _pneumatics::IsLauncherUp, xboxController));
 
     CommandScheduler.getInstance()
         .setDefaultCommand(_intake, new IntakeNote(_intake, xboxController));
@@ -81,9 +84,12 @@ public class RobotContainer {
 
   private void configureNamedCommands() {
     NamedCommands.registerCommand("FireNoteAuto", new FireNoteAuto(_launcher, _launcherFeeder, _pneumatics::IsLauncherUp, _intake::hasNote));
-    NamedCommands.registerCommand("RaiseLauncher", new RaiseLauncher(_pneumatics));
     NamedCommands.registerCommand("PickupNoteAuto", new PickupNoteAuto(_intake));
-    NamedCommands.registerCommand("RaiseLauncher", new RaiseLauncher(_pneumatics));
+    NamedCommands.registerCommand("RaiseLauncher", new RaiseLauncher(_pneumatics));  
+    NamedCommands.registerCommand("LowerLauncher", new LowerLauncher(_pneumatics));
+
+    NamedCommands.registerCommand("PreSpinLauncher", new PrespinupLauncher(_launcher, _pneumatics::IsLauncherUp));
+    NamedCommands.registerCommand("FeedNoteAuto", new FeedNoteAuto(_launcherFeeder, _pneumatics::IsLauncherUp));
   }
 
   private void configureBindings() {
@@ -102,7 +108,6 @@ public class RobotContainer {
    */
   private void autonomousOptions() {
     // Example adding Autonomous option to chooser
-
     m_chooser = AutoBuilder.buildAutoChooser(); // Default auto will be `Commands.none()`
     SmartDashboard.putData("Auto Mode", m_chooser);
 

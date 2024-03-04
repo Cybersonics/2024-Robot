@@ -37,7 +37,7 @@ public class Pneumatics extends SubsystemBase {
 
   public void launcherToggle() {
     _launcher.toggle();
-    SmartDashboard.putBoolean("LauncherUp", IsLauncherUp());
+    SmartDashboard.putBoolean("LauncherUp", !IsLauncherUp());
   }
 
   public boolean IsLauncherUp() {

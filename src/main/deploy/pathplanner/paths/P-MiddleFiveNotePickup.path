@@ -3,25 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.0,
-        "y": 5.6
+        "x": 4.1,
+        "y": 4.6
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.205906929628587,
-        "y": 5.596361216475402
+        "x": 4.380103011987498,
+        "y": 4.07539893464585
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.2,
-        "y": 5.6
+        "x": 5.667071096612504,
+        "y": 3.880403770308729
       },
       "prevControl": {
-        "x": 3.11965088504999,
-        "y": 5.596361216475402
+        "x": 4.966308463726006,
+        "y": 4.122975450923286
+      },
+      "nextControl": {
+        "x": 7.441527092080314,
+        "y": 3.2661690026467944
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 8.2,
+        "y": 0.7
+      },
+      "prevControl": {
+        "x": 6.466551270394702,
+        "y": 1.540461798263264
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,8 +48,8 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "IntakeNote",
-      "waypointRelativePos": 0.1,
+      "name": "Pickup Note",
+      "waypointRelativePos": 1.85,
       "command": {
         "type": "parallel",
         "data": {
@@ -57,13 +73,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": 0.0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Speaker",
+  "folder": null,
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": -18.0,
     "velocity": 0
   },
   "useDefaultConstraints": true

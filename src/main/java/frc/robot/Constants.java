@@ -70,7 +70,7 @@ public class Constants {
         public static final shuffleBoardDrive backRight = new shuffleBoardDrive("RBack Set Angle", 4, 1);
 
         public static final class ModuleConstants {
-            public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
+            public static final double kWheelDiameterMeters = Units.inchesToMeters(4.1); // 4
             public static final double kDriveMotorGearRatio = 1 / 6.429;
             public static final double kTurningMotorGearRatio = 1 / 1024;
             public static final double kDriveEncoderRot2Meter = kDriveMotorGearRatio * Math.PI * kWheelDiameterMeters;
@@ -78,7 +78,7 @@ public class Constants {
             public static final double kDriveEncoderRPM2MeterPerSec = kDriveEncoderRot2Meter / 60;
             public static final double kTurningEncoderRPM2RadPerSec = kTurningEncoderRot2Rad / 60;
 
-            public static final double maxSpeed = 6; // M/S
+            public static final double maxSpeed = 6.5; // M/S
 
             public static final double kPTurning = 0.5;
 
@@ -167,11 +167,17 @@ public class Constants {
         public static final int launcherBottomMotor = 31;
         public static final int feederMotor = 33;
 
-        public static final double longTopMotor = 5300; // 5255; // avg drop down
-        public static final double longBottomMotor = 5440; // 5051; // avg drop down
+        public static final double topFarShotRPM = 5300; // 5255; // avg drop down
+        public static final double bottomFarShotRPM = 5440; // 5051; // avg drop down
+        
+        public static final double topShortShotRPM = 5300; // 5255; // avg drop down
+        public static final double bottomShortShotRPM = 5440; // 5051; // avg drop down
 
-        public static final double shortTopMotor = 3800; // ; // avg drop up
-        public static final double shortBottomMotor = 3840; // ; // avg drop up
+        public static final double topFarLobRPM = 5000; // ;
+        public static final double bottomFarLobRPM = 5100; // ;
+
+        public static final double topSourceLobRPM = 3900;
+        public static final double bottomSourceLobRPM = 3900;
     }
 
     public static final class ShuffleBoardConstants {

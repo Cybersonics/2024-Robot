@@ -14,7 +14,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "StartMoveFireLoaded"
+            "pathName": "P-StartMoveFireLoaded"
           }
         },
         {
@@ -26,7 +26,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "MiddleFourNotePickup"
+            "pathName": "P-MiddleFourNotePickup"
           }
         },
         {
@@ -36,7 +36,38 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "MiddleFourReturnToShoot"
+                  "pathName": "P-MiddleFourReturnToShoot"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "PickupNoteAuto"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "FireNoteAuto"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "P-MiddleThreeNotePickup"
+          }
+        },
+        {
+          "type": "deadline",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "P-MiddleThreeReturnToShootUnder"
                 }
               },
               {

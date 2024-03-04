@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.205906929628587,
-        "y": 5.596361216475402
+        "x": 1.9036644249060484,
+        "y": 5.138122580283166
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.2,
-        "y": 5.6
+        "x": 2.6,
+        "y": 4.1
       },
       "prevControl": {
-        "x": 3.11965088504999,
-        "y": 5.596361216475402
+        "x": 1.8102695844346557,
+        "y": 4.762983558746214
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,8 +32,8 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "IntakeNote",
-      "waypointRelativePos": 0.1,
+      "name": "Pickup Note",
+      "waypointRelativePos": 0.8,
       "command": {
         "type": "parallel",
         "data": {
@@ -57,8 +57,8 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
-    "rotateFast": false
+    "rotation": -30.0,
+    "rotateFast": true
   },
   "reversed": false,
   "folder": "Speaker",

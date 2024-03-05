@@ -8,13 +8,13 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.Launcher;
 import frc.robot.subsystems.LauncherFeeder;
 
-public class FireNoteAuto extends ParallelRaceGroup {
+public class QuickFireNoteAuto extends ParallelRaceGroup {
 
-    public FireNoteAuto(Launcher launcher, LauncherFeeder launcherFeeder, Supplier<Boolean> isLauncherUpSupplier, Supplier<Boolean> hasNoteSupplier) {
+    public QuickFireNoteAuto(Launcher launcher, LauncherFeeder launcherFeeder, Supplier<Boolean> isLauncherUpSupplier, Supplier<Boolean> hasNoteSupplier) {
         addCommands(
             new LauncherSpinUpAuto(launcher, isLauncherUpSupplier),
             new SequentialCommandGroup(
-                new WaitCommand(.6),
+                new WaitCommand(.3),
                 new FeedNoteAuto(launcherFeeder, hasNoteSupplier)
             )
         );

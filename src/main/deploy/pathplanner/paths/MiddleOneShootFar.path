@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.0,
-        "y": 5.6
+        "x": 8.2,
+        "y": 7.5
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.9914122488577533,
-        "y": 5.937602754065366
+        "x": 6.963788939454365,
+        "y": 7.27582204760609
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.7,
-        "y": 6.9
+        "x": 3.6,
+        "y": 6.5
       },
       "prevControl": {
-        "x": 2.154013539856059,
-        "y": 6.62700676992803
+        "x": 4.635839230348296,
+        "y": 6.727333169630711
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,25 +30,7 @@
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "eventMarkers": [
-    {
-      "name": "Pickup Note",
-      "waypointRelativePos": 0.35,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "PickupNoteAuto"
-              }
-            }
-          ]
-        }
-      }
-    }
-  ],
+  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 5.5,
     "maxAcceleration": 5.5,
@@ -57,8 +39,8 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 45.0,
-    "rotateFast": true
+    "rotation": 15.0,
+    "rotateFast": false
   },
   "reversed": false,
   "folder": "Speaker",

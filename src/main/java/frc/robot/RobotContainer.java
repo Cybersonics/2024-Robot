@@ -83,6 +83,7 @@ public class RobotContainer {
   }
 
   private void configureNamedCommands() {
+    NamedCommands.registerCommand("QuickFireNoteAuto", new FireNoteAuto(_launcher, _launcherFeeder, _pneumatics::IsLauncherUp, _intake::hasNote));
     NamedCommands.registerCommand("FireNoteAuto", new FireNoteAuto(_launcher, _launcherFeeder, _pneumatics::IsLauncherUp, _intake::hasNote));
     NamedCommands.registerCommand("PickupNoteAuto", new PickupNoteAuto(_intake));
     NamedCommands.registerCommand("RaiseLauncher", new RaiseLauncher(_pneumatics));  

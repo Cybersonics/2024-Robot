@@ -3,6 +3,7 @@ package frc.robot.commands.Autos;
 import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Launcher;
 
@@ -29,6 +30,7 @@ public class LauncherSpinUpAuto extends Command {
     public void execute() {
         _timer.start();
         _launcher.setReferenceSpeed(_isLauncherUp);
+        SmartDashboard.putBoolean("LauncherAtSpeed", _launcher.AtReferenceSpeed());
     }
 
     // Called once the command ends or is interrupted.

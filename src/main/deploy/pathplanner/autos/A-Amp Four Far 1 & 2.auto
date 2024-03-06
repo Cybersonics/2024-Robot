@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.61,
-      "y": 1.63
+      "x": 1.4,
+      "y": 7.3513176955095005
     },
     "rotation": 0
   },
@@ -12,21 +12,27 @@
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "RaiseLauncher"
+          }
+        },
+        {
           "type": "path",
           "data": {
-            "pathName": "P-StartMoveFireLoaded"
+            "pathName": "Amp-PreloadShot"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "FireNoteAuto"
+            "name": "QuickFireNoteAuto"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "P-MiddleFourNotePickup"
+            "pathName": "Amp-AmpOnePickup"
           }
         },
         {
@@ -36,7 +42,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "P-MiddleFourReturnToShoot"
+                  "pathName": "Amp-AmpOneShotFar"
                 }
               },
               {
@@ -51,13 +57,13 @@
         {
           "type": "named",
           "data": {
-            "name": "FireNoteAuto"
+            "name": "QuickFireNoteAuto"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "P-MiddleThreeNotePickup"
+            "pathName": "Amp-MiddleOnePickup"
           }
         },
         {
@@ -67,7 +73,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "P-MiddleThreeReturnToShoot"
+                  "pathName": "Amp-MiddleOneShotFar"
                 }
               },
               {
@@ -82,13 +88,38 @@
         {
           "type": "named",
           "data": {
-            "name": "FireNoteAuto"
+            "name": "QuickFireNoteAuto"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "P-MiddleFiveNotePickup"
+            "pathName": "Amp-MiddleTwoPickup"
+          }
+        },
+        {
+          "type": "deadline",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Amp-MiddleTwoShotFar"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "PickupNoteAuto"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "QuickFireNoteAuto"
           }
         }
       ]

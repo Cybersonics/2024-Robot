@@ -3,29 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.097360023698671,
-        "y": 4.660384427657217
+        "x": 4.3,
+        "y": 6.5
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.467973190578212,
-        "y": 4.141827850401547
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 5.384328108323675,
-        "y": 3.9389023196098654
-      },
-      "prevControl": {
-        "x": 4.947908822134445,
-        "y": 4.0919324589229715
-      },
-      "nextControl": {
-        "x": 6.135059491021596,
-        "y": 3.6756588477547507
+        "x": 5.238341648179734,
+        "y": 6.8150809935824155
       },
       "isLocked": false,
       "linkedName": null
@@ -33,29 +17,23 @@
     {
       "anchor": {
         "x": 8.5,
-        "y": 4.11
+        "y": 7.7
       },
       "prevControl": {
-        "x": 7.890015970055694,
-        "y": 4.153397000380699
+        "x": 7.5,
+        "y": 7.7
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 1.0,
-      "rotationDegrees": 0,
-      "rotateFast": false
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "NotePickup",
-      "waypointRelativePos": 1.75,
+      "name": "Pickup Note",
+      "waypointRelativePos": 0.75,
       "command": {
         "type": "parallel",
         "data": {
@@ -83,9 +61,9 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Source",
+  "folder": "Amp",
   "previewStartingState": {
-    "rotation": -18.0,
+    "rotation": 15.0,
     "velocity": 0
   },
   "useDefaultConstraints": true

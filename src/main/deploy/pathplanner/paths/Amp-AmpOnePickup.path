@@ -3,59 +3,37 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.097360023698671,
-        "y": 4.660384427657217
+        "x": 1.8,
+        "y": 6.9
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.467973190578212,
-        "y": 4.141827850401547
+        "x": 2.267167809870063,
+        "y": 6.90282881753412
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 5.384328108323675,
-        "y": 3.9389023196098654
+        "x": 2.7,
+        "y": 6.9
       },
       "prevControl": {
-        "x": 4.947908822134445,
-        "y": 4.0919324589229715
-      },
-      "nextControl": {
-        "x": 6.135059491021596,
-        "y": 3.6756588477547507
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 8.5,
-        "y": 4.11
-      },
-      "prevControl": {
-        "x": 7.890015970055694,
-        "y": 4.153397000380699
+        "x": 2.329509187759469,
+        "y": 6.893079059317263
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 1.0,
-      "rotationDegrees": 0,
-      "rotateFast": false
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "NotePickup",
-      "waypointRelativePos": 1.75,
+      "name": "Pickup Note",
+      "waypointRelativePos": 0.6,
       "command": {
         "type": "parallel",
         "data": {
@@ -72,8 +50,8 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 5.5,
-    "maxAcceleration": 5.5,
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
@@ -83,10 +61,10 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Source",
+  "folder": "Amp",
   "previewStartingState": {
-    "rotation": -18.0,
+    "rotation": 40.0,
     "velocity": 0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

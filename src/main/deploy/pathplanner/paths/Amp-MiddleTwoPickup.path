@@ -3,41 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.15,
-        "y": 3.1
+        "x": 4.1,
+        "y": 6.5
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.9998624415301096,
-        "y": 2.0669487419734938
+        "x": 5.009092373529166,
+        "y": 6.863829784666696
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 5.42,
-        "y": 1.66
+        "x": 8.5,
+        "y": 5.7
       },
       "prevControl": {
-        "x": 4.92313334099974,
-        "y": 1.69499060978875
-      },
-      "nextControl": {
-        "x": 6.112232833396783,
-        "y": 1.6112512089157194
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 8.2,
-        "y": 2.45
-      },
-      "prevControl": {
-        "x": 7.585765232338065,
-        "y": 2.6579303664545577
+        "x": 7.509775399598305,
+        "y": 6.111847193053056
       },
       "nextControl": null,
       "isLocked": false,
@@ -46,30 +30,18 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 1.15,
+      "waypointRelativePos": 0.45,
       "rotationDegrees": 0,
       "rotateFast": false
     }
   ],
-  "constraintZones": [
-    {
-      "name": "Note Pickup Slowdown",
-      "minWaypointRelativePos": 1.6,
-      "maxWaypointRelativePos": 2.0,
-      "constraints": {
-        "maxVelocity": 4.0,
-        "maxAcceleration": 4.0,
-        "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 720.0
-      }
-    }
-  ],
+  "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "PickupNote",
-      "waypointRelativePos": 1.7,
+      "name": "Pickup Note",
+      "waypointRelativePos": 0.8,
       "command": {
-        "type": "race",
+        "type": "parallel",
         "data": {
           "commands": [
             {
@@ -95,9 +67,9 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Source",
+  "folder": "Amp",
   "previewStartingState": {
-    "rotation": -35.0,
+    "rotation": 15.0,
     "velocity": 0
   },
   "useDefaultConstraints": true

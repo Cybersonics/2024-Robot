@@ -94,7 +94,9 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    xboxController.a().onTrue(new InstantCommand(() -> _pneumatics.launcherToggle(), _pneumatics));
+    xboxController.a().onTrue(new InstantCommand(() -> _pneumatics.launcherToggle(), _pneumatics));    
+    xboxController.b().onTrue(new InstantCommand(() -> _pneumatics.ampArmToggle(), _pneumatics));
+
 
     leftStick.button(7).onTrue(new InstantCommand(() -> _gyro.zeroNavHeading(), _gyro));
   }

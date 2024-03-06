@@ -10,10 +10,18 @@ public class FeedNoteAuto extends Command {
     private LauncherFeeder _launcherFeeder;
     private Timer _timer;
     private Supplier<Boolean> _hasNoteSupplier;
+    private Supplier<Boolean> _atReferenceSpeedSupplier;
 
      public FeedNoteAuto(LauncherFeeder launcherFeeder, Supplier<Boolean> hasNoteSupplier) {
         _launcherFeeder = launcherFeeder;
         _hasNoteSupplier = hasNoteSupplier;
+        addRequirements(_launcherFeeder);
+    }
+    
+     public FeedNoteAuto(LauncherFeeder launcherFeeder, Supplier<Boolean> hasNoteSupplier, Supplier<Boolean> atReferenceSpeedSupplier) {
+        _launcherFeeder = launcherFeeder;
+        _hasNoteSupplier = hasNoteSupplier;
+        _atReferenceSpeedSupplier = atReferenceSpeedSupplier;
         addRequirements(_launcherFeeder);
     }
 
@@ -26,8 +34,14 @@ public class FeedNoteAuto extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {  
-        _timer.start();      
-        _launcherFeeder.setFeederSpeed(1);
+        _timer.start();
+        if(_atReferenceSpeedSupplier != null) {
+            if(_atReferenceSpeedSupplier.get()) {
+                _launcherFeeder.setFeederSpeed(1);
+            }
+        } else {
+            _launcherFeeder.setFeederSpeed(1);
+        }
     }
 
     // Called once the command ends or is interrupted.

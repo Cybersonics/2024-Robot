@@ -132,7 +132,7 @@ public class Launcher extends SubsystemBase {
     }
 
     public boolean AtReferenceSpeed() {
-        var tolerance = 200;
+        var tolerance = 375;
         var topTarget = SmartDashboard.getNumber("Input TopShooterRPM", 0);
         var bottomTarget = SmartDashboard.getNumber("Input BottomShooterRPM", 0);
 

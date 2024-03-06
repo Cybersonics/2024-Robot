@@ -14,6 +14,9 @@ public class Pneumatics extends SubsystemBase {
 
   private DoubleSolenoid _launcher = new DoubleSolenoid(PneumaticsModuleType.REVPH,
       Constants.PneumaticConstants.launcherUp, Constants.PneumaticConstants.launcherDown);
+      
+  private DoubleSolenoid _ampArm = new DoubleSolenoid(PneumaticsModuleType.REVPH,
+      Constants.PneumaticConstants.AmpArmOut, Constants.PneumaticConstants.AmptArmIn);
 
   Compressor pcmCompressor = new Compressor(Constants.PneumaticConstants.compressorInput, PneumaticsModuleType.REVPH);
 
@@ -23,7 +26,8 @@ public class Pneumatics extends SubsystemBase {
     //pcmCompressor.enableDigital();
     //pcmCompressor.disable();
 
-    _launcher.set(Value.kReverse);
+    _launcher.set(Value.kReverse);    
+    _ampArm.set(Value.kReverse);
     
     SmartDashboard.putBoolean("LauncherUp", IsLauncherUp());
   }
@@ -50,5 +54,17 @@ public class Pneumatics extends SubsystemBase {
 
   public void launcherDown() {
     _launcher.set(Value.kReverse);
+  }
+
+  public void ampArmToggle() {
+    _ampArm.toggle();
+  }
+
+  public void ampArmOut() {
+    _ampArm.set(Value.kForward);
+  }
+
+  public void ampArmIn() {
+    _ampArm.set(Value.kReverse);
   }
 }

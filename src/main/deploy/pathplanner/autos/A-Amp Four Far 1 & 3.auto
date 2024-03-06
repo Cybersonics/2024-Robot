@@ -1,0 +1,130 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.4,
+      "y": 7.3513176955095005
+    },
+    "rotation": 0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "RaiseLauncher"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Amp-PreloadShot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "QuickFireNoteAuto"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Amp-AmpOnePickup"
+          }
+        },
+        {
+          "type": "deadline",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Amp-AmpOneShotFar"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "PickupNoteAuto"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "QuickFireNoteAuto"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Amp-MiddleOnePickup"
+          }
+        },
+        {
+          "type": "deadline",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Amp-MiddleOneShotFar"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "PickupNoteAuto"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "QuickFireNoteAuto"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Amp-MiddleThreePickup"
+          }
+        },
+        {
+          "type": "deadline",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Amp-MiddleThreeShotUnder"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "PickupNoteAuto"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "QuickFireNoteAuto"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}

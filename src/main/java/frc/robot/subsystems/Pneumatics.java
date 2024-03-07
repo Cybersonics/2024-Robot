@@ -67,4 +67,8 @@ public class Pneumatics extends SubsystemBase {
   public void ampArmIn() {
     _ampArm.set(Value.kReverse);
   }
+
+  public boolean IsArmOut() {
+    return _ampArm.get().equals(Value.kForward);
+  }
 }

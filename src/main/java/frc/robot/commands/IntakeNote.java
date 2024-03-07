@@ -29,7 +29,7 @@ public class IntakeNote extends Command {
     @Override
     public void execute() {
         if(_xboxLeftTrigger.getAsBoolean()) {
-            _intake.intakeNote(-1, -0.7, .7);
+            _intake.intakeNote(-1, -1, .7);
         } else {
             _intake.intakeNote(0, 0, 0);
         }

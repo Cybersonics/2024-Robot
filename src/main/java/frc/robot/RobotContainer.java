@@ -17,18 +17,21 @@ import frc.robot.subsystems.Launcher;
 import frc.robot.subsystems.LauncherFeeder;
 import frc.robot.subsystems.NavXGyro;
 import frc.robot.subsystems.Pneumatics;
+import frc.robot.commands.AmpArmExtension;
 import frc.robot.commands.AmpShot;
 import frc.robot.commands.ClimberCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakeNote;
 import frc.robot.commands.LauncherFeed;
 import frc.robot.commands.LauncherSpinUp;
+import frc.robot.commands.LedControlCommand;
 import frc.robot.commands.Autos.FeedNoteAuto;
 import frc.robot.commands.Autos.FireNoteAuto;
 import frc.robot.commands.Autos.LowerLauncher;
 import frc.robot.commands.Autos.PickupNoteAuto;
 import frc.robot.commands.Autos.PrespinupLauncher;
 import frc.robot.commands.Autos.RaiseLauncher;
+import frc.robot.subsystems.BlinkinLEDController;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drive;
 
@@ -39,6 +42,7 @@ import com.pathplanner.lib.auto.NamedCommands;
 public class RobotContainer {
   public static NavXGyro _gyro = NavXGyro.getInstance(); // This must be called before Drive as it is used by the Drive
   public static Drive _drive = Drive.getInstance(_gyro);
+  public static BlinkinLEDController _blinkinLEDController = BlinkinLEDController.getInstance();
   public static Launcher _launcher = Launcher.getInstance();
   public static LauncherFeeder _launcherFeeder = LauncherFeeder.getInstance();
   public static Intake _intake = Intake.getInstance();
@@ -73,6 +77,9 @@ public class RobotContainer {
     CommandScheduler.getInstance()
         .setDefaultCommand(_climber, new ClimberCommand(_climber, xboxController));
 
+    CommandScheduler.getInstance()
+      .setDefaultCommand(_blinkinLEDController, new LedControlCommand(_blinkinLEDController, _intake::hasNote));
+
     // CommandScheduler.getInstance()
     //     .setDefaultCommand(_launcher, new AmpShot(_launcher, _launcherFeeder, xboxController));
 
@@ -89,13 +96,13 @@ public class RobotContainer {
     NamedCommands.registerCommand("RaiseLauncher", new RaiseLauncher(_pneumatics));  
     NamedCommands.registerCommand("LowerLauncher", new LowerLauncher(_pneumatics));
 
-    NamedCommands.registerCommand("PreSpinLauncher", new PrespinupLauncher(_launcher, _pneumatics::IsLauncherUp));
-    NamedCommands.registerCommand("FeedNoteAuto", new FeedNoteAuto(_launcherFeeder, _pneumatics::IsLauncherUp));
+    // NamedCommands.registerCommand("PreSpinLauncher", new PrespinupLauncher(_launcher, _pneumatics::IsLauncherUp));
+    // NamedCommands.registerCommand("FeedNoteAuto", new FeedNoteAuto(_launcherFeeder, _intake::hasNote));
   }
 
   private void configureBindings() {
     xboxController.a().onTrue(new InstantCommand(() -> _pneumatics.launcherToggle(), _pneumatics));    
-    xboxController.b().onTrue(new InstantCommand(() -> _pneumatics.ampArmToggle(), _pneumatics));
+    xboxController.b().onTrue(new AmpArmExtension(_pneumatics, _intake::hasNote));
 
 
     leftStick.button(7).onTrue(new InstantCommand(() -> _gyro.zeroNavHeading(), _gyro));

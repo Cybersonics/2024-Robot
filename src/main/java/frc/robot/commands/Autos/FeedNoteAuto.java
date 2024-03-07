@@ -35,10 +35,8 @@ public class FeedNoteAuto extends Command {
     @Override
     public void execute() {  
         _timer.start();
-        if(_atReferenceSpeedSupplier != null) {
-            if(_atReferenceSpeedSupplier.get()) {
+        if(_atReferenceSpeedSupplier != null && _atReferenceSpeedSupplier.get()) {
                 _launcherFeeder.setFeederSpeed(1);
-            }
         } else {
             _launcherFeeder.setFeederSpeed(1);
         }

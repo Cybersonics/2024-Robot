@@ -32,8 +32,6 @@ public class LedControlCommand extends Command {
     public void execute() {
         if(_hasNoteSupplier.get()) {
             _blinkin.setPattern(BlinkinPattern.WHITE);
-        } else if (!DriverStation.isAutonomous() && DriverStation.getMatchTime() % 10 == 0) {
-            _blinkin.setPattern(BlinkinPattern.RAINBOW_RAINBOW_PALETTE);
         } else {
             _blinkin.off();
         }

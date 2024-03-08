@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.7,
+        "x": 4.5,
         "y": 6.5
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.638341648179734,
-        "y": 6.8150809935824155
+        "x": 5.409092373529166,
+        "y": 6.863829784666696
       },
       "isLocked": false,
       "linkedName": null
@@ -17,23 +17,29 @@
     {
       "anchor": {
         "x": 8.5,
-        "y": 7.7
+        "y": 5.7
       },
       "prevControl": {
-        "x": 7.5,
-        "y": 7.7
+        "x": 7.509775399598305,
+        "y": 6.111847193053056
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.45,
+      "rotationDegrees": 0,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [
     {
       "name": "Pickup Note",
-      "waypointRelativePos": 0.75,
+      "waypointRelativePos": 0.8,
       "command": {
         "type": "parallel",
         "data": {
@@ -61,9 +67,9 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Amp",
+  "folder": "Speaker",
   "previewStartingState": {
-    "rotation": 15.0,
+    "rotation": 10.0,
     "velocity": 0
   },
   "useDefaultConstraints": true

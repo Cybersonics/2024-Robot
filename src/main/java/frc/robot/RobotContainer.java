@@ -18,7 +18,6 @@ import frc.robot.subsystems.LauncherFeeder;
 import frc.robot.subsystems.NavXGyro;
 import frc.robot.subsystems.Pneumatics;
 import frc.robot.commands.AmpArmExtension;
-import frc.robot.commands.AmpShot;
 import frc.robot.commands.ClimberCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakeNote;
@@ -43,10 +42,10 @@ public class RobotContainer {
   public static NavXGyro _gyro = NavXGyro.getInstance(); // This must be called before Drive as it is used by the Drive
   public static Drive _drive = Drive.getInstance(_gyro);
   public static BlinkinLEDController _blinkinLEDController = BlinkinLEDController.getInstance();
-  public static Launcher _launcher = Launcher.getInstance();
+  public static Pneumatics _pneumatics = Pneumatics.getInstance();
+  public static Launcher _launcher = Launcher.getInstance(_pneumatics::IsLauncherUp);
   public static LauncherFeeder _launcherFeeder = LauncherFeeder.getInstance();
   public static Intake _intake = Intake.getInstance();
-  public static Pneumatics _pneumatics = Pneumatics.getInstance();
   public static Climber _climber = Climber.getInstance();
   public final CommandJoystick leftStick = new CommandJoystick(OperatorConstants.LeftStick);
   public final CommandJoystick rightStick = new CommandJoystick(OperatorConstants.RightStick);

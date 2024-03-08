@@ -10,6 +10,7 @@ public class IntakeNote extends Command {
     private Intake _intake;
     private CommandXboxController _xboxController;
     private Trigger _xboxLeftTrigger;
+    private Trigger _xboxLeftbumper;
 
     public IntakeNote(Intake intake, CommandXboxController xboxController) {
         _intake = intake;
@@ -23,6 +24,7 @@ public class IntakeNote extends Command {
     @Override
     public void initialize() {
         _xboxLeftTrigger = _xboxController.leftTrigger();
+        _xboxLeftbumper = _xboxController.leftBumper();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -30,6 +32,8 @@ public class IntakeNote extends Command {
     public void execute() {
         if(_xboxLeftTrigger.getAsBoolean()) {
             _intake.intakeNote(-1, -1, .7);
+        } else if(_xboxLeftbumper.getAsBoolean()) {
+            _intake.intakeNote(1, 1, 0);
         } else {
             _intake.intakeNote(0, 0, 0);
         }

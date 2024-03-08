@@ -43,7 +43,7 @@ public class AmpArmExtension extends Command {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return !_hasNoteSupplier.get();
+        return _timer.hasElapsed(1) && !_hasNoteSupplier.get();
     }
 
 }

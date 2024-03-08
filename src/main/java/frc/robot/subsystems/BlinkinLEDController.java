@@ -181,40 +181,40 @@ public class BlinkinLEDController extends SubsystemBase {
     m_blinkin.set(m_currentPattern.value);
   }
 
-  /**
-   * Set LEDs alliance color solid pattern
-   */
-  public void setAllianceColorSolid() {
-    setPattern(m_allianceColors.get(DriverStation.getAlliance())[0]);
-  }
+  // /**
+  //  * Set LEDs alliance color solid pattern
+  //  */
+  // public void setAllianceColorSolid() {
+  //   setPattern(m_allianceColors.get(DriverStation.getAlliance())[0]);
+  // }
 
-  /**
-   * Set LEDs to alliance color breath pattern
-   */
-  public void setAllianceColorBreath() {
-    setPattern(m_allianceColors.get(DriverStation.getAlliance())[1]);
-  }
+  // /**
+  //  * Set LEDs to alliance color breath pattern
+  //  */
+  // public void setAllianceColorBreath() {
+  //   setPattern(m_allianceColors.get(DriverStation.getAlliance())[1]);
+  // }
 
-  /**
-   * Set LEDs to alliance color chase pattern
-   */
-  public void setAllianceColorChase() {
-    setPattern(m_allianceColors.get(DriverStation.getAlliance())[2]);
-  }
+  // /**
+  //  * Set LEDs to alliance color chase pattern
+  //  */
+  // public void setAllianceColorChase() {
+  //   setPattern(m_allianceColors.get(DriverStation.getAlliance())[2]);
+  // }
 
-  /**
-   * Set LEDs to alliance color shot pattern
-   */
-  public void setAllianceColorShot() {
-    setPattern(m_allianceColors.get(DriverStation.getAlliance())[3]);
-  }
+  // /**
+  //  * Set LEDs to alliance color shot pattern
+  //  */
+  // public void setAllianceColorShot() {
+  //   setPattern(m_allianceColors.get(DriverStation.getAlliance())[3]);
+  // }
 
-  /**
-   * Set LEDs to alliance color strobe pattern
-   */
-  public void setAllianceColorStrobe() {
-    setPattern(m_allianceColors.get(DriverStation.getAlliance())[4]);
-  }
+  // /**
+  //  * Set LEDs to alliance color strobe pattern
+  //  */
+  // public void setAllianceColorStrobe() {
+  //   setPattern(m_allianceColors.get(DriverStation.getAlliance())[4]);
+  // }
 
   /**
    * Set LEDs to team color

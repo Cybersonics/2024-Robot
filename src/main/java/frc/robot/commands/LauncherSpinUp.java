@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.Launcher;
-import frc.robot.subsystems.Pneumatics;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -47,8 +46,6 @@ public class LauncherSpinUp extends Command {
             } else {
                 _launcher.setReferenceSpeed(Constants.LauncherConstants.topFarShotRPM, Constants.LauncherConstants.bottomFarShotRPM, _isLauncherUpSupplier.get());
             }
-            //_launcher.setReferenceSpeed(_pneumatics.IsLauncherUp());
-            //_launcher.setLauncherSpeed(0.83);//Orig 0.75
         } else if (_xboxXButton.getAsBoolean()) {
             _launcher.setReferenceSpeed(Constants.LauncherConstants.topSourceLobRPM, Constants.LauncherConstants.bottomSourceLobRPM, _isLauncherUpSupplier.get());
         } else {

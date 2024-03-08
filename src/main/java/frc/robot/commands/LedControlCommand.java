@@ -4,8 +4,6 @@ import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.BlinkinLEDController;
 import frc.robot.subsystems.BlinkinLEDController.BlinkinPattern;
 
@@ -32,6 +30,8 @@ public class LedControlCommand extends Command {
     public void execute() {
         if(_hasNoteSupplier.get()) {
             _blinkin.setPattern(BlinkinPattern.WHITE);
+        // } else if (DriverStation.getMatchTime() <= 20) {
+        //     _blinkin.setPattern(BlinkinPattern.RAINBOW_RAINBOW_PALETTE);
         } else {
             _blinkin.off();
         }

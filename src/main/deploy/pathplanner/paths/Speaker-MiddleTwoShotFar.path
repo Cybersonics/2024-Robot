@@ -4,23 +4,23 @@
     {
       "anchor": {
         "x": 8.5,
-        "y": 5.2
+        "y": 5.75
       },
       "prevControl": null,
       "nextControl": {
         "x": 7.061286521622926,
-        "y": 6.0700858292452935
+        "y": 6.620085829245293
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 4.3,
+        "x": 4.5,
         "y": 6.5
       },
       "prevControl": {
-        "x": 5.2870904392640155,
+        "x": 5.487090439264016,
         "y": 6.659084862112717
       },
       "nextControl": null,
@@ -28,7 +28,13 @@
       "linkedName": null
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.5,
+      "rotationDegrees": 10.0,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
@@ -39,11 +45,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 5.0,
+    "rotation": 10.0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Amp",
+  "folder": "Speaker",
   "previewStartingState": {
     "rotation": 0,
     "velocity": 0

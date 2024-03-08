@@ -9,11 +9,16 @@ import com.revrobotics.SparkPIDController;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import java.util.function.Supplier;
+
 import com.revrobotics.CANSparkFlex;
 import frc.robot.Constants;
 
 public class Launcher extends SubsystemBase {
     private static Launcher instance;
+private Supplier<Boolean> _isLauncherUpSupplier;
+
     private CANSparkFlex topMotor;
     private CANSparkFlex bottomMotor;
     private RelativeEncoder topEncoder;
@@ -25,7 +30,9 @@ public class Launcher extends SubsystemBase {
   public double bottomKP, bottomKI, bottomKD, bottomKIz, downBottomKFF, upBottomKFF, bottomMaxOutput, bottomMinOutput, bottomMaxRPM;
 
 
-    public Launcher() {
+    public Launcher(Supplier<Boolean> isLauncherUpSupplier) {
+        _isLauncherUpSupplier = isLauncherUpSupplier;
+
         topMotor = new CANSparkFlex(Constants.LauncherConstants.launcherTopMotor, MotorType.kBrushless);
         topMotor.restoreFactoryDefaults();
         topMotor.setIdleMode(IdleMode.kCoast);
@@ -118,9 +125,9 @@ public class Launcher extends SubsystemBase {
         SmartDashboard.putNumber("Reading BottomShooterRPM", bottomEncoder.getVelocity());
     }
 
-    public static Launcher getInstance() {
+    public static Launcher getInstance(Supplier<Boolean> isLauncherUpSupplier) {
         if (instance == null) {
-            instance = new Launcher();
+            instance = new Launcher(isLauncherUpSupplier);
         }
         return instance;
     }
@@ -132,7 +139,11 @@ public class Launcher extends SubsystemBase {
     }
 
     public boolean AtReferenceSpeed() {
-        var tolerance = 375;
+        // Larger number quicker shot less power; smaller number slower shot more power.
+        var tolerance = 325; 
+        if(_isLauncherUpSupplier.get()) {
+            tolerance = 375; 
+        }
         var topTarget = SmartDashboard.getNumber("Input TopShooterRPM", 0);
         var bottomTarget = SmartDashboard.getNumber("Input BottomShooterRPM", 0);
 

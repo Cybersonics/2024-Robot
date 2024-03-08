@@ -2,9 +2,6 @@ package frc.robot.subsystems;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Map;
-
-import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
 
 import edu.wpi.first.math.geometry.Pose2d;

@@ -119,7 +119,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Amp-MiddleTwoPickup"
+            "pathName": "Speaker-MiddleTwoPickup"
           }
         },
         {
@@ -129,7 +129,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Amp-MiddleTwoShotFar"
+                  "pathName": "Speaker-MiddleTwoShotFar"
                 }
               },
               {

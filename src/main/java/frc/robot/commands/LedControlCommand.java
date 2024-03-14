@@ -10,10 +10,12 @@ import frc.robot.subsystems.BlinkinLEDController.BlinkinPattern;
 public class LedControlCommand extends Command {
 
     private Supplier<Boolean> _hasNoteSupplier;
+    private Supplier<Boolean> _isLauncherUpSupplier;
     private BlinkinLEDController _blinkin;
 
-    public LedControlCommand(BlinkinLEDController blinkin, Supplier<Boolean> hasNotSupplier) {
+    public LedControlCommand(BlinkinLEDController blinkin, Supplier<Boolean> hasNotSupplier, Supplier<Boolean> isLauncherUpSupplier) {
         _hasNoteSupplier = hasNotSupplier;
+        _isLauncherUpSupplier = isLauncherUpSupplier;
         _blinkin = blinkin;
         
         // Use addRequirements() here to declare subsystem dependencies.
@@ -28,10 +30,10 @@ public class LedControlCommand extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if(_hasNoteSupplier.get()) {
+        if(_hasNoteSupplier.get() && !_isLauncherUpSupplier.get()) {
             _blinkin.setPattern(BlinkinPattern.WHITE);
-        // } else if (DriverStation.getMatchTime() <= 20) {
-        //     _blinkin.setPattern(BlinkinPattern.RAINBOW_RAINBOW_PALETTE);
+        } else if (_hasNoteSupplier.get() && _isLauncherUpSupplier.get()) {
+            _blinkin.setPattern(BlinkinPattern.STROBE_WHITE);
         } else {
             _blinkin.off();
         }

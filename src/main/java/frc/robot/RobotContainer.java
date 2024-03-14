@@ -77,7 +77,7 @@ public class RobotContainer {
         .setDefaultCommand(_climber, new ClimberCommand(_climber, xboxController));
 
     CommandScheduler.getInstance()
-      .setDefaultCommand(_blinkinLEDController, new LedControlCommand(_blinkinLEDController, _intake::hasNote));
+      .setDefaultCommand(_blinkinLEDController, new LedControlCommand(_blinkinLEDController, _intake::hasNote, _pneumatics::IsLauncherUp));
 
     // CommandScheduler.getInstance()
     //     .setDefaultCommand(_launcher, new AmpShot(_launcher, _launcherFeeder, xboxController));

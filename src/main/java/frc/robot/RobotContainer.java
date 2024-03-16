@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -11,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Launcher;
@@ -48,9 +51,14 @@ public class RobotContainer {
   public static Intake _intake = Intake.getInstance();
   public static Climber _climber = Climber.getInstance();
   public final CommandJoystick leftStick = new CommandJoystick(OperatorConstants.LeftStick);
+  public final Joystick leftStick_HID = leftStick.getHID();
   public final CommandJoystick rightStick = new CommandJoystick(OperatorConstants.RightStick);
+  public final Joystick righStick_HID = rightStick.getHID();
 
   public final CommandXboxController xboxController = new CommandXboxController(2);
+  public final XboxController xboxController_HID = xboxController.getHID();
+  public final JoystickButton xboxA = new JoystickButton(xboxController_HID, 1);
+  public final JoystickButton xboxB = new JoystickButton(xboxController_HID, 2);
 
   // Setup Sendable chooser for picking autonomous program in SmartDashboard
   private SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -61,11 +69,11 @@ public class RobotContainer {
     configureNamedCommands();
 
     CommandScheduler.getInstance()
-        .setDefaultCommand(_drive, new DriveCommand(_drive, leftStick, rightStick, _gyro));
+      .setDefaultCommand(_drive, new DriveCommand(_drive, leftStick, rightStick, _gyro));
     // .setDefaultCommand(_drive, new DriveCommand(_drive, xboxController, _gyro));
 
     CommandScheduler.getInstance()
-        .setDefaultCommand(_launcher, new LauncherSpinUp(_launcher, _pneumatics::IsLauncherUp, xboxController));
+        .setDefaultCommand(_launcher, new LauncherSpinUp(_launcher, _pneumatics::IsLauncherUp, _pneumatics::IsArmOut, xboxController));
 
     CommandScheduler.getInstance()
         .setDefaultCommand(_intake, new IntakeNote(_intake, xboxController));
@@ -100,9 +108,11 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    xboxController.a().onTrue(new InstantCommand(() -> _pneumatics.launcherToggle(), _pneumatics));    
-    xboxController.b().onTrue(new AmpArmExtension(_pneumatics, _intake::hasNote));
+    // xboxController.a().onTrue(new InstantCommand(() -> _pneumatics.launcherToggle(), _pneumatics));    
+    // xboxController.b().onTrue(new AmpArmExtension(_pneumatics, _intake::hasNote));
 
+    xboxA.onTrue(new InstantCommand(() -> _pneumatics.launcherToggle(), _pneumatics));    
+    xboxB.onTrue(new AmpArmExtension(_pneumatics, _intake::hasNote));
 
     leftStick.button(7).onTrue(new InstantCommand(() -> _gyro.zeroNavHeading(), _gyro));
   }

@@ -178,6 +178,9 @@ public class Constants {
 
         public static final double topSourceLobRPM = 3900;
         public static final double bottomSourceLobRPM = 3900;
+
+        public static final double topAmpShotRPM = 3000;
+        public static final double bottomAmpShotRPM = 3500;
     }
 
     public static final class ShuffleBoardConstants {

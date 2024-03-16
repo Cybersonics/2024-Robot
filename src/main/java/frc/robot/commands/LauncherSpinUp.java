@@ -13,6 +13,7 @@ public class LauncherSpinUp extends Command {
 
     private Launcher _launcher;
     private Supplier<Boolean> _isLauncherUpSupplier;
+    private Supplier<Boolean> _isAmpShot;
     private CommandXboxController _xboxController;
     private Trigger _xboxRightTrigger;
     private Trigger _xboxXButton;
@@ -22,10 +23,12 @@ public class LauncherSpinUp extends Command {
         _xboxController = xboxController;
         addRequirements(_launcher);
     }
-    
-    public LauncherSpinUp(Launcher launcher, Supplier<Boolean> isLauncherUpSupplier, CommandXboxController xboxController) {
+
+    public LauncherSpinUp(Launcher launcher, Supplier<Boolean> isLauncherUpSupplier, Supplier<Boolean> isAmpShot,
+            CommandXboxController xboxController) {
         _launcher = launcher;
         _isLauncherUpSupplier = isLauncherUpSupplier;
+        _isAmpShot = isAmpShot;
         _xboxController = xboxController;
         addRequirements(_launcher);
     }
@@ -41,17 +44,21 @@ public class LauncherSpinUp extends Command {
     @Override
     public void execute() {
         if (_xboxRightTrigger.getAsBoolean()) {
-            if(_isLauncherUpSupplier.get()) {
+            if (_isLauncherUpSupplier.get()) {
                 _launcher.setReferenceSpeed(Constants.LauncherConstants.topFarLobRPM, Constants.LauncherConstants.bottomFarLobRPM, _isLauncherUpSupplier.get());
             } else {
                 _launcher.setReferenceSpeed(Constants.LauncherConstants.topFarShotRPM, Constants.LauncherConstants.bottomFarShotRPM, _isLauncherUpSupplier.get());
             }
         } else if (_xboxXButton.getAsBoolean()) {
-            _launcher.setReferenceSpeed(Constants.LauncherConstants.topSourceLobRPM, Constants.LauncherConstants.bottomSourceLobRPM, _isLauncherUpSupplier.get());
+            if (_isAmpShot.get()) {
+                _launcher.setReferenceSpeed(Constants.LauncherConstants.topAmpShotRPM, Constants.LauncherConstants.bottomAmpShotRPM, _isLauncherUpSupplier.get());
+            } else {
+                _launcher.setReferenceSpeed(Constants.LauncherConstants.topSourceLobRPM, Constants.LauncherConstants.bottomSourceLobRPM, _isLauncherUpSupplier.get());
+            }
         } else {
             _launcher.setLauncherSpeed(0);
         }
-        
+
         SmartDashboard.putBoolean("LauncherAtSpeed", _launcher.AtReferenceSpeed());
     }
 

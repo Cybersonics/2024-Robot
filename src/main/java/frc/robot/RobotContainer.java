@@ -31,7 +31,7 @@ import frc.robot.commands.Autos.FeedNoteAuto;
 import frc.robot.commands.Autos.FireNoteAuto;
 import frc.robot.commands.Autos.LowerLauncher;
 import frc.robot.commands.Autos.PickupNoteAuto;
-import frc.robot.commands.Autos.PrespinupLauncher;
+import frc.robot.commands.Autos.RunLauncher;
 import frc.robot.commands.Autos.RaiseLauncher;
 import frc.robot.subsystems.BlinkinLEDController;
 import frc.robot.subsystems.Climber;
@@ -57,8 +57,8 @@ public class RobotContainer {
 
   public final CommandXboxController xboxController = new CommandXboxController(2);
   public final XboxController xboxController_HID = xboxController.getHID();
-  public final JoystickButton xboxA = new JoystickButton(xboxController_HID, 1);
-  public final JoystickButton xboxB = new JoystickButton(xboxController_HID, 2);
+  public final JoystickButton xboxA = new JoystickButton(xboxController_HID, XboxController.Button.kA.value);
+  public final JoystickButton xboxB = new JoystickButton(xboxController_HID, XboxController.Button.kB.value);
 
   // Setup Sendable chooser for picking autonomous program in SmartDashboard
   private SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -73,22 +73,26 @@ public class RobotContainer {
     // .setDefaultCommand(_drive, new DriveCommand(_drive, xboxController, _gyro));
 
     CommandScheduler.getInstance()
-        .setDefaultCommand(_launcher, new LauncherSpinUp(_launcher, _pneumatics::IsLauncherUp, _pneumatics::IsArmOut, xboxController));
+        .setDefaultCommand(_launcher, new LauncherSpinUp(_launcher, _pneumatics::IsLauncherUp, _pneumatics::IsArmOut, 
+        () -> xboxController_HID.getRightTriggerAxis() > 0.01,
+        () -> xboxController_HID.getXButton()));
+        // .setDefaultCommand(_launcher, new LauncherSpinUp(_launcher, _pneumatics::IsLauncherUp, _pneumatics::IsArmOut, xboxController));
 
     CommandScheduler.getInstance()
-        .setDefaultCommand(_intake, new IntakeNote(_intake, xboxController));
+        .setDefaultCommand(_intake, new IntakeNote(_intake, 
+          () -> xboxController_HID.getLeftTriggerAxis() > 0.01, 
+          () -> xboxController_HID.getLeftBumper()));    
+        // .setDefaultCommand(_intake, new IntakeNote(_intake, xboxController));
+
 
     CommandScheduler.getInstance()
         .setDefaultCommand(_launcherFeeder, new LauncherFeed(_launcherFeeder, rightStick, leftStick));
 
-    CommandScheduler.getInstance()
-        .setDefaultCommand(_climber, new ClimberCommand(_climber, xboxController));
+    // CommandScheduler.getInstance()        
+    // .setDefaultCommand(_climber, new ClimberCommand(_climber, xboxController));
 
     CommandScheduler.getInstance()
       .setDefaultCommand(_blinkinLEDController, new LedControlCommand(_blinkinLEDController, _intake::hasNote, _pneumatics::IsLauncherUp));
-
-    // CommandScheduler.getInstance()
-    //     .setDefaultCommand(_launcher, new AmpShot(_launcher, _launcherFeeder, xboxController));
 
     // Configure Autonomous Options
     autonomousOptions();
@@ -103,8 +107,8 @@ public class RobotContainer {
     NamedCommands.registerCommand("RaiseLauncher", new RaiseLauncher(_pneumatics));  
     NamedCommands.registerCommand("LowerLauncher", new LowerLauncher(_pneumatics));
 
-    // NamedCommands.registerCommand("PreSpinLauncher", new PrespinupLauncher(_launcher, _pneumatics::IsLauncherUp));
-    // NamedCommands.registerCommand("FeedNoteAuto", new FeedNoteAuto(_launcherFeeder, _intake::hasNote));
+    NamedCommands.registerCommand("RunLauncher", new RunLauncher(_launcher, _pneumatics::IsLauncherUp));
+    NamedCommands.registerCommand("FeedNoteAuto", new FeedNoteAuto(_launcherFeeder, _intake::hasNote));
   }
 
   private void configureBindings() {

@@ -22,7 +22,7 @@ public class Pneumatics extends SubsystemBase {
 
   /** Creates a new Pnuematics. */
   private Pneumatics() {
-    pcmCompressor.enableAnalog(50,60);
+    pcmCompressor.enableAnalog(80,100);
     //pcmCompressor.enableDigital();
     //pcmCompressor.disable();
 

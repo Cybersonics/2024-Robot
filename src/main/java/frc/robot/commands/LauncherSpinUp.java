@@ -7,50 +7,54 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.Launcher;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 public class LauncherSpinUp extends Command {
 
     private Launcher _launcher;
     private Supplier<Boolean> _isLauncherUpSupplier;
-    private Supplier<Boolean> _isAmpShot;
-    private CommandXboxController _xboxController;
-    private Trigger _xboxRightTrigger;
-    private Trigger _xboxXButton;
+    private Supplier<Boolean> _isAmpShotSupplier;
+    private Supplier<Boolean> _xboxRightTriggerSupplier;
+    private Supplier<Boolean> _xboxXButtonSupplier;
 
-    public LauncherSpinUp(Launcher launcher, CommandXboxController xboxController) {
-        _launcher = launcher;
-        _xboxController = xboxController;
-        addRequirements(_launcher);
-    }
-
-    public LauncherSpinUp(Launcher launcher, Supplier<Boolean> isLauncherUpSupplier, Supplier<Boolean> isAmpShot,
+    public LauncherSpinUp(Launcher launcher, Supplier<Boolean> isLauncherUpSupplier, Supplier<Boolean> isAmpShotSupplier,
             CommandXboxController xboxController) {
         _launcher = launcher;
         _isLauncherUpSupplier = isLauncherUpSupplier;
-        _isAmpShot = isAmpShot;
-        _xboxController = xboxController;
+        _isAmpShotSupplier = isAmpShotSupplier;
+
+        _xboxRightTriggerSupplier = () -> xboxController.rightTrigger().getAsBoolean();
+        _xboxXButtonSupplier = () -> xboxController.x().getAsBoolean();
+
+
+        addRequirements(_launcher);
+    }
+    
+    public LauncherSpinUp(Launcher launcher, Supplier<Boolean> isLauncherUpSupplier, Supplier<Boolean> isAmpShotSupplier,
+            Supplier<Boolean> xboxRightTriggerSupplier, Supplier<Boolean> xboxXButtonSupplier) {
+        _launcher = launcher;
+        _isLauncherUpSupplier = isLauncherUpSupplier;
+        _isAmpShotSupplier = isAmpShotSupplier;
+        _xboxRightTriggerSupplier = xboxRightTriggerSupplier;
+        _xboxXButtonSupplier = xboxXButtonSupplier;
+
         addRequirements(_launcher);
     }
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {
-        _xboxRightTrigger = _xboxController.rightTrigger();
-        _xboxXButton = _xboxController.x();
-    }
+    public void initialize() { }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if (_xboxRightTrigger.getAsBoolean()) {
+        if (_xboxRightTriggerSupplier.get()) {
             if (_isLauncherUpSupplier.get()) {
                 _launcher.setReferenceSpeed(Constants.LauncherConstants.topFarLobRPM, Constants.LauncherConstants.bottomFarLobRPM, _isLauncherUpSupplier.get());
             } else {
                 _launcher.setReferenceSpeed(Constants.LauncherConstants.topFarShotRPM, Constants.LauncherConstants.bottomFarShotRPM, _isLauncherUpSupplier.get());
             }
-        } else if (_xboxXButton.getAsBoolean()) {
-            if (_isAmpShot.get()) {
+        } else if (_xboxXButtonSupplier.get()) {
+            if (_isAmpShotSupplier.get()) {
                 _launcher.setReferenceSpeed(Constants.LauncherConstants.topAmpShotRPM, Constants.LauncherConstants.bottomAmpShotRPM, _isLauncherUpSupplier.get());
             } else {
                 _launcher.setReferenceSpeed(Constants.LauncherConstants.topSourceLobRPM, Constants.LauncherConstants.bottomSourceLobRPM, _isLauncherUpSupplier.get());

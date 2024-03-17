@@ -4,17 +4,19 @@ import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.subsystems.Launcher;
 
-public class PrespinupLauncher extends Command {
+public class RunLauncher extends Command {
     
     private Launcher _launcher;
     private Timer _timer;
-    private boolean _isLauncherUp;
+    private Supplier<Boolean> _isLauncherUpSupplier;
 
-    public PrespinupLauncher(Launcher launcher, Supplier<Boolean> isLauncherUp) {
+    public RunLauncher(Launcher launcher, Supplier<Boolean> isLauncherUpSupplier) {
         _launcher = launcher;
-        _isLauncherUp = isLauncherUp.get();
+        _isLauncherUpSupplier = isLauncherUpSupplier;
+
         addRequirements(_launcher);
     }
 
@@ -27,8 +29,11 @@ public class PrespinupLauncher extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        _timer.start();
-        _launcher.setReferenceSpeed(_isLauncherUp);
+        if (_isLauncherUpSupplier.get()) {
+            _launcher.setReferenceSpeed(Constants.LauncherConstants.topFarLobRPM, Constants.LauncherConstants.bottomFarLobRPM, _isLauncherUpSupplier.get());
+        } else {
+            _launcher.setReferenceSpeed(Constants.LauncherConstants.topFarShotRPM, Constants.LauncherConstants.bottomFarShotRPM, _isLauncherUpSupplier.get());
+        }        
     }
 
     // Called once the command ends or is interrupted.
@@ -42,6 +47,6 @@ public class PrespinupLauncher extends Command {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return _launcher.AtReferenceSpeed();
+        return false;
     }
 }

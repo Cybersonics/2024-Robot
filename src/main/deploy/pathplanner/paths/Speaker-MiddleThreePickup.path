@@ -3,37 +3,43 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.0,
+        "x": 1.9,
         "y": 5.6
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.0134141831229044,
-        "y": 5.216120646018014
+        "x": 2.634896291170256,
+        "y": 4.982126448813468
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.3,
-        "y": 4.0
+        "x": 9.5,
+        "y": 3.7
       },
       "prevControl": {
-        "x": 1.7696702277015015,
-        "y": 4.046149659995282
+        "x": 8.5,
+        "y": 3.7
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.65,
+      "rotationDegrees": 0,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Pickup Note",
-      "waypointRelativePos": 0.6,
+      "name": "Intake Note",
+      "waypointRelativePos": 0.7,
       "command": {
         "type": "parallel",
         "data": {
@@ -42,6 +48,23 @@
               "type": "named",
               "data": {
                 "name": "PickupNoteAuto"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Launcher Down",
+      "waypointRelativePos": 0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "LowerLauncher"
               }
             }
           ]
@@ -57,7 +80,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0,
+    "rotation": 0,
     "rotateFast": false
   },
   "reversed": false,

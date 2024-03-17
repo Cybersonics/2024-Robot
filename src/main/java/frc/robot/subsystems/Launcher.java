@@ -85,8 +85,8 @@ private Supplier<Boolean> _isLauncherUpSupplier;
         bottomPIDController.setFF(downBottomKFF);
         bottomPIDController.setOutputRange(bottomMinOutput, bottomMaxOutput);
 
-        SmartDashboard.putNumber("Input TopShooterRPM", Constants.LauncherConstants.topFarShotRPM);        
-        SmartDashboard.putNumber("Input BottomShooterRPM", Constants.LauncherConstants.bottomFarShotRPM);
+        SmartDashboard.putNumber("Input TopShooterRPM", 0);        
+        SmartDashboard.putNumber("Input BottomShooterRPM", 0);
     }
 
     public void setReferenceSpeed(double topMotorTargetVelocity, double bottomMotorTargetVelocity, boolean isLauncherUp) {

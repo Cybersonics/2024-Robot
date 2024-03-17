@@ -27,9 +27,7 @@ public class AmpArmExtension extends Command {
     @Override
     public void execute() {
         _timer.start();
-        if(!_pneumatics.IsArmOut()) {
-            _pneumatics.ampArmToggle();
-        }
+        _pneumatics.ampArmOut();
     }
 
     // Called once the command ends or is interrupted.

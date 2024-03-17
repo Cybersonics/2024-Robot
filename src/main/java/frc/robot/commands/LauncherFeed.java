@@ -21,16 +21,16 @@ public class LauncherFeed extends Command {
         _leftJoystick = leftJoystick;
         _launcherFeeder = launcherFeeder;
 
+        _rightJoystickButtonTwo = _rightJoystick.button(2);
+        _rightJoyStickTrigger = _rightJoystick.trigger();
+        _leftJoystickButtonTwo = _leftJoystick.button(2);
+        
         addRequirements(_launcherFeeder);
     }
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {
-        _rightJoystickButtonTwo = _rightJoystick.button(2);
-        _rightJoyStickTrigger = _rightJoystick.trigger();
-        _leftJoystickButtonTwo = _leftJoystick.button(2);
-    }
+    public void initialize() { }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override

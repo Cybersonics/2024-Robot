@@ -22,17 +22,17 @@ public class Intake extends SubsystemBase {
 
     public Intake() {
         intakeMotor = new CANSparkMax(Constants.IntakeConstants.intakeMotor, MotorType.kBrushless);
-        intakeMotor.restoreFactoryDefaults();
+        // intakeMotor.restoreFactoryDefaults();
         intakeMotor.setIdleMode(IdleMode.kCoast);
 
         feederMotor = new CANSparkFlex(Constants.IntakeConstants.feederMotor, MotorType.kBrushless);
-        feederMotor.restoreFactoryDefaults();
+        // feederMotor.restoreFactoryDefaults();
         feederMotor.setIdleMode(IdleMode.kCoast);
         // feederMotor.setInverted(invertDrive);
         // feederMotor.setSmartCurrentLimit(40);
 
         centeringMotor = new CANSparkMax(37, MotorType.kBrushless);
-        centeringMotor.restoreFactoryDefaults();
+        // centeringMotor.restoreFactoryDefaults();
         centeringMotor.setIdleMode(IdleMode.kCoast);
 
         noteTrip = new DigitalInput(Constants.IntakeConstants.noteTripInput);

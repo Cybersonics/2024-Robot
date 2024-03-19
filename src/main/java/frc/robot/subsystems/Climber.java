@@ -14,11 +14,11 @@ public class Climber extends SubsystemBase {
     
     public Climber() {
         leftClimber = new CANSparkMax(Constants.ClimberConstants.leftClimber, MotorType.kBrushless);
-        leftClimber.restoreFactoryDefaults();
+        // leftClimber.restoreFactoryDefaults();
         leftClimber.setIdleMode(IdleMode.kBrake);
 
         rightClimber = new CANSparkMax(Constants.ClimberConstants.rightClimber, MotorType.kBrushless);
-        rightClimber.restoreFactoryDefaults();
+        // rightClimber.restoreFactoryDefaults();
         rightClimber.setIdleMode(IdleMode.kBrake);
 
     }

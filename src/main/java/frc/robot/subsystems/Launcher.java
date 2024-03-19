@@ -14,6 +14,7 @@ import java.util.function.Supplier;
 
 import com.revrobotics.CANSparkFlex;
 import frc.robot.Constants;
+import frc.robot.utility.SparkMaxUtil;
 
 public class Launcher extends SubsystemBase {
     private static Launcher instance;
@@ -34,7 +35,7 @@ private Supplier<Boolean> _isLauncherUpSupplier;
         _isLauncherUpSupplier = isLauncherUpSupplier;
 
         topMotor = new CANSparkFlex(Constants.LauncherConstants.launcherTopMotor, MotorType.kBrushless);
-        topMotor.restoreFactoryDefaults();
+        // topMotor.restoreFactoryDefaults();
         topMotor.setIdleMode(IdleMode.kCoast);
         topEncoder = topMotor.getEncoder();
         topPIDController = topMotor.getPIDController();
@@ -42,7 +43,7 @@ private Supplier<Boolean> _isLauncherUpSupplier;
         // motorOne.setSmartCurrentLimit(40);
 
         bottomMotor = new CANSparkFlex(Constants.LauncherConstants.launcherBottomMotor, MotorType.kBrushless);
-        bottomMotor.restoreFactoryDefaults();
+        // bottomMotor.restoreFactoryDefaults();
         bottomMotor.setIdleMode(IdleMode.kCoast);
         bottomMotor.setInverted(true);
         bottomEncoder = bottomMotor.getEncoder();
@@ -84,6 +85,11 @@ private Supplier<Boolean> _isLauncherUpSupplier;
         bottomPIDController.setIZone(bottomKIz);
         bottomPIDController.setFF(downBottomKFF);
         bottomPIDController.setOutputRange(bottomMinOutput, bottomMaxOutput);
+
+         // Save the SPARK MAX configurations. If a SPARK MAX browns out during
+        // operation, it will maintain the above configurations.
+        SparkMaxUtil.configureSpark("", () -> topMotor.burnFlash()); // Set configuration values to flash memory in Spark Max to prevent errors.
+        SparkMaxUtil.configureSpark("", () -> bottomMotor.burnFlash()); // Set configuration values to flash memory in Spark Max to prevent errors.
 
         SmartDashboard.putNumber("Input TopShooterRPM", 0);        
         SmartDashboard.putNumber("Input BottomShooterRPM", 0);

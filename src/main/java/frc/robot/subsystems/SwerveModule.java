@@ -32,6 +32,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.DriveConstants.ModuleConstants;
+import frc.robot.utility.SparkMaxUtil;
 import frc.robot.Constants.shuffleBoardDrive;
 
 public class SwerveModule extends SubsystemBase {
@@ -76,7 +77,7 @@ public class SwerveModule extends SubsystemBase {
 
     // Create and configure a new Drive motor
     driveMotor = new CANSparkMax(driveNum, MotorType.kBrushless);
-    driveMotor.restoreFactoryDefaults();
+    // driveMotor.restoreFactoryDefaults();
     driveMotor.setInverted(invertDrive); // setInverted reverses the both the motor and the encoder direction.
     driveMotor.setOpenLoopRampRate(RAMP_RATE); // This provides a motor ramp up time to prevent brown outs.
     driveMotor.setIdleMode(IdleMode.kBrake);
@@ -90,7 +91,7 @@ public class SwerveModule extends SubsystemBase {
 
     // Create and configure a new Steering motor
     steerMotor = new CANSparkMax(steerNum, MotorType.kBrushless);
-    steerMotor.restoreFactoryDefaults();
+    // steerMotor.restoreFactoryDefaults();
     steerMotor.setInverted(invertSteer);
     steerMotor.setIdleMode(IdleMode.kBrake);
     steerMotor.setSmartCurrentLimit(30);
@@ -143,8 +144,8 @@ public class SwerveModule extends SubsystemBase {
     
     // Save the SPARK MAX configurations. If a SPARK MAX browns out during
     // operation, it will maintain the above configurations.
-    driveMotor.burnFlash(); // Set configuration values to flash memory in Spark Max to prevent errors.
-    steerMotor.burnFlash(); // Set configuration values to flash memory in Spark Max to prevent errors.
+    SparkMaxUtil.configureSpark("", () -> driveMotor.burnFlash()); // Set configuration values to flash memory in Spark Max to prevent errors.
+    SparkMaxUtil.configureSpark("", () -> steerMotor.burnFlash()); // Set configuration values to flash memory in Spark Max to prevent errors.
 
   }
 

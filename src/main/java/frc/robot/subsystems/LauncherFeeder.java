@@ -13,7 +13,7 @@ public class LauncherFeeder extends SubsystemBase {
 
      public LauncherFeeder() {
         feederMotor = new CANSparkFlex(Constants.LauncherConstants.feederMotor, MotorType.kBrushless);
-        feederMotor.restoreFactoryDefaults();
+        // feederMotor.restoreFactoryDefaults();
         feederMotor.setIdleMode(IdleMode.kCoast);
         // feederMotor.setInverted(invertDrive);
         // feederMotor.setSmartCurrentLimit(40);

@@ -91,9 +91,9 @@ public class DriveCommand extends Command {
       // stickStrafe = -this.xboxController.getLeftX();
       // stickOmega = -this.xboxController.getRightX();
     } else {
-      stickForward = -this.leftStick.getY()*.9;
-      stickStrafe = -this.leftStick.getX()*.9;
-      stickOmega = -this.rightStick.getX()*.9;
+      stickForward = -this.leftStick.getY();//*.9;
+      stickStrafe = -this.leftStick.getX();//*.9;
+      stickOmega = -this.rightStick.getX();//*.9;
       // stickForward = this.leftStick.getY();
       // stickStrafe = this.leftStick.getX();
       // stickOmega = this.rightStick.getX();

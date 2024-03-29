@@ -75,24 +75,26 @@ public class RobotContainer {
     CommandScheduler.getInstance()
         .setDefaultCommand(_launcher, new LauncherSpinUp(_launcher, _pneumatics::IsLauncherUp, _pneumatics::IsArmOut, 
         () -> xboxController_HID.getRightTriggerAxis() > 0.01,
-        () -> xboxController_HID.getXButton()));
+        xboxController_HID::getXButton));
         // .setDefaultCommand(_launcher, new LauncherSpinUp(_launcher, _pneumatics::IsLauncherUp, _pneumatics::IsArmOut, xboxController));
 
     CommandScheduler.getInstance()
         .setDefaultCommand(_intake, new IntakeNote(_intake, 
           () -> xboxController_HID.getLeftTriggerAxis() > 0.01, 
-          () -> xboxController_HID.getLeftBumper()));    
+          xboxController_HID::getLeftBumper));    
         // .setDefaultCommand(_intake, new IntakeNote(_intake, xboxController));
 
 
     CommandScheduler.getInstance()
         .setDefaultCommand(_launcherFeeder, new LauncherFeed(_launcherFeeder, rightStick, leftStick));
 
-    // CommandScheduler.getInstance()        
-    // .setDefaultCommand(_climber, new ClimberCommand(_climber, xboxController));
+    CommandScheduler.getInstance()        
+    .setDefaultCommand(_climber, new ClimberCommand(_climber, 
+      xboxController_HID::getLeftY,
+      xboxController_HID::getRightY));
 
     CommandScheduler.getInstance()
-      .setDefaultCommand(_blinkinLEDController, new LedControlCommand(_blinkinLEDController, _intake::hasNote, _pneumatics::IsLauncherUp));
+      .setDefaultCommand(_blinkinLEDController, new LedControlCommand(_blinkinLEDController, _intake::topHasNote, _pneumatics::IsLauncherUp));
 
     // Configure Autonomous Options
     autonomousOptions();
@@ -101,14 +103,14 @@ public class RobotContainer {
   }
 
   private void configureNamedCommands() {
-    NamedCommands.registerCommand("QuickFireNoteAuto", new FireNoteAuto(_launcher, _launcherFeeder, _pneumatics::IsLauncherUp, _intake::hasNote));
-    NamedCommands.registerCommand("FireNoteAuto", new FireNoteAuto(_launcher, _launcherFeeder, _pneumatics::IsLauncherUp, _intake::hasNote));
+    NamedCommands.registerCommand("QuickFireNoteAuto", new FireNoteAuto(_launcher, _launcherFeeder, _pneumatics::IsLauncherUp, _intake::topHasNote));
+    NamedCommands.registerCommand("FireNoteAuto", new FireNoteAuto(_launcher, _launcherFeeder, _pneumatics::IsLauncherUp, _intake::topHasNote));
     NamedCommands.registerCommand("PickupNoteAuto", new PickupNoteAuto(_intake));
     NamedCommands.registerCommand("RaiseLauncher", new RaiseLauncher(_pneumatics));  
     NamedCommands.registerCommand("LowerLauncher", new LowerLauncher(_pneumatics));
 
     NamedCommands.registerCommand("RunLauncher", new RunLauncher(_launcher, _pneumatics::IsLauncherUp));
-    NamedCommands.registerCommand("FeedNoteAuto", new FeedNoteAuto(_launcherFeeder, _intake::hasNote));
+    NamedCommands.registerCommand("FeedNoteAuto", new FeedNoteAuto(_launcherFeeder, _intake::topHasNote));
   }
 
   private void configureBindings() {
@@ -116,7 +118,7 @@ public class RobotContainer {
     // xboxController.b().onTrue(new AmpArmExtension(_pneumatics, _intake::hasNote));
 
     xboxA.onTrue(new InstantCommand(() -> _pneumatics.launcherToggle(), _pneumatics));    
-    xboxB.onTrue(new AmpArmExtension(_pneumatics, _intake::hasNote));
+    xboxB.onTrue(new AmpArmExtension(_pneumatics, _intake::topHasNote));
 
     leftStick.button(7).onTrue(new InstantCommand(() -> _gyro.zeroNavHeading(), _gyro));
   }

@@ -18,7 +18,9 @@ public class Intake extends SubsystemBase {
     private CANSparkFlex feederMotor;
     private CANSparkMax centeringMotor;
 
-    private DigitalInput noteTrip;
+    private DigitalInput topNoteTrip;  
+    // private DigitalInput bottomNoteTrip;
+
 
     public Intake() {
         intakeMotor = new CANSparkMax(Constants.IntakeConstants.intakeMotor, MotorType.kBrushless);
@@ -35,7 +37,9 @@ public class Intake extends SubsystemBase {
         // centeringMotor.restoreFactoryDefaults();
         centeringMotor.setIdleMode(IdleMode.kCoast);
 
-        noteTrip = new DigitalInput(Constants.IntakeConstants.noteTripInput);
+        topNoteTrip = new DigitalInput(Constants.IntakeConstants.topNoteTripInput);
+        // bottomNoteTrip = new DigitalInput(Constants.IntakeConstants.topNoteTripInput);
+
     }
 
     public static Intake getInstance() {
@@ -63,12 +67,18 @@ public class Intake extends SubsystemBase {
         centeringMotor.set(speed);
     }
 
-    public boolean hasNote() {
-        return !noteTrip.get();
+    public boolean topHasNote() {
+        return !topNoteTrip.get();
     }
+
+    // public boolean bottomHasNote() {
+    //     return !bottomNoteTrip.get();
+    // }
 
     @Override
     public void periodic() {
-        SmartDashboard.putBoolean("noteTrip", hasNote());
+        SmartDashboard.putBoolean("topNoteTrip", topHasNote());      
+        // SmartDashboard.putBoolean("bottomNoteTrip", bottomHasNote());
+
     }
 }

@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -11,26 +12,26 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 public class LauncherSpinUp extends Command {
 
     private Launcher _launcher;
-    private Supplier<Boolean> _isLauncherUpSupplier;
-    private Supplier<Boolean> _isAmpShotSupplier;
-    private Supplier<Boolean> _xboxRightTriggerSupplier;
-    private Supplier<Boolean> _xboxXButtonSupplier;
+    private BooleanSupplier _isLauncherUpSupplier;
+    private BooleanSupplier _isAmpShotSupplier;
+    private BooleanSupplier _xboxRightTriggerSupplier;
+    private BooleanSupplier _xboxXButtonSupplier;
 
-    public LauncherSpinUp(Launcher launcher, Supplier<Boolean> isLauncherUpSupplier, Supplier<Boolean> isAmpShotSupplier,
+    public LauncherSpinUp(Launcher launcher, BooleanSupplier isLauncherUpSupplier, BooleanSupplier isAmpShotSupplier,
             CommandXboxController xboxController) {
         _launcher = launcher;
         _isLauncherUpSupplier = isLauncherUpSupplier;
         _isAmpShotSupplier = isAmpShotSupplier;
 
-        _xboxRightTriggerSupplier = () -> xboxController.rightTrigger().getAsBoolean();
-        _xboxXButtonSupplier = () -> xboxController.x().getAsBoolean();
+        _xboxRightTriggerSupplier = xboxController.rightTrigger();
+        _xboxXButtonSupplier = xboxController.x();
 
 
         addRequirements(_launcher);
     }
     
-    public LauncherSpinUp(Launcher launcher, Supplier<Boolean> isLauncherUpSupplier, Supplier<Boolean> isAmpShotSupplier,
-            Supplier<Boolean> xboxRightTriggerSupplier, Supplier<Boolean> xboxXButtonSupplier) {
+    public LauncherSpinUp(Launcher launcher, BooleanSupplier isLauncherUpSupplier, BooleanSupplier isAmpShotSupplier,
+            BooleanSupplier xboxRightTriggerSupplier, BooleanSupplier xboxXButtonSupplier) {
         _launcher = launcher;
         _isLauncherUpSupplier = isLauncherUpSupplier;
         _isAmpShotSupplier = isAmpShotSupplier;
@@ -47,17 +48,17 @@ public class LauncherSpinUp extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if (_xboxRightTriggerSupplier.get()) {
-            if (_isLauncherUpSupplier.get()) {
-                _launcher.setReferenceSpeed(Constants.LauncherConstants.topFarLobRPM, Constants.LauncherConstants.bottomFarLobRPM, _isLauncherUpSupplier.get());
+        if (_xboxRightTriggerSupplier.getAsBoolean()) {
+            if (_isLauncherUpSupplier.getAsBoolean()) {
+                _launcher.setReferenceSpeed(Constants.LauncherConstants.topFarLobRPM, Constants.LauncherConstants.bottomFarLobRPM, _isLauncherUpSupplier.getAsBoolean());
             } else {
-                _launcher.setReferenceSpeed(Constants.LauncherConstants.topFarShotRPM, Constants.LauncherConstants.bottomFarShotRPM, _isLauncherUpSupplier.get());
+                _launcher.setReferenceSpeed(Constants.LauncherConstants.topFarShotRPM, Constants.LauncherConstants.bottomFarShotRPM, _isLauncherUpSupplier.getAsBoolean());
             }
-        } else if (_xboxXButtonSupplier.get()) {
-            if (_isAmpShotSupplier.get()) {
-                _launcher.setReferenceSpeed(Constants.LauncherConstants.topAmpShotRPM, Constants.LauncherConstants.bottomAmpShotRPM, _isLauncherUpSupplier.get());
+        } else if (_xboxXButtonSupplier.getAsBoolean()) {
+            if (_isAmpShotSupplier.getAsBoolean()) {
+                _launcher.setReferenceSpeed(Constants.LauncherConstants.topAmpShotRPM, Constants.LauncherConstants.bottomAmpShotRPM, _isLauncherUpSupplier.getAsBoolean());
             } else {
-                _launcher.setReferenceSpeed(Constants.LauncherConstants.topSourceLobRPM, Constants.LauncherConstants.bottomSourceLobRPM, _isLauncherUpSupplier.get());
+                _launcher.setReferenceSpeed(Constants.LauncherConstants.topSourceLobRPM, Constants.LauncherConstants.bottomSourceLobRPM, _isLauncherUpSupplier.getAsBoolean());
             }
         } else {
             _launcher.setLauncherSpeed(0);

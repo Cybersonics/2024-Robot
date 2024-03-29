@@ -1,0 +1,37 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 3.25,
+      "y": 4.699383460524641
+    },
+    "rotation": 90.0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "RaiseLauncher"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Trap Reverse Post"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "QuickFireNoteAuto"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}

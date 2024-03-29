@@ -159,7 +159,9 @@ public class Constants {
         public static final int intakeMotor = 30;
         public static final int feederMotor = 34;
 
-        public static final int noteTripInput = 0;
+        public static final int topNoteTripInput = 0;       
+        public static final int bottomNoteTripInput = 1;
+
     }
 
     public static final class LauncherConstants {
@@ -214,7 +216,11 @@ public class Constants {
     }
 
     public static final class ClimberConstants {
-        public static final int leftClimber = 35;
-        public static final int rightClimber = 36;
+        public static final int leftClimber = 36;
+        public static final int rightClimber = 35;
+    }
+
+    public static final class TrapConstants {
+        public static final double AngleOffset = 15; // 15 degree angle to right (counterclock wise)
     }
 }

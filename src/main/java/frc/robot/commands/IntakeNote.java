@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj2.command.Command;
@@ -9,19 +10,19 @@ import frc.robot.subsystems.Intake;
 public class IntakeNote extends Command {
     
     private Intake _intake;
-    private Supplier<Boolean> _xboxLeftTriggerSupplier;
-    private Supplier<Boolean> _xboxLeftbumperSupplier;
+    private BooleanSupplier _xboxLeftTriggerSupplier;
+    private BooleanSupplier _xboxLeftbumperSupplier;
     
     public IntakeNote(Intake intake, CommandXboxController xboxController) {
         _intake = intake;
         
-        _xboxLeftTriggerSupplier = () -> xboxController.leftTrigger().getAsBoolean();
-        _xboxLeftbumperSupplier = () -> xboxController.leftBumper().getAsBoolean();
+        _xboxLeftTriggerSupplier = xboxController.leftTrigger();
+        _xboxLeftbumperSupplier = xboxController.leftBumper();
         // Use addRequirements() here to declare subsystem dependencies.
         addRequirements(_intake);
     }
 
-    public IntakeNote(Intake intake, Supplier<Boolean> xboxLeftTriggerSupplier, Supplier<Boolean> xboxLeftBumSupplier) {
+    public IntakeNote(Intake intake, BooleanSupplier xboxLeftTriggerSupplier, BooleanSupplier xboxLeftBumSupplier) {
           _intake = intake;
           _xboxLeftTriggerSupplier = xboxLeftTriggerSupplier;
           _xboxLeftbumperSupplier = xboxLeftBumSupplier;
@@ -36,9 +37,9 @@ public class IntakeNote extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if(_xboxLeftTriggerSupplier.get()) {
+        if(_xboxLeftTriggerSupplier.getAsBoolean()) {
             _intake.intakeNote(-1, -1, .7);
-        } else if(_xboxLeftbumperSupplier.get()) {
+        } else if(_xboxLeftbumperSupplier.getAsBoolean()) {
             _intake.intakeNote(1, 1, 0);
         } else {
             _intake.intakeNote(0, 0, 0);
@@ -47,8 +48,7 @@ public class IntakeNote extends Command {
 
     // Called once the command ends or is interrupted.
     @Override
-    public void end(boolean interrupted) {
-    }
+    public void end(boolean interrupted) { }
 
     // Returns true when the command should end.
     @Override

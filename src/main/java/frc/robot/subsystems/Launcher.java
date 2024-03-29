@@ -114,8 +114,14 @@ private Supplier<Boolean> _isLauncherUpSupplier;
     }
     
     public void setReferenceSpeed(boolean isLauncherUp) {
-        double setTopReferenceSpeed = SmartDashboard.getNumber("Input TopShooterRPM", Constants.LauncherConstants.topFarShotRPM);        
+        double setTopReferenceSpeed = SmartDashboard.getNumber("Input TopShooterRPM", Constants.LauncherConstants.topFarShotRPM);  
+        if(setTopReferenceSpeed == 0) {
+            setTopReferenceSpeed = Constants.LauncherConstants.topFarShotRPM;
+        }      
         double setBottomReferenceSpeed = SmartDashboard.getNumber("Input BottomShooterRPM", Constants.LauncherConstants.bottomFarShotRPM);
+        if(setBottomReferenceSpeed == 0) {
+            setBottomReferenceSpeed = Constants.LauncherConstants.bottomFarShotRPM;
+        }
         if(isLauncherUp) {
             topPIDController.setFF(upTopKFF);
             bottomPIDController.setFF(upBottomKFF);

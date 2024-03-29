@@ -98,12 +98,6 @@
                       "data": {
                         "name": "FeedNoteAuto"
                       }
-                    },
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "P-MiddleFiveNotePickup"
-                      }
                     }
                   ]
                 }

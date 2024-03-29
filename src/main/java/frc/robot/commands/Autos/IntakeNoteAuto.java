@@ -40,6 +40,6 @@ public class IntakeNoteAuto extends Command {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return _intake.hasNote();
+        return _intake.topHasNote();
     }
 }

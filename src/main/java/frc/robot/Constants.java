@@ -1,5 +1,9 @@
 package frc.robot;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.PIDConstants;
 import com.pathplanner.lib.util.ReplanningConfig;
@@ -11,6 +15,8 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.utility.shuffleBoardDrive;
+import frc.robot.utility.AprilTag;
+
 
 public class Constants {
     public static class OperatorConstants {
@@ -181,8 +187,11 @@ public class Constants {
         public static final double topSourceLobRPM = 3900;
         public static final double bottomSourceLobRPM = 3900;
 
-        public static final double topAmpShotRPM = 3000;
-        public static final double bottomAmpShotRPM = 3500;
+        public static final double topAmpShotRPM = 4000;
+        public static final double bottomAmpShotRPM = 4000;
+
+        public static final double topTrapShotRPM = 4800;
+        public static final double bottomTrapShotRPM = 4800;
     }
 
     public static final class ShuffleBoardConstants {
@@ -222,5 +231,14 @@ public class Constants {
 
     public static final class TrapConstants {
         public static final double AngleOffset = 15; // 15 degree angle to right (counterclock wise)
+    }
+
+    public static final class CameraConstants {
+        public static final String CameraName = "limelight"; 
+        public static final int AprilTagPipeline = 0;
+    }
+
+    public static final class AprilTags {
+        public static final ArrayList<AprilTag> AprilTags = AprilTag.LoadAprilTagList();
     }
 }

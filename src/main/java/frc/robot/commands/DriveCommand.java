@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.utility.AprilTag;
 import frc.robot.utility.LimelightHelpers;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class DriveCommand extends Command {
 
@@ -54,7 +55,7 @@ public class DriveCommand extends Command {
     addRequirements(drive);
   }
 
-    public DriveCommand(Drive drive, CommandJoystick leftStick, CommandJoystick rightStick, CommandXboxController xboxController, NavXGyro gyro, Camera camera) {
+    public DriveCommand(Drive drive, CommandJoystick leftStick, CommandJoystick rightStick, JoystickButton xboxA, NavXGyro gyro, Camera camera) {
     this._drive = drive;
     this.leftStick = leftStick;
     this.rightStick = rightStick;
@@ -205,7 +206,7 @@ public class DriveCommand extends Command {
      * the drive system.
      */
     if (xboxController != null) {
-      if(xboxController.button(1).getAsBoolean()){
+      if(xboxController.  button(1).getAsBoolean()){
         if (_aprilTagID>-1){
           _target = Constants.AprilTags.AprilTags.get(((int)_aprilTagID-1)); // indexed list is 0-15 not 1-16
           double targetDistance = _target.getDistance();
@@ -262,10 +263,7 @@ public class DriveCommand extends Command {
           // _drive.processInput(distanceValue, 0.0, -rotationValue, false);
         }
       }
-
     }
-
-    
 
     this._drive.processInput(forward, strafe, omega, deadStick);
   }

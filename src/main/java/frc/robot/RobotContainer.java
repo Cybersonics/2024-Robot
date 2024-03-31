@@ -122,7 +122,7 @@ public class RobotContainer {
 
     xboxA.onTrue(new InstantCommand(() -> _pneumatics.launcherToggle(), _pneumatics));    
     xboxB.onTrue(new AmpArmExtension(_pneumatics, _intake::topHasNote));
-    xboxY.onTrue(new CameraAlignment(_camera, _drive));
+    xboxY.onTrue(new CameraAlignment(_camera, _drive, _gyro));
     
     leftStick.button(7).onTrue(new InstantCommand(() -> _gyro.zeroNavHeading(), _gyro));
   }

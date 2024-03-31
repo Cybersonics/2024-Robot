@@ -8,21 +8,24 @@ import frc.robot.subsystems.Camera;
 import frc.robot.subsystems.Drive;
 import frc.robot.utility.AprilTag;
 import frc.robot.utility.LimelightHelpers;
+import frc.robot.subsystems.NavXGyro;
 
 public class CameraAlignment extends Command {
     private Camera _camera;
     private Drive _drive;
+    private NavXGyro _navXGyro;
 
     private PIDController _driveRotationPID, _driveDistancePID, _driveStrafePID;
-    private double _driveRotationP = 0.0004, _driveRotationD = 0.01, _driveRotationI = 0.00;//p=0.0002
+    private double _driveRotationP = 0.00035, _driveRotationD = 0.00, _driveRotationI = 0.00;//p=0.0002 p =0.0004 d=0.01
     private double _driveDistanceP = 0.015, _driveDistanceD = 0.008, _driveDistanceI = 0.00;//p=0.002
-    private double _driveStrafeP = 0.015, _driveStrafeD = 0.008, _driveStrafeI = 0.00;
+    private double _driveStrafeP = 0.02, _driveStrafeD = 0.00, _driveStrafeI = 0.00;
     private AprilTag _target;
     private double _aprilTagID;
 
-    public CameraAlignment(Camera camera, Drive drive) {
+    public CameraAlignment(Camera camera, Drive drive, NavXGyro gyro) {
         _camera = camera;
         _drive = drive;
+        _navXGyro = gyro;
 
         addRequirements(_camera, _drive);
     }
@@ -31,13 +34,13 @@ public class CameraAlignment extends Command {
     @Override
     public void initialize() { 
         _driveRotationPID = new PIDController(_driveRotationP, _driveRotationI, _driveRotationD);
-        _driveRotationPID.setTolerance(0.8);
+        _driveRotationPID.setTolerance(1.0);//0.8
         
         _driveDistancePID = new PIDController(_driveDistanceP, _driveDistanceI, _driveDistanceD);
         _driveDistancePID.setTolerance(2);
 
         _driveStrafePID = new PIDController(_driveStrafeP, _driveStrafeI, _driveStrafeD);
-        _driveStrafePID.setTolerance(2);
+        _driveStrafePID.setTolerance(0.5);//2
         
         _aprilTagID = LimelightHelpers.getFiducialID("");
         //_target = Constants.AprilTags.AprilTags.get(((int)LimelightHelpers.getFiducialID("")-1)); // indexed list is 0-15 not 1-16
@@ -58,10 +61,11 @@ public class CameraAlignment extends Command {
         
         
             //double rotationEstimate = LimelightHelpers.getTY("");// + Constants.TrapConstants.AngleOffset;
-            double rotationEstimate = LimelightHelpers.getTX("");// + Constants.TrapConstants.AngleOffset;
-            double rotationValue = _driveRotationPID.calculate(rotationEstimate, 0);
+            //double rotationEstimate = LimelightHelpers.getTX("");// + Constants.TrapConstants.AngleOffset;
+            //double rotationValue = _driveRotationPID.calculate(rotationEstimate, 0);
+            double rotationValue = _driveRotationPID.calculate(-_navXGyro.getNavAngle(), targetHeading);
             
-            SmartDashboard.putNumber("Rotation Estimate", rotationEstimate);
+            //SmartDashboard.putNumber("Rotation Estimate", rotationEstimate);
             SmartDashboard.putNumber("Rotation Value", rotationValue);
 
 
@@ -101,7 +105,7 @@ public class CameraAlignment extends Command {
             // and its at the same time as rotaiton maybe we should separate it?     
             // _drive.processInput(distanceValue, 0.0, -rotationValue, false);
 
-            _drive.processInput(distanceValue, 0.0, rotationValue, false); //-rotationValue
+            _drive.processInput(distanceValue, -strafeValue, rotationValue, false); //-rotationValue
 
         }
 

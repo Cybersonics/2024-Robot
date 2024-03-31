@@ -38,12 +38,12 @@ public class AprilTag {
         list.add(new AprilTag(7, 0, 0, 0)); // 
         list.add(new AprilTag(8, 0, 0, 0)); // 
         list.add(new AprilTag(9, 0, 0, 0)); // 
-        list.add(new AprilTag(10, 50.5, 15, 70)); // Red
+        list.add(new AprilTag(10, 50.5, 15, 70)); // Red Should be 13
         list.add(new AprilTag(11, 50.5, 135, 70)); // Red
         list.add(new AprilTag(12, 50.5, -105, 70)); // Red
         list.add(new AprilTag(13, 0, 0, 0)); // 
         list.add(new AprilTag(14, 51.5, 15, 70)); // Blue
-        list.add(new AprilTag(15, 51.5, 135, 70)); // Blue
+        list.add(new AprilTag(15, 52.0, 135, 70)); // Blue height original=51.5
         list.add(new AprilTag(16, 51.5, -105, 70)); // Blue
         return list;
     }

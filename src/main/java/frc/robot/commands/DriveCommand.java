@@ -7,9 +7,14 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.Constants;
+import frc.robot.subsystems.Camera;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.NavXGyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.utility.AprilTag;
+import frc.robot.utility.LimelightHelpers;
+import edu.wpi.first.math.controller.PIDController;
 
 public class DriveCommand extends Command {
 
@@ -19,6 +24,7 @@ public class DriveCommand extends Command {
   private CommandXboxController xboxController;
 
   private NavXGyro _navXGyro;
+  private Camera _camera;
 
   public static final double OMEGA_SCALE = 1.0 / 20.0;//30.0;// 45
   public static final double DEADZONE_LSTICK = 0.1;
@@ -26,6 +32,13 @@ public class DriveCommand extends Command {
   private double originHeading = 0.0;
   private double leftPow = 1;
   private double rightPow = 1;
+
+  private PIDController _driveRotationPID, _driveDistancePID, _driveStrafePID;
+  private double _driveRotationP = 0.0004, _driveRotationD = 0.01, _driveRotationI = 0.00;//p=0.0002
+  private double _driveDistanceP = 0.015, _driveDistanceD = 0.008, _driveDistanceI = 0.00;//p=0.002
+  private double _driveStrafeP = 0.015, _driveStrafeD = 0.008, _driveStrafeI = 0.00;
+  private AprilTag _target;
+  private double _aprilTagID;
 
   /**
    * Creates a new DriveCommand using a standard set of joysticks as the driver
@@ -41,13 +54,25 @@ public class DriveCommand extends Command {
     addRequirements(drive);
   }
 
-  public DriveCommand(Drive drive, CommandXboxController xboxController, NavXGyro gyro) {
+    public DriveCommand(Drive drive, CommandJoystick leftStick, CommandJoystick rightStick, CommandXboxController xboxController, NavXGyro gyro, Camera camera) {
     this._drive = drive;
+    this.leftStick = leftStick;
+    this.rightStick = rightStick;
     this.xboxController = xboxController;
     this._navXGyro = gyro;
+    this._camera = camera;
 
+    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drive);
   }
+
+  // public DriveCommand(Drive drive, CommandXboxController xboxController, NavXGyro gyro) {
+  //   this._drive = drive;
+  //   this.xboxController = xboxController;
+  //   this._navXGyro = gyro;
+
+  //   addRequirements(drive);
+  // }
 
   // Called when the command is initially scheduled.
   @Override
@@ -59,6 +84,17 @@ public class DriveCommand extends Command {
      */
     originHeading = _navXGyro.getZeroAngle();
     // _drive.setDrivesMode(IdleMode.kCoast);
+    _driveRotationPID = new PIDController(_driveRotationP, _driveRotationI, _driveRotationD);
+    _driveRotationPID.setTolerance(0.8);
+    
+    _driveDistancePID = new PIDController(_driveDistanceP, _driveDistanceI, _driveDistanceD);
+    _driveDistancePID.setTolerance(2);
+
+    _driveStrafePID = new PIDController(_driveStrafeP, _driveStrafeI, _driveStrafeD);
+    _driveStrafePID.setTolerance(2);
+    
+    _aprilTagID = LimelightHelpers.getFiducialID("");
+    //_target = Constants.AprilTags.AprilTags.get(((int)LimelightHelpers.getFiducialID("")-1)); // indexed list is 0-15 not 1-16
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -68,36 +104,19 @@ public class DriveCommand extends Command {
     // originCorr = _navXGyro.getNavAngle() + originOffset;
 
     /*
-     * Original stick commands used in original code are commented out below.
      * The sticks are being inverted in the following lines to work with the
      * revised drive code. The revised drive code sets aligns the drive axis
      * and drive directions to match the odd directions of wpilib. This is done
      * to allow the use of path planning software in autonoumous mode.
      */
 
-    // double stickForward = this.driveController.getLeftY();
-    // double stickStrafe = this.driveController.getLeftX();
-    // double stickOmega = (this.driveController.getRightX());
-
     double stickForward;
     double stickStrafe;
     double stickOmega;
 
-    if (xboxController != null) {
-      stickForward = -this.xboxController.getLeftY() * 0.25;
-      stickStrafe = -this.xboxController.getLeftX() * 0.25;
-      stickOmega = -this.xboxController.getRightX() * 0.25;
-      // stickForward = -this.xboxController.getLeftY();
-      // stickStrafe = -this.xboxController.getLeftX();
-      // stickOmega = -this.xboxController.getRightX();
-    } else {
-      stickForward = -this.leftStick.getY();//*.9;
-      stickStrafe = -this.leftStick.getX();//*.9;
-      stickOmega = -this.rightStick.getX();//*.9;
-      // stickForward = this.leftStick.getY();
-      // stickStrafe = this.leftStick.getX();
-      // stickOmega = this.rightStick.getX();
-    }
+    stickForward = -this.leftStick.getY();//*.9;
+    stickStrafe = -this.leftStick.getX();//*.9;
+    stickOmega = -this.rightStick.getX();//*.9;
 
     // SmartDashboard.putNumber("Controller Forward", stickForward);
     // SmartDashboard.putNumber("Controller Strafe", stickStrafe);
@@ -131,11 +150,8 @@ public class DriveCommand extends Command {
     if (Math.abs(omega) < DEADZONE_RSTICK * OMEGA_SCALE)
       omega = 0.0;
     boolean stickFieldCentric;
-    if(xboxController != null) {
-      stickFieldCentric = xboxController.leftBumper().getAsBoolean();
-    }else {
-      stickFieldCentric = leftStick.trigger().getAsBoolean();
-    }
+ 
+    stickFieldCentric = leftStick.trigger().getAsBoolean();
 
     if (!stickFieldCentric) {
 
@@ -188,6 +204,69 @@ public class DriveCommand extends Command {
      * Take the calculated values from the joysticks and use the values to operate
      * the drive system.
      */
+    if (xboxController != null) {
+      if(xboxController.button(1).getAsBoolean()){
+        if (_aprilTagID>-1){
+          _target = Constants.AprilTags.AprilTags.get(((int)_aprilTagID-1)); // indexed list is 0-15 not 1-16
+          double targetDistance = _target.getDistance();
+          double targetHeight = _target.getHeight();
+          double targetHeading = _target.getExpectedHeading();
+
+          SmartDashboard.putNumber("Target Distance", targetDistance);
+          SmartDashboard.putNumber("Target Height", targetHeight);
+          SmartDashboard.putNumber("Target Heading", targetHeading);
+      
+      
+          //double rotationEstimate = LimelightHelpers.getTY("");// + Constants.TrapConstants.AngleOffset;
+          double rotationEstimate = LimelightHelpers.getTX("");// + Constants.TrapConstants.AngleOffset;
+          double rotationValue = _driveRotationPID.calculate(rotationEstimate, 0);
+          
+          SmartDashboard.putNumber("Rotation Estimate", rotationEstimate);
+          SmartDashboard.putNumber("Rotation Value", rotationValue);
+
+
+          //How many degrees back is limelight rotated from vertical
+          /*Vertical angle calculated by setting bot a fixed distance back from target (measureDistanceToTarget) with 
+          height of target and height of camera lens measured in inches.
+          Use a calculator to get the Total Angle = arcTan(targetHeight-cameraHeight)/measuredDistanceToTaget
+          Using the Limelight webviewer get the ty value. Take the total angle calculated above and subtract the 
+          ty value from the Limelight webvier to get the limelightMountAngleDegrees.
+          */
+
+          double tx = LimelightHelpers.getTX("");
+          //Vertical angle of target in view in degrees
+          double ty = LimelightHelpers.getTY(""); 
+
+          double limelightMountAngleDegrees = 29.085;//32; 
+
+          //Distance from center of limelight lens to floor
+          double limelightLensHeightInches = 14.5;
+
+          //Distance fron target to floor
+          //double goalHeightInches = 52.0;//50.5;
+
+          double angleToGoalDegrees = limelightMountAngleDegrees + ty;
+          double angleToGoalRadians = angleToGoalDegrees * (3.14159 / 180.0);
+
+          //Calculate distance
+          double distanceFromLimelight = (targetHeight - limelightLensHeightInches) / Math.tan(angleToGoalRadians);
+
+          SmartDashboard.putNumber("Distance Value", distanceFromLimelight);
+
+          double distanceValue = _driveDistancePID.calculate(distanceFromLimelight, targetDistance);
+
+          double strafeValue = _driveStrafePID.calculate(tx, 0);
+
+          // This isn't correct either since it doesn't account for the vector movement its only forward/reverse 
+          // and its at the same time as rotaiton maybe we should separate it?     
+          // _drive.processInput(distanceValue, 0.0, -rotationValue, false);
+        }
+      }
+
+    }
+
+    
+
     this._drive.processInput(forward, strafe, omega, deadStick);
   }
 

@@ -33,7 +33,8 @@ public class Climber extends SubsystemBase {
         // leftClimber.restoreFactoryDefaults();
         leftClimber.setIdleMode(IdleMode.kBrake);
         //leftClimber.setInverted(true); // Reverses controller to match up and down but breaks limit sensor.
-        leftEncoder = leftClimber.getAbsoluteEncoder(Type.kDutyCycle);
+        leftEncoder = leftClimber.getAbsoluteEncoder(Type.kDutyCycle);        
+        // leftEncoder.setPositionConversionFactor(Constants.ClimberConstants.kClimberEncoderRot2Meter);
         leftPIDController = leftClimber.getPIDController();
         leftPIDController.setFeedbackDevice(leftEncoder);
         //leftEncoder.setInverted(true);
@@ -48,6 +49,7 @@ public class Climber extends SubsystemBase {
         rightClimber.setIdleMode(IdleMode.kBrake);
         //rightClimber.setInverted(true); // Reverses controller to match up and down but breaks limit sensor.
         rightEncoder = rightClimber.getAbsoluteEncoder(Type.kDutyCycle);
+        // rightEncoder.setPositionConversionFactor(Constants.ClimberConstants.kClimberEncoderRot2Meter);
         rightPIDController = rightClimber.getPIDController();
         rightPIDController.setFeedbackDevice(rightEncoder);
         //rightEncoder.setInverted(true);

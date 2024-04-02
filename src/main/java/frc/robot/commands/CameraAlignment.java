@@ -55,9 +55,9 @@ public class CameraAlignment extends Command {
             double targetHeight = _target.getHeight();
             double targetHeading = _target.getExpectedHeading();
 
-            SmartDashboard.putNumber("Target Distance", targetDistance);
-            SmartDashboard.putNumber("Target Height", targetHeight);
-            SmartDashboard.putNumber("Target Heading", targetHeading);
+            // SmartDashboard.putNumber("Target Distance", targetDistance);
+            // SmartDashboard.putNumber("Target Height", targetHeight);
+            // SmartDashboard.putNumber("Target Heading", targetHeading);
         
         
             //double rotationEstimate = LimelightHelpers.getTY("");// + Constants.TrapConstants.AngleOffset;

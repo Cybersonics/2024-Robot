@@ -36,9 +36,9 @@ public class DriveCommand extends Command {
   private double rightPow = 1;
 
   private PIDController _driveRotationPID, _driveDistancePID, _driveStrafePID;
-  private double _driveRotationP = 0.0004, _driveRotationD = 0.01, _driveRotationI = 0.00;//p=0.0002
+  private double _driveRotationP = 0.0004, _driveRotationD = 0.00, _driveRotationI = 0.00;//p=0.0002
   private double _driveDistanceP = 0.015, _driveDistanceD = 0.008, _driveDistanceI = 0.00;//p=0.002
-  private double _driveStrafeP = 0.015, _driveStrafeD = 0.008, _driveStrafeI = 0.00;
+  private double _driveStrafeP = 0.015, _driveStrafeD = 0.00, _driveStrafeI = 0.00;//p=0.015 d=0.008
   private AprilTag _target;
   private double _aprilTagID;
 
@@ -102,6 +102,10 @@ public class DriveCommand extends Command {
     
     _aprilTagID = LimelightHelpers.getFiducialID("");
     //_target = Constants.AprilTags.AprilTags.get(((int)LimelightHelpers.getFiducialID("")-1)); // indexed list is 0-15 not 1-16
+
+    SmartDashboard.putNumber("Target Distance", 0);
+    SmartDashboard.putNumber("Target Height", 0);
+    SmartDashboard.putNumber("Target Heading", 0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -195,16 +199,16 @@ public class DriveCommand extends Command {
     }
 
    
-    if(_rightJoystickButtonThree.getAsBoolean()){
+    if(_rightJoystickButtonThree.getAsBoolean()) {
       if (_aprilTagID>-1){
-        _target = Constants.AprilTags.AprilTags.get(((int)_aprilTagID-1)); // indexed list is 0-15 not 1-16
-        double targetDistance = _target.getDistance();
-        double targetHeight = _target.getHeight();
-        double targetHeading = _target.getExpectedHeading();
+        AprilTag target = Constants.AprilTags.AprilTags.get(((int)_aprilTagID-1)); // indexed list is 0-15 not 1-16
+        double targetDistance = target.getDistance();
+        double targetHeight = target.getHeight();
+        double targetHeading = target.getExpectedHeading();
 
-        SmartDashboard.putNumber("Target Distance", targetDistance);
-        SmartDashboard.putNumber("Target Height", targetHeight);
-        SmartDashboard.putNumber("Target Heading", targetHeading);
+        SmartDashboard.putNumber("Target Distance", target.getDistance());
+        SmartDashboard.putNumber("Target Height", target.getHeight());
+        SmartDashboard.putNumber("Target Heading", target.getExpectedHeading());
     
     
         //double rotationEstimate = LimelightHelpers.getTY("");// + Constants.TrapConstants.AngleOffset;

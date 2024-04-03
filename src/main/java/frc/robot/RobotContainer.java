@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.units.Time;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -33,6 +34,7 @@ import frc.robot.commands.Autos.FireNoteAuto;
 import frc.robot.commands.Autos.LowerLauncher;
 import frc.robot.commands.Autos.PickupNoteAuto;
 import frc.robot.commands.Autos.RunLauncher;
+import frc.robot.commands.Autos.TimedClimberUpCommand;
 import frc.robot.commands.Autos.RaiseLauncher;
 import frc.robot.subsystems.BlinkinLEDController;
 import frc.robot.subsystems.Camera;
@@ -123,6 +125,7 @@ public class RobotContainer {
     xboxA.onTrue(new InstantCommand(() -> _pneumatics.launcherToggle(), _pneumatics));    
     xboxB.onTrue(new AmpArmExtension(_pneumatics, _intake::topHasNote));
     //xboxY.onTrue(new CameraAlignment(_camera, _drive, _gyro));
+    xboxController.povUp().onTrue(new TimedClimberUpCommand(_climber, 2));
     
     leftStick.button(7).onTrue(new InstantCommand(() -> _gyro.zeroNavHeading(), _gyro));
   }

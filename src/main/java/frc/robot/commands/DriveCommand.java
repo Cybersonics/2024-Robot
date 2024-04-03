@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants;
+import frc.robot.Constants.DriveConstants.ModuleConstants;
 import frc.robot.subsystems.Camera;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.NavXGyro;
@@ -93,6 +94,9 @@ public class DriveCommand extends Command {
     // _drive.setDrivesMode(IdleMode.kCoast);
     _driveRotationPID = new PIDController(_driveRotationP, _driveRotationI, _driveRotationD);
     _driveRotationPID.setTolerance(0.8);
+
+    _driveRotationPID.enableContinuousInput(-180,180);
+
     
     _driveDistancePID = new PIDController(_driveDistanceP, _driveDistanceI, _driveDistanceD);
     _driveDistancePID.setTolerance(2);
@@ -125,6 +129,8 @@ public class DriveCommand extends Command {
     double stickStrafe;
     double stickOmega;
     boolean deadStick = false;
+
+    _aprilTagID = LimelightHelpers.getFiducialID("");
 
     stickForward = -this.leftStick.getY();//*.9;
     stickStrafe = -this.leftStick.getX();//*.9;
@@ -261,7 +267,13 @@ public class DriveCommand extends Command {
         strafe = -strafeValue;
         omega = rotationValue;
         deadStick = false;
-      } 
+      } else {
+        // When losing april tag kill all movement.
+        forward = 0;
+        strafe = 0;
+        omega = 0;
+        deadStick = true;
+      }
     }
 
     /*

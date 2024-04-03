@@ -1,0 +1,83 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 10.6,
+        "y": 7.6
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 9.7429510009378,
+        "y": 7.562740853405335
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 7.148580597877187,
+        "y": 7.6
+      },
+      "prevControl": {
+        "x": 7.746154680853514,
+        "y": 7.621518632058745
+      },
+      "nextControl": {
+        "x": 6.306047373592079,
+        "y": 7.569660393636285
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.5,
+        "y": 7.1
+      },
+      "prevControl": {
+        "x": 3.4894259406657238,
+        "y": 7.604509266775097
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [
+    {
+      "name": "Lower Launcher",
+      "waypointRelativePos": 0.05,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "LowerLauncher"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 5.5,
+    "maxAcceleration": 5.5,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 33.0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "Amp Sneak",
+  "previewStartingState": null,
+  "useDefaultConstraints": false
+}

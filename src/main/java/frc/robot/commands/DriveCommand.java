@@ -132,9 +132,9 @@ public class DriveCommand extends Command {
 
     _aprilTagID = LimelightHelpers.getFiducialID("");
 
-    stickForward = -this.leftStick.getY();//*.9;
-    stickStrafe = -this.leftStick.getX();//*.9;
-    stickOmega = -this.rightStick.getX();//*.9;
+    stickForward = -this.leftStick.getY()*.95;
+    stickStrafe = -this.leftStick.getX()*.95;
+    stickOmega = -this.rightStick.getX()*.95;
 
     // SmartDashboard.putNumber("Controller Forward", stickForward);
     // SmartDashboard.putNumber("Controller Strafe", stickStrafe);

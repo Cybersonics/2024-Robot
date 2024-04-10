@@ -26,7 +26,7 @@ public class IntakeNoteAuto extends Command {
     @Override
     public void execute() {
         _timer.start();
-        _intake.intakeNote(-.85, -.75, .85);
+        _intake.intakeNote(-.9, -1, 1);
     }
 
     // Called once the command ends or is interrupted.

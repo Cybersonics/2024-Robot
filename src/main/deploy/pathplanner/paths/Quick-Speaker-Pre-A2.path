@@ -1,0 +1,129 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.2,
+        "y": 5.6
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 1.4,
+        "y": 5.6
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.0,
+        "y": 5.6
+      },
+      "prevControl": {
+        "x": 1.8000289813803523,
+        "y": 5.60340466036788
+      },
+      "nextControl": {
+        "x": 4.097034256121018,
+        "y": 5.564296379189416
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 4.4,
+        "y": 5.0
+      },
+      "prevControl": {
+        "x": 3.9591666600994304,
+        "y": 5.337972227257104
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1.2,
+      "rotationDegrees": 0,
+      "rotateFast": false
+    }
+  ],
+  "constraintZones": [],
+  "eventMarkers": [
+    {
+      "name": "Feed PreLoad Note",
+      "waypointRelativePos": 0.9,
+      "command": {
+        "type": "sequential",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "FeedNoteAuto"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "PickupNoteAuto"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Raise Launcher",
+      "waypointRelativePos": 0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "RaiseLauncher"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Lower Launcher",
+      "waypointRelativePos": 1.65,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "LowerLauncher"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 5.5,
+    "maxAcceleration": 5.5,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -15.0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "Quick Speaker",
+  "previewStartingState": null,
+  "useDefaultConstraints": false
+}

@@ -240,6 +240,10 @@ public class Constants {
     public static final class CameraConstants {
         public static final String CameraName = "limelight"; 
         public static final int AprilTagPipeline = 0;
+
+        public static final double RobotCameraHeight = Units.inchesToMeters(14.75);
+        public static final double RobotCameraAngle = Units.degreesToRadians(30.6);
+        public static final double RobotDistance = 58;
     }
 
     public static final class AprilTags {

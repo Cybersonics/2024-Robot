@@ -10,23 +10,29 @@ import frc.robot.utility.AprilTag;
 
 import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonUtils;
+import org.photonvision.targeting.PhotonPipelineResult;
 
 public class Camera extends SubsystemBase {
+    private PhotonCamera camera;
+
     private static Camera instance;
     // private final PhotonCamera camera;
-    private final double CAMERA_HEIGHT_METERS = Units.inchesToMeters(14.5);
+    private final double CAMERA_HEIGHT_METERS = Constants.CameraConstants.RobotCameraHeight;
     // Angle between horizontal and the camera.
-    private final double CAMERA_PITCH_RADIANS = Units.degreesToRadians(32);
+    private final double CAMERA_PITCH_RADIANS = Constants.CameraConstants.RobotCameraAngle;
 
     // The field from AprilTagFields will be different depending on the game. only returns pose objects no height
     private AprilTagFieldLayout aprilTagFieldLayout = AprilTagFields.k2024Crescendo.loadAprilTagLayoutField();
     private double TARGET_HEIGHT_METERS; // Convert to meters when setting
 
+    private PhotonPipelineResult result;
     private double yawVal = 0, pitchVal = 0, skewVal = 0, areaVal = 0;
     private int targetId = 0;
     private boolean hasTarget = false;
 
-    public Camera() { }
+    public Camera() { 
+        camera = new PhotonCamera("Arducam_OV9281_USB_Camera");
+    }
 
     public static Camera getInstance() {
         if (instance == null) {
@@ -47,6 +53,10 @@ public class Camera extends SubsystemBase {
         SmartDashboard.putNumber("Camera Distance", rangeInInches);
 
         return range;
+    }
+
+    public PhotonCamera getPhotonCamera() {
+        return camera;
     }
 
     public double getYawVal() {

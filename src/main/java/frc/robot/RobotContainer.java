@@ -76,7 +76,7 @@ public class RobotContainer {
     configureNamedCommands();
 
     CommandScheduler.getInstance()
-      .setDefaultCommand(_drive, new DriveCommand(_drive, leftStick, rightStick, _gyro));
+      .setDefaultCommand(_drive, new DriveCommand(_drive, leftStick, rightStick, _gyro, _camera));
     // .setDefaultCommand(_drive, new DriveCommand(_drive, xboxController, _gyro));
 
     CommandScheduler.getInstance()

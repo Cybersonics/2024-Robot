@@ -15,6 +15,10 @@ import frc.robot.subsystems.NavXGyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.utility.AprilTag;
 import frc.robot.utility.LimelightHelpers;
+
+import org.photonvision.PhotonCamera;
+import org.photonvision.targeting.PhotonTrackedTarget;
+
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -28,6 +32,7 @@ public class DriveCommand extends Command {
 
   private NavXGyro _navXGyro;
   private Camera _camera;
+  private PhotonCamera _photonCamera;
 
   public static final double OMEGA_SCALE = 1.0 / 20.0;//30.0;// 45
   public static final double DEADZONE_LSTICK = 0.1;
@@ -42,6 +47,7 @@ public class DriveCommand extends Command {
   private double _driveStrafeP = 0.015, _driveStrafeD = 0.00, _driveStrafeI = 0.00;//p=0.015 d=0.008
   private AprilTag _target;
   private double _aprilTagID;
+  private PhotonTrackedTarget _bestTarget;
 
   private Trigger _rightJoystickButtonThree;
 
@@ -49,12 +55,14 @@ public class DriveCommand extends Command {
    * Creates a new DriveCommand using a standard set of joysticks as the driver
    * joysticks.
    */
-  public DriveCommand(Drive drive, CommandJoystick leftStick, CommandJoystick rightStick, NavXGyro gyro) {
+  public DriveCommand(Drive drive, CommandJoystick leftStick, CommandJoystick rightStick, NavXGyro gyro, Camera camera) {
     this._drive = drive;
     this.leftStick = leftStick;
     this.rightStick = rightStick;
     this._navXGyro = gyro;
 
+    this._camera = camera;
+    this._photonCamera = _camera.getPhotonCamera();
     
     _rightJoystickButtonThree = rightStick.button(3);
 
@@ -69,6 +77,7 @@ public class DriveCommand extends Command {
     this.xboxController = xboxController;
     this._navXGyro = gyro;
     this._camera = camera;
+    this._photonCamera = _camera.getPhotonCamera();
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drive);
@@ -104,7 +113,7 @@ public class DriveCommand extends Command {
     _driveStrafePID = new PIDController(_driveStrafeP, _driveStrafeI, _driveStrafeD);
     _driveStrafePID.setTolerance(2);
     
-    _aprilTagID = LimelightHelpers.getFiducialID("");
+    // _aprilTagID = LimelightHelpers.getFiducialID("");
     //_target = Constants.AprilTags.AprilTags.get(((int)LimelightHelpers.getFiducialID("")-1)); // indexed list is 0-15 not 1-16
 
     SmartDashboard.putNumber("Target Distance", 0);
@@ -129,8 +138,6 @@ public class DriveCommand extends Command {
     double stickStrafe;
     double stickOmega;
     boolean deadStick = false;
-
-    _aprilTagID = LimelightHelpers.getFiducialID("");
 
     stickForward = -this.leftStick.getY()*.95;
     stickStrafe = -this.leftStick.getX()*.95;
@@ -205,7 +212,14 @@ public class DriveCommand extends Command {
     }
 
    
+    var latestResult = _photonCamera.getLatestResult();
+    
     if(_rightJoystickButtonThree.getAsBoolean()) {
+      if(latestResult.hasTargets()) {
+        _bestTarget = latestResult.getBestTarget();
+        _aprilTagID = _bestTarget.getFiducialId();
+        // _aprilTagID = LimelightHelpers.getFiducialID("");
+      }
       if (_aprilTagID>-1){
         AprilTag target = Constants.AprilTags.AprilTags.get(((int)_aprilTagID-1)); // indexed list is 0-15 not 1-16
         double targetDistance = target.getDistance();
@@ -234,14 +248,17 @@ public class DriveCommand extends Command {
         ty value from the Limelight webvier to get the limelightMountAngleDegrees.
         */
 
-        double tx = LimelightHelpers.getTX("");
-        //Vertical angle of target in view in degrees
-        double ty = LimelightHelpers.getTY(""); 
+        double tx = _bestTarget.getYaw();
+        // double tx = LimelightHelpers.getTX("");
 
-        double limelightMountAngleDegrees = 29.085;//32; 
+        //Vertical angle of target in view in degrees
+        double ty = _bestTarget.getPitch();
+        // double ty = LimelightHelpers.getTY(""); 
+
+        double limelightMountAngleDegrees = 30.6; //29.085;//32; 
 
         //Distance from center of limelight lens to floor
-        double limelightLensHeightInches = 14.5;
+        double limelightLensHeightInches = 14.75; //14.5;
 
         //Distance fron target to floor
         //double goalHeightInches = 52.0;//50.5;

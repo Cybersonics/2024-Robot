@@ -1,5 +1,7 @@
 package frc.robot.commands;
 
+import org.photonvision.PhotonCamera;
+
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -15,6 +17,8 @@ public class CameraAlignment extends Command {
     private Drive _drive;
     private NavXGyro _navXGyro;
 
+    private PhotonCamera _photonCamera;
+
     private PIDController _driveRotationPID, _driveDistancePID, _driveStrafePID;
     private double _driveRotationP = 0.00035, _driveRotationD = 0.00, _driveRotationI = 0.00;//p=0.0002 p =0.0004 d=0.01
     private double _driveDistanceP = 0.015, _driveDistanceD = 0.008, _driveDistanceI = 0.00;//p=0.002
@@ -26,6 +30,8 @@ public class CameraAlignment extends Command {
         _camera = camera;
         _drive = drive;
         _navXGyro = gyro;
+
+        _photonCamera = camera.getPhotonCamera();
 
         addRequirements(_camera, _drive);
     }
@@ -41,15 +47,18 @@ public class CameraAlignment extends Command {
 
         _driveStrafePID = new PIDController(_driveStrafeP, _driveStrafeI, _driveStrafeD);
         _driveStrafePID.setTolerance(0.5);//2
-        
-        _aprilTagID = LimelightHelpers.getFiducialID("");
+              
+        // _aprilTagID = LimelightHelpers.getFiducialID("");
+
         //_target = Constants.AprilTags.AprilTags.get(((int)LimelightHelpers.getFiducialID("")-1)); // indexed list is 0-15 not 1-16
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if (_aprilTagID>-1){
+        var bestTarget = _photonCamera.getLatestResult().getBestTarget();
+        _aprilTagID = bestTarget.getFiducialId();
+        if (_aprilTagID > -1){
             _target = Constants.AprilTags.AprilTags.get(((int)_aprilTagID-1)); // indexed list is 0-15 not 1-16
             double targetDistance = _target.getDistance();
             double targetHeight = _target.getHeight();
@@ -76,15 +85,17 @@ public class CameraAlignment extends Command {
             Using the Limelight webviewer get the ty value. Take the total angle calculated above and subtract the 
             ty value from the Limelight webvier to get the limelightMountAngleDegrees.
             */
+            double tx = bestTarget.getYaw();
+            // double tx = LimelightHelpers.getTX("");
 
-            double tx = LimelightHelpers.getTX("");
             //Vertical angle of target in view in degrees
-            double ty = LimelightHelpers.getTY(""); 
+            double ty = bestTarget.getPitch();
+            // double ty = LimelightHelpers.getTY(""); 
 
-            double limelightMountAngleDegrees = 29.085;//32; 
+            double limelightMountAngleDegrees = 30.6; //29.085;//32; 
 
             //Distance from center of limelight lens to floor
-            double limelightLensHeightInches = 14.5;
+            double limelightLensHeightInches = 14.75; //14.5;
 
             //Distance fron target to floor
             //double goalHeightInches = 52.0;//50.5;

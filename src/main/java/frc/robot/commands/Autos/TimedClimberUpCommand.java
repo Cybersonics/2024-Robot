@@ -2,44 +2,46 @@ package frc.robot.commands.Autos;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Climber;
 
-public class IntakeNoteAuto extends Command {
-    
-    private Intake _intake;
+public class TimedClimberUpCommand extends Command {
+    private Climber _climber;
     private Timer _timer;
+    private double _runTimeInSeconds;
 
-    public IntakeNoteAuto(Intake intake) {
-        _intake = intake;
+    public TimedClimberUpCommand(Climber climber, double runTimeInSeconds) {
+        _climber = climber;
+        _runTimeInSeconds = runTimeInSeconds;
         
-        // Use addRequirements() here to declare subsystem dependencies.
-        addRequirements(_intake);
+        addRequirements(_climber);
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
         _timer = new Timer();
+        _timer.start();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        _timer.start();
-        _intake.intakeNote(-.9, -1, 1);
+        _climber.setLeftClimberSpeed(1);
+        _climber.setRightClimberSpeed(1);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        _intake.intakeNote(0, 0, 0);
         _timer.stop();
         _timer.reset();
+        _climber.setLeftClimberSpeed(0);
+        _climber.setRightClimberSpeed(0);
     }
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return _intake.topHasNote();
+        return _timer.hasElapsed(_runTimeInSeconds);
     }
 }

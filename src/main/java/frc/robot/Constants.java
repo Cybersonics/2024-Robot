@@ -227,6 +227,10 @@ public class Constants {
     public static final class ClimberConstants {
         public static final int leftClimber = 36;
         public static final int rightClimber = 35;
+
+        public static final double kSpoolDiameterMeters = Units.inchesToMeters(2); // 4
+        public static final double kClimberMotorGearRatio = 1 / 64;
+        public static final double kClimberEncoderRot2Meter = kClimberMotorGearRatio * Math.PI * kSpoolDiameterMeters;
     }
 
     public static final class TrapConstants {
@@ -236,6 +240,10 @@ public class Constants {
     public static final class CameraConstants {
         public static final String CameraName = "limelight"; 
         public static final int AprilTagPipeline = 0;
+
+        public static final double RobotCameraHeight = Units.inchesToMeters(14.75);
+        public static final double RobotCameraAngle = Units.degreesToRadians(30.6);
+        public static final double RobotDistance = 58;
     }
 
     public static final class AprilTags {

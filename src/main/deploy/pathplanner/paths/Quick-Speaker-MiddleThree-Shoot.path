@@ -3,59 +3,69 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.9,
-        "y": 3.0
+        "x": 8.5,
+        "y": 4.15
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.343606396951513,
-        "y": 3.1491719040445205
+        "x": 7.917671690560116,
+        "y": 4.15
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 5.3,
-        "y": 4.085148692862707
+        "x": 5.9,
+        "y": 4.15
       },
       "prevControl": {
-        "x": 5.015703151307903,
-        "y": 3.9236770179903204
+        "x": 7.140000000000001,
+        "y": 4.15
       },
       "nextControl": {
-        "x": 5.540324239793373,
-        "y": 4.221645307898693
+        "x": 4.9,
+        "y": 4.15
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 9.0,
-        "y": 4.0
+        "x": 4.0,
+        "y": 5.0
       },
       "prevControl": {
-        "x": 8.324136170945375,
-        "y": 4.2026111737187675
+        "x": 4.2595329346509905,
+        "y": 4.8495252319109765
+      },
+      "nextControl": {
+        "x": 3.4406823944912803,
+        "y": 5.324287116354662
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 0.5,
+        "y": 5.6
+      },
+      "prevControl": {
+        "x": 1.4,
+        "y": 5.6
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 1.4,
-      "rotationDegrees": 0,
-      "rotateFast": false
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "NotePickup",
-      "waypointRelativePos": 1.75,
+      "name": "RaiseLauncher",
+      "waypointRelativePos": 2.0,
       "command": {
         "type": "parallel",
         "data": {
@@ -63,7 +73,7 @@
             {
               "type": "named",
               "data": {
-                "name": "PickupNoteAuto"
+                "name": "RaiseLauncher"
               }
             }
           ]
@@ -83,9 +93,9 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Source",
+  "folder": "Quick Speaker",
   "previewStartingState": {
-    "rotation": -30.0,
+    "rotation": 0,
     "velocity": 0
   },
   "useDefaultConstraints": true

@@ -4,6 +4,8 @@
   "holonomicMode": true,
   "pathFolders": [
     "Amp",
+    "Amp Sneak",
+    "Quick Speaker",
     "Source",
     "Speaker"
   ],

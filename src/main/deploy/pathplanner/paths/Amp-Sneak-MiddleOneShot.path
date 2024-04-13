@@ -3,59 +3,53 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.9,
-        "y": 3.0
+        "x": 10.6,
+        "y": 7.6
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.343606396951513,
-        "y": 3.1491719040445205
+        "x": 9.7429510009378,
+        "y": 7.562740853405335
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 5.3,
-        "y": 4.085148692862707
+        "x": 7.148580597877187,
+        "y": 7.6
       },
       "prevControl": {
-        "x": 5.015703151307903,
-        "y": 3.9236770179903204
+        "x": 7.746154680853514,
+        "y": 7.621518632058745
       },
       "nextControl": {
-        "x": 5.540324239793373,
-        "y": 4.221645307898693
+        "x": 6.306047373592079,
+        "y": 7.569660393636285
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 9.0,
-        "y": 4.0
+        "x": 2.5,
+        "y": 7.1
       },
       "prevControl": {
-        "x": 8.324136170945375,
-        "y": 4.2026111737187675
+        "x": 3.4894259406657238,
+        "y": 7.604509266775097
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 1.4,
-      "rotationDegrees": 0,
-      "rotateFast": false
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "NotePickup",
-      "waypointRelativePos": 1.75,
+      "name": "Lower Launcher",
+      "waypointRelativePos": 0.05,
       "command": {
         "type": "parallel",
         "data": {
@@ -63,7 +57,7 @@
             {
               "type": "named",
               "data": {
-                "name": "PickupNoteAuto"
+                "name": "LowerLauncher"
               }
             }
           ]
@@ -79,14 +73,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": 33.0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Source",
-  "previewStartingState": {
-    "rotation": -30.0,
-    "velocity": 0
-  },
-  "useDefaultConstraints": true
+  "folder": "Amp Sneak",
+  "previewStartingState": null,
+  "useDefaultConstraints": false
 }

@@ -3,41 +3,57 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.9,
-        "y": 3.0
+        "x": 1.8,
+        "y": 6.8
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.343606396951513,
-        "y": 3.1491719040445205
+        "x": 1.9998027404169363,
+        "y": 7.792953819797855
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 5.3,
-        "y": 4.085148692862707
+        "x": 2.730450902429251,
+        "y": 7.841935302009029
       },
       "prevControl": {
-        "x": 5.015703151307903,
-        "y": 3.9236770179903204
+        "x": 2.274726520478509,
+        "y": 7.851141855179751
       },
       "nextControl": {
-        "x": 5.540324239793373,
-        "y": 4.221645307898693
+        "x": 3.215367576319878,
+        "y": 7.832139005566794
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 9.0,
-        "y": 4.0
+        "x": 6.18364539831705,
+        "y": 7.841935302009029
       },
       "prevControl": {
-        "x": 8.324136170945375,
-        "y": 4.2026111737187675
+        "x": 4.712001694498616,
+        "y": 7.825678943660989
+      },
+      "nextControl": {
+        "x": 7.655289102135484,
+        "y": 7.858191660357068
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 10.6,
+        "y": 7.6
+      },
+      "prevControl": {
+        "x": 9.29756208008836,
+        "y": 7.9929538197978545
       },
       "nextControl": null,
       "isLocked": false,
@@ -46,16 +62,16 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 1.4,
-      "rotationDegrees": 0,
+      "waypointRelativePos": 0.85,
+      "rotationDegrees": 0.0,
       "rotateFast": false
     }
   ],
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "NotePickup",
-      "waypointRelativePos": 1.75,
+      "name": "Pick Up Note",
+      "waypointRelativePos": 2.5,
       "command": {
         "type": "parallel",
         "data": {
@@ -83,10 +99,10 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Source",
+  "folder": "Amp Sneak",
   "previewStartingState": {
-    "rotation": -30.0,
-    "velocity": 0
+    "rotation": 40.0,
+    "velocity": 0.0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

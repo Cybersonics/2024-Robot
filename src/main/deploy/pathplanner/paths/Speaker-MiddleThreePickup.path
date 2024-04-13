@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.9,
+        "x": 2.2,
         "y": 5.6
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.527648950784839,
-        "y": 5.294118711752863
+        "x": 2.852904607957187,
+        "y": 5.373268598565837
       },
       "isLocked": false,
       "linkedName": null
@@ -20,12 +20,12 @@
         "y": 4.865129350211196
       },
       "prevControl": {
-        "x": 3.8146170354098436,
-        "y": 4.943127415946043
+        "x": 3.8668212897284984,
+        "y": 5.001009333760911
       },
       "nextControl": {
-        "x": 4.596563067063944,
-        "y": 4.782728229965717
+        "x": 4.573711498854927,
+        "y": 4.70819958904066
       },
       "isLocked": false,
       "linkedName": null
@@ -48,12 +48,12 @@
     },
     {
       "anchor": {
-        "x": 8.5,
+        "x": 9.0,
         "y": 3.9
       },
       "prevControl": {
-        "x": 7.519525157815163,
-        "y": 3.836149659995282
+        "x": 7.971469499024917,
+        "y": 3.918518576893956
       },
       "nextControl": null,
       "isLocked": false,
@@ -80,23 +80,6 @@
               "type": "named",
               "data": {
                 "name": "PickupNoteAuto"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "name": "Launcher Down",
-      "waypointRelativePos": 0,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "LowerLauncher"
               }
             }
           ]

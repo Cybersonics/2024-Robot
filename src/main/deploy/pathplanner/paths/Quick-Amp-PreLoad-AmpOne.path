@@ -3,41 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.2,
-        "y": 5.6
+        "x": 1.4,
+        "y": 7.35
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.4,
-        "y": 5.6
+        "x": 1.3786200378855828,
+        "y": 7.25231224631518
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.0,
-        "y": 5.6
+        "x": 1.8,
+        "y": 6.9
       },
       "prevControl": {
-        "x": 1.8000289813803523,
-        "y": 5.60340466036788
+        "x": 1.6462649428277676,
+        "y": 7.027927839801391
       },
       "nextControl": {
-        "x": 4.097034256121018,
-        "y": 5.564296379189416
+        "x": 1.9537350571722325,
+        "y": 6.77207216019861
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 4.8,
-        "y": 4.8
+        "x": 4.7,
+        "y": 6.9
       },
       "prevControl": {
-        "x": 4.35916666009943,
-        "y": 5.137972227257104
+        "x": 4.2,
+        "y": 6.9
       },
       "nextControl": null,
       "isLocked": false,
@@ -46,36 +46,18 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 1.2,
+      "waypointRelativePos": 1.0,
+      "rotationDegrees": 40.0,
+      "rotateFast": false
+    },
+    {
+      "waypointRelativePos": 1.45,
       "rotationDegrees": 0,
       "rotateFast": false
     }
   ],
   "constraintZones": [],
   "eventMarkers": [
-    {
-      "name": "Feed PreLoad Note",
-      "waypointRelativePos": 0.9,
-      "command": {
-        "type": "sequential",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "FeedNoteAuto"
-              }
-            },
-            {
-              "type": "named",
-              "data": {
-                "name": "PickupNoteAuto"
-              }
-            }
-          ]
-        }
-      }
-    },
     {
       "name": "Raise Launcher",
       "waypointRelativePos": 0,
@@ -94,8 +76,25 @@
       }
     },
     {
+      "name": "Feed Preload Note",
+      "waypointRelativePos": 1.0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "FeedNoteAuto"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
       "name": "Lower Launcher",
-      "waypointRelativePos": 1.3,
+      "waypointRelativePos": 1.8,
       "command": {
         "type": "parallel",
         "data": {
@@ -104,6 +103,23 @@
               "type": "named",
               "data": {
                 "name": "LowerLauncher"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Intake Amp One",
+      "waypointRelativePos": 1.25,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "PickupNoteAuto"
               }
             }
           ]
@@ -118,12 +134,12 @@
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
-    "velocity": 0.0,
-    "rotation": -22.0,
-    "rotateFast": false
+    "velocity": 0,
+    "rotation": 20.0,
+    "rotateFast": true
   },
   "reversed": false,
-  "folder": "Quick Speaker",
+  "folder": "Quick Amp",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }

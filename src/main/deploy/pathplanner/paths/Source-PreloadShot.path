@@ -3,59 +3,37 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.8,
-        "y": 4.8
+        "x": 1.41,
+        "y": 1.52
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.792571303519695,
-        "y": 4.516092659870284
+        "x": 1.869410314592602,
+        "y": 1.8009526105037992
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 5.9,
-        "y": 4.15
+        "x": 4.0,
+        "y": 3.0
       },
       "prevControl": {
-        "x": 5.262173646549295,
-        "y": 4.224488952921994
-      },
-      "nextControl": {
-        "x": 6.707747257976616,
-        "y": 4.055666727085244
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 9.5,
-        "y": 3.9
-      },
-      "prevControl": {
-        "x": 8.5,
-        "y": 3.9
+        "x": 3.5558779156513225,
+        "y": 2.641683993201716
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 1.15,
-      "rotationDegrees": 0,
-      "rotateFast": false
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Pickup Note",
-      "waypointRelativePos": 1.3,
+      "name": "Lower Launcher",
+      "waypointRelativePos": 0.15,
       "command": {
         "type": "parallel",
         "data": {
@@ -63,7 +41,7 @@
             {
               "type": "named",
               "data": {
-                "name": "PickupNoteAuto"
+                "name": "LowerLauncher"
               }
             }
           ]
@@ -78,15 +56,12 @@
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
-    "velocity": 0,
-    "rotation": 0,
+    "velocity": 0.0,
+    "rotation": -40.0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Quick Speaker",
-  "previewStartingState": {
-    "rotation": -20.0,
-    "velocity": 0
-  },
+  "folder": "Source",
+  "previewStartingState": null,
   "useDefaultConstraints": true
 }

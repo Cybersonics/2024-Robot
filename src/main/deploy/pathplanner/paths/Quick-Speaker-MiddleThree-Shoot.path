@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.5,
-        "y": 4.15
+        "x": 9.5,
+        "y": 3.9
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.917671690560116,
-        "y": 4.15
+        "x": 8.917671690560116,
+        "y": 3.9
       },
       "isLocked": false,
       "linkedName": null
@@ -20,12 +20,12 @@
         "y": 4.15
       },
       "prevControl": {
-        "x": 7.140000000000001,
-        "y": 4.15
+        "x": 7.139989020420465,
+        "y": 4.144781835888591
       },
       "nextControl": {
-        "x": 4.9,
-        "y": 4.15
+        "x": 5.037478714575568,
+        "y": 4.153629691507593
       },
       "isLocked": false,
       "linkedName": null
@@ -48,11 +48,11 @@
     },
     {
       "anchor": {
-        "x": 0.5,
+        "x": 1.8,
         "y": 5.6
       },
       "prevControl": {
-        "x": 1.4,
+        "x": 2.7,
         "y": 5.6
       },
       "nextControl": null,
@@ -65,7 +65,7 @@
   "eventMarkers": [
     {
       "name": "RaiseLauncher",
-      "waypointRelativePos": 2.0,
+      "waypointRelativePos": 0.7,
       "command": {
         "type": "parallel",
         "data": {

@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.2,
-        "y": 4.8
+        "x": 9.5,
+        "y": 5.3
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.2813058642744375,
-        "y": 4.358141922934678
+        "x": 8.569432463447265,
+        "y": 5.4651204562552325
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 8.75,
-        "y": 2.1
+        "x": 4.2,
+        "y": 6.6
       },
       "prevControl": {
-        "x": 6.486050786828415,
-        "y": 2.009441488479177
+        "x": 4.709302783760698,
+        "y": 6.940676029323419
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,36 +30,24 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.5,
+      "waypointRelativePos": 0.65,
       "rotationDegrees": 0,
       "rotateFast": false
     }
   ],
-  "constraintZones": [
-    {
-      "name": "Note Pickup Slowdown",
-      "minWaypointRelativePos": 0.8,
-      "maxWaypointRelativePos": 1.0,
-      "constraints": {
-        "maxVelocity": 4.0,
-        "maxAcceleration": 4.0,
-        "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 720.0
-      }
-    }
-  ],
+  "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "PickupNote",
-      "waypointRelativePos": 0.75,
+      "name": "Lower Launcher",
+      "waypointRelativePos": 0.5,
       "command": {
-        "type": "race",
+        "type": "parallel",
         "data": {
           "commands": [
             {
               "type": "named",
               "data": {
-                "name": "PickupNoteAuto"
+                "name": "LowerLauncher"
               }
             }
           ]
@@ -68,21 +56,18 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 4.0,
-    "maxAcceleration": 4.0,
+    "maxVelocity": 5.5,
+    "maxAcceleration": 5.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": 25.0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Source",
-  "previewStartingState": {
-    "rotation": -10.0,
-    "velocity": 0
-  },
+  "folder": "Quick Amp",
+  "previewStartingState": null,
   "useDefaultConstraints": false
 }

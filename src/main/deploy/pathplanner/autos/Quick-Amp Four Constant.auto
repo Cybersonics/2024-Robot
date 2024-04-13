@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.41,
-      "y": 1.52
+      "x": 1.4,
+      "y": 7.35
     },
     "rotation": 0
   },
@@ -28,7 +28,7 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "Source-PreloadShot"
+                        "pathName": "Quick-Amp-PreLoad-AmpOne"
                       }
                     },
                     {
@@ -40,7 +40,7 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "Source-MiddleFourPickup"
+                        "pathName": "Quick-Amp-MiddleOnePickup"
                       }
                     },
                     {
@@ -50,7 +50,7 @@
                           {
                             "type": "path",
                             "data": {
-                              "pathName": "Source-MiddleFourShot"
+                              "pathName": "Quick-Amp-MiddleOneShot"
                             }
                           },
                           {
@@ -71,7 +71,7 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "Source-MiddleFivePickup"
+                        "pathName": "Quick-Amp-MiddleTwoPickup"
                       }
                     },
                     {
@@ -81,7 +81,7 @@
                           {
                             "type": "path",
                             "data": {
-                              "pathName": "Source-MiddleFiveShot"
+                              "pathName": "Quick-Amp-MiddleTwoShot"
                             }
                           },
                           {

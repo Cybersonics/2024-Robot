@@ -3,41 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.8,
-        "y": 4.8
+        "x": 9.7,
+        "y": 7.3
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.792571303519695,
-        "y": 4.516092659870284
+        "x": 9.13722877565087,
+        "y": 7.112111217062529
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 5.9,
-        "y": 4.15
+        "x": 4.4,
+        "y": 6.9
       },
       "prevControl": {
-        "x": 5.262173646549295,
-        "y": 4.224488952921994
-      },
-      "nextControl": {
-        "x": 6.707747257976616,
-        "y": 4.055666727085244
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 9.5,
-        "y": 3.9
-      },
-      "prevControl": {
-        "x": 8.5,
-        "y": 3.9
+        "x": 4.928506495199147,
+        "y": 7.028842697303533
       },
       "nextControl": null,
       "isLocked": false,
@@ -46,7 +30,7 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 1.15,
+      "waypointRelativePos": 0.7,
       "rotationDegrees": 0,
       "rotateFast": false
     }
@@ -54,8 +38,8 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Pickup Note",
-      "waypointRelativePos": 1.3,
+      "name": "Lower Launcher",
+      "waypointRelativePos": 0.4,
       "command": {
         "type": "parallel",
         "data": {
@@ -63,7 +47,7 @@
             {
               "type": "named",
               "data": {
-                "name": "PickupNoteAuto"
+                "name": "LowerLauncher"
               }
             }
           ]
@@ -79,14 +63,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
-    "rotateFast": false
+    "rotation": 23.0,
+    "rotateFast": true
   },
   "reversed": false,
-  "folder": "Quick Speaker",
-  "previewStartingState": {
-    "rotation": -20.0,
-    "velocity": 0
-  },
-  "useDefaultConstraints": true
+  "folder": "Quick Amp",
+  "previewStartingState": null,
+  "useDefaultConstraints": false
 }

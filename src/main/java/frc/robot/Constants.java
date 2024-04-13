@@ -76,7 +76,7 @@ public class Constants {
         public static final shuffleBoardDrive backRight = new shuffleBoardDrive("RBack Set Angle", 4, 1);
 
         public static final class ModuleConstants {
-            public static final double kWheelDiameterMeters = Units.inchesToMeters(4.1); // 4
+            public static final double kWheelDiameterMeters = Units.inchesToMeters(5); // 4.1 // 4
             public static final double kDriveMotorGearRatio = 1 / 6.429;
             public static final double kTurningMotorGearRatio = 1 / 1024;
             public static final double kDriveEncoderRot2Meter = kDriveMotorGearRatio * Math.PI * kWheelDiameterMeters;

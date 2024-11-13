@@ -55,16 +55,22 @@ public class RobotContainer {
   public static Intake _intake = Intake.getInstance();
   public static Climber _climber = Climber.getInstance();
   public static Camera _camera = Camera.getInstance();
-  public final CommandJoystick leftStick = new CommandJoystick(OperatorConstants.LeftStick);
+  /*public final CommandJoystick leftStick = new CommandJoystick(OperatorConstants.LeftStick);
   public final Joystick leftStick_HID = leftStick.getHID();
   public final CommandJoystick rightStick = new CommandJoystick(OperatorConstants.RightStick);
-  public final Joystick righStick_HID = rightStick.getHID();
+  public final Joystick righStick_HID = rightStick.getHID();*/
 
   public final CommandXboxController xboxController = new CommandXboxController(2);
   public final XboxController xboxController_HID = xboxController.getHID();
   public final JoystickButton xboxA = new JoystickButton(xboxController_HID, XboxController.Button.kA.value);
   public final JoystickButton xboxB = new JoystickButton(xboxController_HID, XboxController.Button.kB.value); 
   public final JoystickButton xboxY = new JoystickButton(xboxController_HID, XboxController.Button.kY.value);
+
+  public final CommandXboxController driveController = new CommandXboxController(OperatorConstants.xboxDriveController);
+    public final XboxController driveController_HID = driveController.getHID();
+    public final JoystickButton driveControllerA = new JoystickButton(driveController_HID, XboxController.Button.kA.value);
+    public final JoystickButton driveControllerB = new JoystickButton(driveController_HID, XboxController.Button.kB.value); 
+    public final JoystickButton driveControllerY = new JoystickButton(driveController_HID, XboxController.Button.kY.value);
 
 
   // Setup Sendable chooser for picking autonomous program in SmartDashboard
@@ -76,8 +82,9 @@ public class RobotContainer {
     configureNamedCommands();
 
     CommandScheduler.getInstance()
-      .setDefaultCommand(_drive, new DriveCommand(_drive, leftStick, rightStick, _gyro, _camera));
+    //  .setDefaultCommand(_drive, new DriveCommand(_drive, leftStick, rightStick, _gyro, _camera));
     // .setDefaultCommand(_drive, new DriveCommand(_drive, xboxController, _gyro));
+    .setDefaultCommand(_drive, new DriveCommand(_drive, driveController, _gyro, _camera));
 
     CommandScheduler.getInstance()
         .setDefaultCommand(_launcher, new LauncherSpinUp(_launcher, _pneumatics::IsLauncherUp, _pneumatics::IsArmOut, 
@@ -93,7 +100,9 @@ public class RobotContainer {
 
 
     CommandScheduler.getInstance()
-        .setDefaultCommand(_launcherFeeder, new LauncherFeed(_launcherFeeder, rightStick, leftStick));
+        //.setDefaultCommand(_launcherFeeder, new LauncherFeed(_launcherFeeder, rightStick, leftStick));
+        .setDefaultCommand(_launcherFeeder, new LauncherFeed(_launcherFeeder, driveController));
+
 
     CommandScheduler.getInstance()        
     .setDefaultCommand(_climber, new ClimberCommand(_climber, 
@@ -127,7 +136,7 @@ public class RobotContainer {
     //xboxY.onTrue(new CameraAlignment(_camera, _drive, _gyro));
     xboxController.povUp().onTrue(new TimedClimberUpCommand(_climber, 2));
     
-    leftStick.button(7).onTrue(new InstantCommand(() -> _gyro.zeroNavHeading(), _gyro));
+    driveControllerB.onTrue(new InstantCommand(() -> _gyro.zeroNavHeading(), _gyro));
   }
 
   public Command getAutonomousCommand() {

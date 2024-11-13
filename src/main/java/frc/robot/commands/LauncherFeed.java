@@ -4,16 +4,26 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.LauncherFeeder;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Constants.OperatorConstants;
 
 public class LauncherFeed extends Command {
     private LauncherFeeder _launcherFeeder;
     private CommandJoystick _rightJoystick;
     private CommandJoystick _leftJoystick;
+    //private XboxController _driveController;
+  private CommandXboxController _driveController = new CommandXboxController(OperatorConstants.xboxDriveController);
+    private XboxController driveController_HID = _driveController.getHID();
+    private JoystickButton xboxA = new JoystickButton(driveController_HID, XboxController.Button.kA.value);
+    private JoystickButton xboxB = new JoystickButton(driveController_HID, XboxController.Button.kRightBumper.value); 
+    private JoystickButton xboxY = new JoystickButton(driveController_HID, XboxController.Button.kY.value);
 
     private Trigger _rightJoystickButtonTwo;
     private Trigger _rightJoyStickTrigger;
-
     private Trigger _leftJoystickButtonTwo;
+
 
 
     public LauncherFeed(LauncherFeeder launcherFeeder, CommandJoystick righJoystick, CommandJoystick leftJoystick) {
@@ -24,6 +34,18 @@ public class LauncherFeed extends Command {
         _rightJoystickButtonTwo = _rightJoystick.button(2);
         _rightJoyStickTrigger = _rightJoystick.trigger();
         _leftJoystickButtonTwo = _leftJoystick.button(2);
+        
+        addRequirements(_launcherFeeder);
+    }
+
+    public LauncherFeed(LauncherFeeder launcherFeeder, CommandXboxController driveController) {
+        _driveController = driveController;
+        _launcherFeeder = launcherFeeder;
+
+        _rightJoystickButtonTwo = xboxA;
+//        _rightJoystick.button(2);
+        _rightJoyStickTrigger = xboxB;
+        _leftJoystickButtonTwo = xboxY;
         
         addRequirements(_launcherFeeder);
     }

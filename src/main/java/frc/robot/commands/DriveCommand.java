@@ -29,6 +29,7 @@ public class DriveCommand extends Command {
   private CommandJoystick leftStick;
   private CommandJoystick rightStick;
   private CommandXboxController xboxController;
+  private CommandXboxController _driveController;
 
   private NavXGyro _navXGyro;
   private Camera _camera;
@@ -78,6 +79,20 @@ public class DriveCommand extends Command {
     this._navXGyro = gyro;
     this._camera = camera;
     this._photonCamera = _camera.getPhotonCamera();
+
+    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(drive);
+  }
+
+  public DriveCommand(Drive drive, CommandXboxController driveController, NavXGyro gyro, Camera camera) {
+    this._drive = drive;
+    this._driveController = driveController;
+    this._navXGyro = gyro;
+
+    this._camera = camera;
+    this._photonCamera = _camera.getPhotonCamera();
+    
+    //_rightJoystickButtonThree = rightStick.button(3);
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drive);
@@ -139,9 +154,13 @@ public class DriveCommand extends Command {
     double stickOmega;
     boolean deadStick = false;
 
-    stickForward = -this.leftStick.getY()*.95;
-    stickStrafe = -this.leftStick.getX()*.95;
-    stickOmega = -this.rightStick.getX()*.95;
+    //stickForward = -this.leftStick.getY()*.95;
+    //stickStrafe = -this.leftStick.getX()*.95;
+    //stickOmega = -this.rightStick.getX()*.95;
+
+    stickForward = -this._driveController.getLeftY()*.35;
+    stickStrafe = -this._driveController.getLeftX()*.35;
+    stickOmega = -this._driveController.getRightX()*.35;
 
     // SmartDashboard.putNumber("Controller Forward", stickForward);
     // SmartDashboard.putNumber("Controller Strafe", stickStrafe);
@@ -176,9 +195,9 @@ public class DriveCommand extends Command {
       omega = 0.0;
     boolean stickFieldCentric;
  
-    stickFieldCentric = leftStick.trigger().getAsBoolean();
+    stickFieldCentric = _driveController.leftTrigger().getAsBoolean();
 
-    if (!stickFieldCentric) {
+     if (!stickFieldCentric) {
 
       /*
        * When the Left Joystick trigger is not pressed, The robot is in Field Centric
@@ -214,11 +233,11 @@ public class DriveCommand extends Command {
    
     var latestResult = _photonCamera.getLatestResult();
     
-    if(_rightJoystickButtonThree.getAsBoolean()) {
+    /*if(_rightJoystickButtonThree.getAsBoolean()) {
       if(latestResult.hasTargets()) {
         _bestTarget = latestResult.getBestTarget();
         _aprilTagID = _bestTarget.getFiducialId();
-        // _aprilTagID = LimelightHelpers.getFiducialID("");
+         _aprilTagID = LimelightHelpers.getFiducialID("");
       }
       if (_aprilTagID>-1){
         AprilTag target = Constants.AprilTags.AprilTags.get(((int)_aprilTagID-1)); // indexed list is 0-15 not 1-16
@@ -248,7 +267,7 @@ public class DriveCommand extends Command {
         ty value from the Limelight webvier to get the limelightMountAngleDegrees.
         */
 
-        double tx = _bestTarget.getYaw();
+        /*double tx = _bestTarget.getYaw();
         // double tx = LimelightHelpers.getTX("");
 
         //Vertical angle of target in view in degrees
@@ -291,7 +310,7 @@ public class DriveCommand extends Command {
         omega = 0;
         deadStick = true;
       }
-    }
+    }/* */
 
     /*
       * If all of the joysticks are in the deadzone, don't update the motors

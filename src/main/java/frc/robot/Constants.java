@@ -23,7 +23,7 @@ public class Constants {
         public static final int LeftStick = 0;
         public static final int RightStick = 1;
         public static final int OpController = 2;
-        public static final int xboxDriveController = 1;
+        public static final int xboxDriveController = 0;
     }
 
     public static class AutoConstants {
